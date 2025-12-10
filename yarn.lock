@@ -8,10 +8,14 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.18.6", "@babel/code-frame@^7.21.4":
-  version "7.21.4"
+"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.21.4", "@babel/code-frame@^7.27.1":
+  version "7.27.1"
+  resolved "https://npm.yandex-team.ru/@babel%2fcode-frame/-/code-frame-7.27.1.tgz?rbtorrent="
+  integrity sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==
   dependencies:
-    "@babel/highlight" "^7.18.6"
+    "@babel/helper-validator-identifier" "^7.27.1"
+    js-tokens "^4.0.0"
+    picocolors "^1.1.1"
 
 "@babel/compat-data@^7.17.7", "@babel/compat-data@^7.20.5", "@babel/compat-data@^7.21.5":
   version "7.21.7"
@@ -35,13 +39,16 @@
     json5 "^2.2.2"
     semver "^6.3.0"
 
-"@babel/generator@^7.21.5":
-  version "7.21.5"
+"@babel/generator@^7.21.5", "@babel/generator@^7.28.5":
+  version "7.28.5"
+  resolved "https://npm.yandex-team.ru/@babel%2fgenerator/-/generator-7.28.5.tgz?rbtorrent="
+  integrity sha512-3EwLFhZ38J4VyIP6WNtt2kUdW9dokXA9Cr4IVIFHuCpZ3H8/YFOl5JjZHisrn1fATPBmKKqXzDFvh9fUwHz6CQ==
   dependencies:
-    "@babel/types" "^7.21.5"
-    "@jridgewell/gen-mapping" "^0.3.2"
-    "@jridgewell/trace-mapping" "^0.3.17"
-    jsesc "^2.5.1"
+    "@babel/parser" "^7.28.5"
+    "@babel/types" "^7.28.5"
+    "@jridgewell/gen-mapping" "^0.3.12"
+    "@jridgewell/trace-mapping" "^0.3.28"
+    jsesc "^3.0.2"
 
 "@babel/helper-annotate-as-pure@^7.18.6":
   version "7.18.6"
@@ -100,6 +107,11 @@
   dependencies:
     "@babel/template" "^7.20.7"
     "@babel/types" "^7.21.0"
+
+"@babel/helper-globals@^7.28.0":
+  version "7.28.0"
+  resolved "https://npm.yandex-team.ru/@babel%2fhelper-globals/-/helper-globals-7.28.0.tgz?rbtorrent="
+  integrity sha512-+W6cISkXFa1jXsDEdYA8HeevQT/FULhxzR99pxphltZcVaugps53THCeiWA8SguxxpSp3gKPiuYfSWopkLQ4hw==
 
 "@babel/helper-hoist-variables@^7.18.6":
   version "7.18.6"
@@ -169,11 +181,15 @@
   dependencies:
     "@babel/types" "^7.18.6"
 
-"@babel/helper-string-parser@^7.21.5":
-  version "7.21.5"
+"@babel/helper-string-parser@^7.27.1":
+  version "7.27.1"
+  resolved "https://npm.yandex-team.ru/@babel%2fhelper-string-parser/-/helper-string-parser-7.27.1.tgz?rbtorrent="
+  integrity sha512-qMlSxKbpRlAridDExk92nSobyDdpPijUq2DW6oDnUqd0iOGxmQjyqhMIihI9+zv4LPyZdRje2cavWPbCbWm3eA==
 
-"@babel/helper-validator-identifier@^7.18.6", "@babel/helper-validator-identifier@^7.19.1":
-  version "7.19.1"
+"@babel/helper-validator-identifier@^7.19.1", "@babel/helper-validator-identifier@^7.27.1", "@babel/helper-validator-identifier@^7.28.5":
+  version "7.28.5"
+  resolved "https://npm.yandex-team.ru/@babel%2fhelper-validator-identifier/-/helper-validator-identifier-7.28.5.tgz?rbtorrent="
+  integrity sha512-qSs4ifwzKJSV39ucNjsvc6WVHs6b7S03sOh2OcHF9UHfVPqWWALUsNUVzhSBiItjRZoLHx7nIarVjqKVusUZ1Q==
 
 "@babel/helper-validator-option@^7.21.0":
   version "7.21.0"
@@ -187,21 +203,19 @@
     "@babel/types" "^7.20.5"
 
 "@babel/helpers@^7.21.5":
-  version "7.21.5"
+  version "7.28.4"
+  resolved "https://npm.yandex-team.ru/@babel%2fhelpers/-/helpers-7.28.4.tgz?rbtorrent="
+  integrity sha512-HFN59MmQXGHVyYadKLVumYsA9dBFun/ldYxipEjzA4196jpLZd8UjEEBLkbEkvfYreDqJhZxYAWFPtrfhNpj4w==
   dependencies:
-    "@babel/template" "^7.20.7"
-    "@babel/traverse" "^7.21.5"
-    "@babel/types" "^7.21.5"
+    "@babel/template" "^7.27.2"
+    "@babel/types" "^7.28.4"
 
-"@babel/highlight@^7.18.6":
-  version "7.18.6"
+"@babel/parser@^7.21.5", "@babel/parser@^7.27.2", "@babel/parser@^7.28.5":
+  version "7.28.5"
+  resolved "https://npm.yandex-team.ru/@babel%2fparser/-/parser-7.28.5.tgz?rbtorrent="
+  integrity sha512-KKBU1VGYR7ORr3At5HAtUQ+TV3SzRCXmA/8OdDZiLDBIZxVyzXuztPjfLd3BV1PRAQGCMWWSHYhL0F8d5uHBDQ==
   dependencies:
-    "@babel/helper-validator-identifier" "^7.18.6"
-    chalk "^2.0.0"
-    js-tokens "^4.0.0"
-
-"@babel/parser@^7.20.7", "@babel/parser@^7.21.5":
-  version "7.21.5"
+    "@babel/types" "^7.28.5"
 
 "@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression@^7.18.6":
   version "7.18.6"
@@ -674,37 +688,39 @@
   version "0.8.0"
 
 "@babel/runtime@^7.8.4":
-  version "7.21.5"
-  dependencies:
-    regenerator-runtime "^0.13.11"
+  version "7.28.4"
+  resolved "https://npm.yandex-team.ru/@babel%2fruntime/-/runtime-7.28.4.tgz?rbtorrent="
+  integrity sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==
 
-"@babel/template@^7.18.10", "@babel/template@^7.20.7":
-  version "7.20.7"
+"@babel/template@^7.18.10", "@babel/template@^7.20.7", "@babel/template@^7.27.2":
+  version "7.27.2"
+  resolved "https://npm.yandex-team.ru/@babel%2ftemplate/-/template-7.27.2.tgz?rbtorrent="
+  integrity sha512-LPDZ85aEJyYSd18/DkjNh4/y1ntkE5KwUHWTiqgRxruuZL2F1yuHligVHLvcHY2vMHXttKFpJn6LwfI7cw7ODw==
   dependencies:
-    "@babel/code-frame" "^7.18.6"
-    "@babel/parser" "^7.20.7"
-    "@babel/types" "^7.20.7"
+    "@babel/code-frame" "^7.27.1"
+    "@babel/parser" "^7.27.2"
+    "@babel/types" "^7.27.1"
 
 "@babel/traverse@^7.20.5", "@babel/traverse@^7.21.5":
-  version "7.21.5"
+  version "7.28.5"
+  resolved "https://npm.yandex-team.ru/@babel%2ftraverse/-/traverse-7.28.5.tgz?rbtorrent="
+  integrity sha512-TCCj4t55U90khlYkVV/0TfkJkAkUg3jZFA3Neb7unZT8CPok7iiRfaX0F+WnqWqt7OxhOn0uBKXCw4lbL8W0aQ==
   dependencies:
-    "@babel/code-frame" "^7.21.4"
-    "@babel/generator" "^7.21.5"
-    "@babel/helper-environment-visitor" "^7.21.5"
-    "@babel/helper-function-name" "^7.21.0"
-    "@babel/helper-hoist-variables" "^7.18.6"
-    "@babel/helper-split-export-declaration" "^7.18.6"
-    "@babel/parser" "^7.21.5"
-    "@babel/types" "^7.21.5"
-    debug "^4.1.0"
-    globals "^11.1.0"
+    "@babel/code-frame" "^7.27.1"
+    "@babel/generator" "^7.28.5"
+    "@babel/helper-globals" "^7.28.0"
+    "@babel/parser" "^7.28.5"
+    "@babel/template" "^7.27.2"
+    "@babel/types" "^7.28.5"
+    debug "^4.3.1"
 
-"@babel/types@^7.18.6", "@babel/types@^7.18.9", "@babel/types@^7.20.0", "@babel/types@^7.20.5", "@babel/types@^7.20.7", "@babel/types@^7.21.0", "@babel/types@^7.21.4", "@babel/types@^7.21.5", "@babel/types@^7.4.4":
-  version "7.21.5"
+"@babel/types@^7.18.6", "@babel/types@^7.18.9", "@babel/types@^7.20.0", "@babel/types@^7.20.5", "@babel/types@^7.21.0", "@babel/types@^7.21.4", "@babel/types@^7.21.5", "@babel/types@^7.27.1", "@babel/types@^7.28.4", "@babel/types@^7.28.5", "@babel/types@^7.4.4":
+  version "7.28.5"
+  resolved "https://npm.yandex-team.ru/@babel%2ftypes/-/types-7.28.5.tgz?rbtorrent="
+  integrity sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==
   dependencies:
-    "@babel/helper-string-parser" "^7.21.5"
-    "@babel/helper-validator-identifier" "^7.19.1"
-    to-fast-properties "^2.0.0"
+    "@babel/helper-string-parser" "^7.27.1"
+    "@babel/helper-validator-identifier" "^7.28.5"
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
@@ -749,51 +765,47 @@
 "@humanwhocodes/object-schema@^1.2.1":
   version "1.2.1"
 
+"@isaacs/cliui@^8.0.2":
+  version "8.0.2"
+  resolved "https://npm.yandex-team.ru/@isaacs%2fcliui/-/cliui-8.0.2.tgz?rbtorrent=2cca369f004c6d5cd17180ab17dc0a7d6471901b"
+  integrity sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==
+  dependencies:
+    string-width "^5.1.2"
+    string-width-cjs "npm:string-width@^4.2.0"
+    strip-ansi "^7.0.1"
+    strip-ansi-cjs "npm:strip-ansi@^6.0.1"
+    wrap-ansi "^8.1.0"
+    wrap-ansi-cjs "npm:wrap-ansi@^7.0.0"
+
 "@isaacs/string-locale-compare@^1.1.0":
   version "1.1.0"
 
-"@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.2":
-  version "0.3.3"
+"@jridgewell/gen-mapping@^0.3.0", "@jridgewell/gen-mapping@^0.3.12":
+  version "0.3.13"
+  resolved "https://npm.yandex-team.ru/@jridgewell%2fgen-mapping/-/gen-mapping-0.3.13.tgz?rbtorrent="
+  integrity sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==
   dependencies:
-    "@jridgewell/set-array" "^1.0.1"
-    "@jridgewell/sourcemap-codec" "^1.4.10"
-    "@jridgewell/trace-mapping" "^0.3.9"
+    "@jridgewell/sourcemap-codec" "^1.5.0"
+    "@jridgewell/trace-mapping" "^0.3.24"
 
 "@jridgewell/resolve-uri@^3.1.0":
-  version "3.1.1"
-
-"@jridgewell/resolve-uri@3.1.0":
   version "3.1.0"
 
-"@jridgewell/set-array@^1.0.1":
-  version "1.1.2"
-
-"@jridgewell/source-map@^0.3.2":
+"@jridgewell/source-map@^0.3.3":
   version "0.3.3"
   dependencies:
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@jridgewell/source-map@^0.3.3":
-  version "0.3.5"
-  dependencies:
-    "@jridgewell/gen-mapping" "^0.3.0"
-    "@jridgewell/trace-mapping" "^0.3.9"
+"@jridgewell/sourcemap-codec@^1.4.14", "@jridgewell/sourcemap-codec@^1.5.0":
+  version "1.5.5"
+  resolved "https://npm.yandex-team.ru/@jridgewell%2fsourcemap-codec/-/sourcemap-codec-1.5.5.tgz?rbtorrent="
+  integrity sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==
 
-"@jridgewell/sourcemap-codec@^1.4.10", "@jridgewell/sourcemap-codec@^1.4.14":
-  version "1.4.15"
-
-"@jridgewell/sourcemap-codec@1.4.14":
-  version "1.4.14"
-
-"@jridgewell/trace-mapping@^0.3.17", "@jridgewell/trace-mapping@^0.3.9":
-  version "0.3.18"
-  dependencies:
-    "@jridgewell/resolve-uri" "3.1.0"
-    "@jridgewell/sourcemap-codec" "1.4.14"
-
-"@jridgewell/trace-mapping@^0.3.20":
-  version "0.3.20"
+"@jridgewell/trace-mapping@^0.3.24", "@jridgewell/trace-mapping@^0.3.25", "@jridgewell/trace-mapping@^0.3.28", "@jridgewell/trace-mapping@^0.3.9":
+  version "0.3.31"
+  resolved "https://npm.yandex-team.ru/@jridgewell%2ftrace-mapping/-/trace-mapping-0.3.31.tgz?rbtorrent="
+  integrity sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
@@ -860,8 +872,17 @@
 
 "@npmcli/fs@^2.1.0":
   version "2.1.2"
+  resolved "https://npm.yandex-team.ru/@npmcli%2ffs/-/fs-2.1.2.tgz?rbtorrent=602b07d3f2149ca90d8142ae88976b136c46b4bf"
+  integrity sha512-yOJKRvohFOaLqipNtwYB9WugyZKhC/DZC4VYPmpaCzDBrA8YpK3qHZ8/HGscMnE4GqbkLNuVcCnxkeQEdGt6LQ==
   dependencies:
     "@gar/promisify" "^1.1.3"
+    semver "^7.3.5"
+
+"@npmcli/fs@^3.1.0":
+  version "3.1.1"
+  resolved "https://npm.yandex-team.ru/@npmcli%2ffs/-/fs-3.1.1.tgz?rbtorrent="
+  integrity sha512-q9CRWjpHCMIh5sVyefoD1cA7PkvILqCZsnSOEUUivORLjxCO/Irmue2DprETiNgEqktDBZaM1Bi+jrarx1XdCg==
+  dependencies:
     semver "^7.3.5"
 
 "@npmcli/git@^2.1.0":
@@ -876,11 +897,33 @@
     semver "^7.3.5"
     which "^2.0.2"
 
+"@npmcli/git@^4.0.0":
+  version "4.1.0"
+  resolved "https://npm.yandex-team.ru/@npmcli%2fgit/-/git-4.1.0.tgz?rbtorrent=d0c52b998d99a83cdfd1f2ff48eb70ad3a4b6d2a"
+  integrity sha512-9hwoB3gStVfa0N31ymBmrX+GuDGdVA/QWShZVqE0HK2Af+7QGGrCTbZia/SW0ImUTjTne7SP91qxDmtXvDHRPQ==
+  dependencies:
+    "@npmcli/promise-spawn" "^6.0.0"
+    lru-cache "^7.4.4"
+    npm-pick-manifest "^8.0.0"
+    proc-log "^3.0.0"
+    promise-inflight "^1.0.1"
+    promise-retry "^2.0.1"
+    semver "^7.3.5"
+    which "^3.0.0"
+
 "@npmcli/installed-package-contents@^1.0.6", "@npmcli/installed-package-contents@^1.0.7":
   version "1.0.7"
   dependencies:
     npm-bundled "^1.1.1"
     npm-normalize-package-bin "^1.0.1"
+
+"@npmcli/installed-package-contents@^2.0.1":
+  version "2.1.0"
+  resolved "https://npm.yandex-team.ru/@npmcli%2finstalled-package-contents/-/installed-package-contents-2.1.0.tgz?rbtorrent="
+  integrity sha512-c8UuGLeZpm69BryRykLuKRyKFZYJsZSCT4aVY5ds4omyZqJ172ApzgfKJ5eV/r3HgLdUYgFVe54KSFVjKoe27w==
+  dependencies:
+    npm-bundled "^3.0.0"
+    npm-normalize-package-bin "^3.0.0"
 
 "@npmcli/map-workspaces@^2.0.0":
   version "2.0.4"
@@ -906,6 +949,8 @@
 
 "@npmcli/move-file@^2.0.0":
   version "2.0.1"
+  resolved "https://npm.yandex-team.ru/@npmcli%2fmove-file/-/move-file-2.0.1.tgz?rbtorrent=376a2e76c30a7aac8f76f2cb709c0cda8c1c65f1"
+  integrity sha512-mJd2Z5TjYWq/ttPLLGqArdtnC74J6bOzg4rMDnN+p1xTacZ2yPRCk2y0oSWQtygLR9YVQXgOcONrwtnk3JupxQ==
   dependencies:
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
@@ -915,6 +960,11 @@
 
 "@npmcli/node-gyp@^1.0.2", "@npmcli/node-gyp@^1.0.3":
   version "1.0.3"
+
+"@npmcli/node-gyp@^3.0.0":
+  version "3.0.0"
+  resolved "https://npm.yandex-team.ru/@npmcli%2fnode-gyp/-/node-gyp-3.0.0.tgz?rbtorrent=cf5f32165948cbcfed8c65afcf09c85c7889b498"
+  integrity sha512-gp8pRXC2oOxu0DUE1/M3bYtb1b3/DbJ5aM113+XJBgfXdussRAsX0YOrOhdd8WvnAR6auDBvJomGAkLKA5ydxA==
 
 "@npmcli/package-json@^1.0.1":
   version "1.0.1"
@@ -926,6 +976,13 @@
   dependencies:
     infer-owner "^1.0.4"
 
+"@npmcli/promise-spawn@^6.0.0", "@npmcli/promise-spawn@^6.0.1":
+  version "6.0.2"
+  resolved "https://npm.yandex-team.ru/@npmcli%2fpromise-spawn/-/promise-spawn-6.0.2.tgz?rbtorrent=8a4f46fc80711ebb6521ef0e027449ab88143f42"
+  integrity sha512-gGq0NJkIGSwdbUt4yhdF8ZrmkGKVz9vAdVzpOfnom+V8PLSmSOVhZwbNvZZS1EYcJN5hzzKBxmmVVAInM6HQLg==
+  dependencies:
+    which "^3.0.0"
+
 "@npmcli/run-script@^2.0.0":
   version "2.0.0"
   dependencies:
@@ -933,6 +990,17 @@
     "@npmcli/promise-spawn" "^1.3.2"
     node-gyp "^8.2.0"
     read-package-json-fast "^2.0.1"
+
+"@npmcli/run-script@^6.0.0":
+  version "6.0.2"
+  resolved "https://npm.yandex-team.ru/@npmcli%2frun-script/-/run-script-6.0.2.tgz?rbtorrent=0d100862a21e2399e620d3df015c5f27d060adad"
+  integrity sha512-NCcr1uQo1k5U+SYlnIrbAh3cxy+OQT1VtqiAbxdymSlptbzBb62AjH2xXgjNCoP073hoa1CfCAcwoZ8k96C4nA==
+  dependencies:
+    "@npmcli/node-gyp" "^3.0.0"
+    "@npmcli/promise-spawn" "^6.0.0"
+    node-gyp "^9.0.0"
+    read-package-json-fast "^3.0.0"
+    which "^3.0.0"
 
 "@octokit/auth-token@^2.4.4":
   version "2.5.0"
@@ -1011,11 +1079,60 @@
   dependencies:
     "@octokit/openapi-types" "^12.11.0"
 
+"@pkgjs/parseargs@^0.11.0":
+  version "0.11.0"
+  resolved "https://npm.yandex-team.ru/@pkgjs%2fparseargs/-/parseargs-0.11.0.tgz?rbtorrent=03f029bc7eace2eb2da5999055257521f38ca896"
+  integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
+
+"@sigstore/bundle@^1.1.0":
+  version "1.1.0"
+  resolved "https://npm.yandex-team.ru/@sigstore%2fbundle/-/bundle-1.1.0.tgz?rbtorrent=81162c20e8f622766a63af16f6724cb37a2254f7"
+  integrity sha512-PFutXEy0SmQxYI4texPw3dd2KewuNqv7OuK1ZFtY2fM754yhvG2KdgwIhRnoEE2uHdtdGNQ8s0lb94dW9sELog==
+  dependencies:
+    "@sigstore/protobuf-specs" "^0.2.0"
+
+"@sigstore/protobuf-specs@^0.2.0":
+  version "0.2.1"
+  resolved "https://npm.yandex-team.ru/@sigstore%2fprotobuf-specs/-/protobuf-specs-0.2.1.tgz?rbtorrent=016789c5cbb21fb09009471046e42af7f479aa5c"
+  integrity sha512-XTWVxnWJu+c1oCshMLwnKvz8ZQJJDVOlciMfgpJBQbThVjKTCG8dwyhgLngBD2KN0ap9F/gOV8rFDEx8uh7R2A==
+
+"@sigstore/sign@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.yandex-team.ru/@sigstore%2fsign/-/sign-1.0.0.tgz?rbtorrent=09a3e7b539d8b0a7aa17854c672767429e2e1ab2"
+  integrity sha512-INxFVNQteLtcfGmcoldzV6Je0sbbfh9I16DM4yJPw3j5+TFP8X6uIiA18mvpEa9yyeycAKgPmOA3X9hVdVTPUA==
+  dependencies:
+    "@sigstore/bundle" "^1.1.0"
+    "@sigstore/protobuf-specs" "^0.2.0"
+    make-fetch-happen "^11.0.1"
+
+"@sigstore/tuf@^1.0.3":
+  version "1.0.3"
+  resolved "https://npm.yandex-team.ru/@sigstore%2ftuf/-/tuf-1.0.3.tgz?rbtorrent=39dcd0952f738207779139ecab4840dc4bebd90d"
+  integrity sha512-2bRovzs0nJZFlCN3rXirE4gwxCn97JNjMmwpecqlbgV9WcxX7WRuIrgzx/X7Ib7MYRbyUTpBYE0s2x6AmZXnlg==
+  dependencies:
+    "@sigstore/protobuf-specs" "^0.2.0"
+    tuf-js "^1.1.7"
+
 "@tootallnate/once@1":
   version "1.1.2"
 
 "@tootallnate/once@2":
   version "2.0.0"
+  resolved "https://npm.yandex-team.ru/@tootallnate%2fonce/-/once-2.0.0.tgz?rbtorrent=23b462a593765450973514e30a9cc4e6b950fcbd"
+  integrity sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==
+
+"@tufjs/canonical-json@1.0.0":
+  version "1.0.0"
+  resolved "https://npm.yandex-team.ru/@tufjs%2fcanonical-json/-/canonical-json-1.0.0.tgz?rbtorrent=7e0700ed935c4b4cf9f86fe53683d0b43180afb5"
+  integrity sha512-QTnf++uxunWvG2z3UFNzAoQPHxnSXOwtaI3iJ+AohhV+5vONuArPjJE7aPXPVXfXJsqrVbZBu9b81AJoSd09IQ==
+
+"@tufjs/models@1.0.4":
+  version "1.0.4"
+  resolved "https://npm.yandex-team.ru/@tufjs%2fmodels/-/models-1.0.4.tgz?rbtorrent=ebf1b4eacdec9dcd1b85c894158dca5206858e88"
+  integrity sha512-qaGV9ltJP0EO25YfFUPhxRVK0evXFIAGicsVXuRim4Ed9cjPxYhNnNJ49SFmbeLgtxpslIkX317IgpfcHPVj/A==
+  dependencies:
+    "@tufjs/canonical-json" "1.0.0"
+    minimatch "^9.0.0"
 
 "@types/body-parser@*":
   version "1.19.2"
@@ -1039,20 +1156,26 @@
   dependencies:
     "@types/node" "*"
 
-"@types/eslint-scope@^3.7.3":
-  version "3.7.4"
+"@types/eslint-scope@^3.7.7":
+  version "3.7.7"
+  resolved "https://npm.yandex-team.ru/@types%2feslint-scope/-/eslint-scope-3.7.7.tgz?rbtorrent=134c3c67a9d7c35e8dbb83449bd061a838f66af0"
+  integrity sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==
   dependencies:
     "@types/eslint" "*"
     "@types/estree" "*"
 
 "@types/eslint@*":
-  version "8.37.0"
+  version "9.6.1"
+  resolved "https://npm.yandex-team.ru/@types%2feslint/-/eslint-9.6.1.tgz?rbtorrent="
+  integrity sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==
   dependencies:
     "@types/estree" "*"
     "@types/json-schema" "*"
 
-"@types/estree@*", "@types/estree@^1.0.0":
-  version "1.0.1"
+"@types/estree@*", "@types/estree@^1.0.8":
+  version "1.0.8"
+  resolved "https://npm.yandex-team.ru/@types%2festree/-/estree-1.0.8.tgz?rbtorrent="
+  integrity sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==
 
 "@types/expect@^1.20.4":
   version "1.20.4"
@@ -1081,8 +1204,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/json-schema@*", "@types/json-schema@^7.0.8", "@types/json-schema@^7.0.9":
-  version "7.0.11"
+"@types/json-schema@*", "@types/json-schema@^7.0.15", "@types/json-schema@^7.0.9":
+  version "7.0.15"
+  resolved "https://npm.yandex-team.ru/@types%2fjson-schema/-/json-schema-7.0.15.tgz?rbtorrent=b1a1de4eb80bcd1a5bc0e2facd516d39e452686e"
+  integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
 "@types/mime@*":
   version "3.0.1"
@@ -1142,8 +1267,10 @@
     "@types/expect" "^1.20.4"
     "@types/node" "*"
 
-"@types/ws@^8.5.1":
-  version "8.5.4"
+"@types/ws@^8.5.5":
+  version "8.18.1"
+  resolved "https://npm.yandex-team.ru/@types%2fws/-/ws-8.18.1.tgz?rbtorrent="
+  integrity sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==
   dependencies:
     "@types/node" "*"
 
@@ -1241,120 +1368,162 @@
     "@typescript-eslint/types" "5.59.2"
     eslint-visitor-keys "^3.3.0"
 
-"@webassemblyjs/ast@^1.11.5", "@webassemblyjs/ast@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/ast@^1.14.1", "@webassemblyjs/ast@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fast/-/ast-1.14.1.tgz?rbtorrent="
+  integrity sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==
   dependencies:
-    "@webassemblyjs/helper-numbers" "1.11.5"
-    "@webassemblyjs/helper-wasm-bytecode" "1.11.5"
+    "@webassemblyjs/helper-numbers" "1.13.2"
+    "@webassemblyjs/helper-wasm-bytecode" "1.13.2"
 
-"@webassemblyjs/floating-point-hex-parser@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/floating-point-hex-parser@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2ffloating-point-hex-parser/-/floating-point-hex-parser-1.13.2.tgz?rbtorrent="
+  integrity sha512-6oXyTOzbKxGH4steLbLNOu71Oj+C8Lg34n6CqRvqfS2O71BxY6ByfMDRhBytzknj9yGUPVJ1qIKhRlAwO1AovA==
 
-"@webassemblyjs/helper-api-error@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/helper-api-error@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fhelper-api-error/-/helper-api-error-1.13.2.tgz?rbtorrent="
+  integrity sha512-U56GMYxy4ZQCbDZd6JuvvNV/WFildOjsaWD3Tzzvmw/mas3cXzRJPMjP83JqEsgSbyrmaGjBfDtV7KDXV9UzFQ==
 
-"@webassemblyjs/helper-buffer@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/helper-buffer@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fhelper-buffer/-/helper-buffer-1.14.1.tgz?rbtorrent="
+  integrity sha512-jyH7wtcHiKssDtFPRB+iQdxlDf96m0E39yb0k5uJVhFGleZFoNw1c4aeIcVUPPbXUVJ94wwnMOAqUHyzoEPVMA==
 
-"@webassemblyjs/helper-numbers@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/helper-numbers@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fhelper-numbers/-/helper-numbers-1.13.2.tgz?rbtorrent="
+  integrity sha512-FE8aCmS5Q6eQYcV3gI35O4J789wlQA+7JrqTTpJqn5emA4U2hvwJmvFRC0HODS+3Ye6WioDklgd6scJ3+PLnEA==
   dependencies:
-    "@webassemblyjs/floating-point-hex-parser" "1.11.5"
-    "@webassemblyjs/helper-api-error" "1.11.5"
+    "@webassemblyjs/floating-point-hex-parser" "1.13.2"
+    "@webassemblyjs/helper-api-error" "1.13.2"
     "@xtuc/long" "4.2.2"
 
-"@webassemblyjs/helper-wasm-bytecode@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/helper-wasm-bytecode@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fhelper-wasm-bytecode/-/helper-wasm-bytecode-1.13.2.tgz?rbtorrent="
+  integrity sha512-3QbLKy93F0EAIXLh0ogEVR6rOubA9AoZ+WRYhNbFyuB70j3dRdwH9g+qXhLAO0kiYGlg3TxDV+I4rQTr/YNXkA==
 
-"@webassemblyjs/helper-wasm-section@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/helper-wasm-section@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fhelper-wasm-section/-/helper-wasm-section-1.14.1.tgz?rbtorrent="
+  integrity sha512-ds5mXEqTJ6oxRoqjhWDU83OgzAYjwsCV8Lo/N+oRsNDmx/ZDpqalmrtgOMkHwxsG0iI//3BwWAErYRHtgn0dZw==
   dependencies:
-    "@webassemblyjs/ast" "1.11.5"
-    "@webassemblyjs/helper-buffer" "1.11.5"
-    "@webassemblyjs/helper-wasm-bytecode" "1.11.5"
-    "@webassemblyjs/wasm-gen" "1.11.5"
+    "@webassemblyjs/ast" "1.14.1"
+    "@webassemblyjs/helper-buffer" "1.14.1"
+    "@webassemblyjs/helper-wasm-bytecode" "1.13.2"
+    "@webassemblyjs/wasm-gen" "1.14.1"
 
-"@webassemblyjs/ieee754@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/ieee754@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fieee754/-/ieee754-1.13.2.tgz?rbtorrent="
+  integrity sha512-4LtOzh58S/5lX4ITKxnAK2USuNEvpdVV9AlgGQb8rJDHaLeHciwG4zlGr0j/SNWlr7x3vO1lDEsuePvtcDNCkw==
   dependencies:
     "@xtuc/ieee754" "^1.2.0"
 
-"@webassemblyjs/leb128@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/leb128@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fleb128/-/leb128-1.13.2.tgz?rbtorrent="
+  integrity sha512-Lde1oNoIdzVzdkNEAWZ1dZ5orIbff80YPdHx20mrHwHrVNNTjNr8E3xz9BdpcGqRQbAEa+fkrCb+fRFTl/6sQw==
   dependencies:
     "@xtuc/long" "4.2.2"
 
-"@webassemblyjs/utf8@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/utf8@1.13.2":
+  version "1.13.2"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2futf8/-/utf8-1.13.2.tgz?rbtorrent="
+  integrity sha512-3NQWGjKTASY1xV5m7Hr0iPeXD9+RDobLll3T9d2AO+g3my8xy5peVyjSag4I50mR1bBSN/Ct12lo+R9tJk0NZQ==
 
-"@webassemblyjs/wasm-edit@^1.11.5":
-  version "1.11.5"
+"@webassemblyjs/wasm-edit@^1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fwasm-edit/-/wasm-edit-1.14.1.tgz?rbtorrent="
+  integrity sha512-RNJUIQH/J8iA/1NzlE4N7KtyZNHi3w7at7hDjvRNm5rcUXa00z1vRz3glZoULfJ5mpvYhLybmVcwcjGrC1pRrQ==
   dependencies:
-    "@webassemblyjs/ast" "1.11.5"
-    "@webassemblyjs/helper-buffer" "1.11.5"
-    "@webassemblyjs/helper-wasm-bytecode" "1.11.5"
-    "@webassemblyjs/helper-wasm-section" "1.11.5"
-    "@webassemblyjs/wasm-gen" "1.11.5"
-    "@webassemblyjs/wasm-opt" "1.11.5"
-    "@webassemblyjs/wasm-parser" "1.11.5"
-    "@webassemblyjs/wast-printer" "1.11.5"
+    "@webassemblyjs/ast" "1.14.1"
+    "@webassemblyjs/helper-buffer" "1.14.1"
+    "@webassemblyjs/helper-wasm-bytecode" "1.13.2"
+    "@webassemblyjs/helper-wasm-section" "1.14.1"
+    "@webassemblyjs/wasm-gen" "1.14.1"
+    "@webassemblyjs/wasm-opt" "1.14.1"
+    "@webassemblyjs/wasm-parser" "1.14.1"
+    "@webassemblyjs/wast-printer" "1.14.1"
 
-"@webassemblyjs/wasm-gen@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/wasm-gen@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fwasm-gen/-/wasm-gen-1.14.1.tgz?rbtorrent="
+  integrity sha512-AmomSIjP8ZbfGQhumkNvgC33AY7qtMCXnN6bL2u2Js4gVCg8fp735aEiMSBbDR7UQIj90n4wKAFUSEd0QN2Ukg==
   dependencies:
-    "@webassemblyjs/ast" "1.11.5"
-    "@webassemblyjs/helper-wasm-bytecode" "1.11.5"
-    "@webassemblyjs/ieee754" "1.11.5"
-    "@webassemblyjs/leb128" "1.11.5"
-    "@webassemblyjs/utf8" "1.11.5"
+    "@webassemblyjs/ast" "1.14.1"
+    "@webassemblyjs/helper-wasm-bytecode" "1.13.2"
+    "@webassemblyjs/ieee754" "1.13.2"
+    "@webassemblyjs/leb128" "1.13.2"
+    "@webassemblyjs/utf8" "1.13.2"
 
-"@webassemblyjs/wasm-opt@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/wasm-opt@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fwasm-opt/-/wasm-opt-1.14.1.tgz?rbtorrent="
+  integrity sha512-PTcKLUNvBqnY2U6E5bdOQcSM+oVP/PmrDY9NzowJjislEjwP/C4an2303MCVS2Mg9d3AJpIGdUFIQQWbPds0Sw==
   dependencies:
-    "@webassemblyjs/ast" "1.11.5"
-    "@webassemblyjs/helper-buffer" "1.11.5"
-    "@webassemblyjs/wasm-gen" "1.11.5"
-    "@webassemblyjs/wasm-parser" "1.11.5"
+    "@webassemblyjs/ast" "1.14.1"
+    "@webassemblyjs/helper-buffer" "1.14.1"
+    "@webassemblyjs/wasm-gen" "1.14.1"
+    "@webassemblyjs/wasm-parser" "1.14.1"
 
-"@webassemblyjs/wasm-parser@^1.11.5", "@webassemblyjs/wasm-parser@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/wasm-parser@^1.14.1", "@webassemblyjs/wasm-parser@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fwasm-parser/-/wasm-parser-1.14.1.tgz?rbtorrent="
+  integrity sha512-JLBl+KZ0R5qB7mCnud/yyX08jWFw5MsoalJ1pQ4EdFlgj9VdXKGuENGsiCIjegI1W7p91rUlcB/LB5yRJKNTcQ==
   dependencies:
-    "@webassemblyjs/ast" "1.11.5"
-    "@webassemblyjs/helper-api-error" "1.11.5"
-    "@webassemblyjs/helper-wasm-bytecode" "1.11.5"
-    "@webassemblyjs/ieee754" "1.11.5"
-    "@webassemblyjs/leb128" "1.11.5"
-    "@webassemblyjs/utf8" "1.11.5"
+    "@webassemblyjs/ast" "1.14.1"
+    "@webassemblyjs/helper-api-error" "1.13.2"
+    "@webassemblyjs/helper-wasm-bytecode" "1.13.2"
+    "@webassemblyjs/ieee754" "1.13.2"
+    "@webassemblyjs/leb128" "1.13.2"
+    "@webassemblyjs/utf8" "1.13.2"
 
-"@webassemblyjs/wast-printer@1.11.5":
-  version "1.11.5"
+"@webassemblyjs/wast-printer@1.14.1":
+  version "1.14.1"
+  resolved "https://npm.yandex-team.ru/@webassemblyjs%2fwast-printer/-/wast-printer-1.14.1.tgz?rbtorrent="
+  integrity sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==
   dependencies:
-    "@webassemblyjs/ast" "1.11.5"
+    "@webassemblyjs/ast" "1.14.1"
     "@xtuc/long" "4.2.2"
 
-"@webpack-cli/configtest@^2.0.1":
-  version "2.0.1"
+"@webpack-cli/configtest@^2.1.1":
+  version "2.1.1"
+  resolved "https://npm.yandex-team.ru/@webpack-cli%2fconfigtest/-/configtest-2.1.1.tgz?rbtorrent=1bda3459f7433b121dd92c6bebc4a9d0e1ced6a1"
+  integrity sha512-wy0mglZpDSiSS0XHrVR+BAdId2+yxPSoJW8fsna3ZpYSlufjvxnP4YbKTCBZnNIcGN4r6ZPXV55X4mYExOfLmw==
 
 "@webpack-cli/generators@^3.0.2":
-  version "3.0.2"
+  version "3.0.7"
+  resolved "https://npm.yandex-team.ru/@webpack-cli%2fgenerators/-/generators-3.0.7.tgz?rbtorrent=f49cd213f7eccf5f58380c8ccedb1d58db097d33"
+  integrity sha512-H4dlEX8CzO5EHBYYZQop9x4w6lG9FenSF/1spLRlvRAULDgTs0VfmwOuwp03tTLml9jpMsouuVw6vEN8KpwE/w==
   dependencies:
-    webpack-cli "^5.0.2"
+    webpack-cli "^5.1.4"
     yeoman-environment "^3.9.1"
     yeoman-generator "^5.7.0"
 
-"@webpack-cli/info@^2.0.1":
-  version "2.0.1"
-
-"@webpack-cli/serve@^2.0.2":
+"@webpack-cli/info@^2.0.2":
   version "2.0.2"
+  resolved "https://npm.yandex-team.ru/@webpack-cli%2finfo/-/info-2.0.2.tgz?rbtorrent=302ee97a99e7e8468103e0550ac1e8505c856f51"
+  integrity sha512-zLHQdI/Qs1UyT5UBdWNqsARasIA+AaF8t+4u2aS2nEpBQh2mWIVb8qAklq0eUENnC5mOItrIB4LiS9xMtph18A==
+
+"@webpack-cli/serve@^2.0.5":
+  version "2.0.5"
+  resolved "https://npm.yandex-team.ru/@webpack-cli%2fserve/-/serve-2.0.5.tgz?rbtorrent=56ac4ea9476ec6e325bea87bdf174e71d38c6643"
+  integrity sha512-lqaoKnRYBdo1UgDX8uF24AfGMifWK19TxPmM5FHc2vAGxrJ/qtyUyFBWoY1tISZdelsQ5fBcOusifo5o5wSJxQ==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
+  resolved "https://npm.yandex-team.ru/@xtuc%2fieee754/-/ieee754-1.2.0.tgz?rbtorrent=7b6a13d4979fcc776c78bb6b8ad6cb056bcaf0d2"
+  integrity sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==
 
 "@xtuc/long@4.2.2":
   version "4.2.2"
+  resolved "https://npm.yandex-team.ru/@xtuc%2flong/-/long-4.2.2.tgz?rbtorrent=dfc162a3e26c7b15626c015fb9e65b02847b2908"
+  integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-abbrev@1:
+abbrev@^1.0.0, abbrev@1:
   version "1.1.1"
 
 accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.8:
@@ -1363,17 +1532,18 @@ accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.8:
     mime-types "~2.1.34"
     negotiator "0.6.3"
 
-acorn-import-assertions@^1.7.6:
-  version "1.8.0"
+acorn-import-phases@^1.0.3:
+  version "1.0.4"
+  resolved "https://npm.yandex-team.ru/acorn-import-phases/-/acorn-import-phases-1.0.4.tgz?rbtorrent="
+  integrity sha512-wKmbr/DDiIXzEOiWrTTUcDm24kQ2vGfZQvM2fwg2vXqR5uW6aapr7ObPtj1th32b9u90/Pf4AItvdTh42fBmVQ==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
 
-"acorn@^6.0.0 || ^7.0.0 || ^8.0.0", acorn@^8, acorn@^8.5.0, acorn@^8.7.1, acorn@^8.8.0:
-  version "8.8.2"
-
-acorn@^8.8.2:
-  version "8.11.2"
+"acorn@^6.0.0 || ^7.0.0 || ^8.0.0", acorn@^8.14.0, acorn@^8.15.0, acorn@^8.8.0:
+  version "8.15.0"
+  resolved "https://npm.yandex-team.ru/acorn/-/acorn-8.15.0.tgz?rbtorrent="
+  integrity sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==
 
 adjust-sourcemap-loader@^4.0.0:
   version "4.0.0"
@@ -1404,9 +1574,6 @@ ajv-formats@^2.1.1:
   dependencies:
     ajv "^8.0.0"
 
-ajv-keywords@^3.5.2:
-  version "3.5.2"
-
 ajv-keywords@^5.1.0:
   version "5.1.0"
   dependencies:
@@ -1421,14 +1588,6 @@ ajv@^6.10.0:
     uri-js "^4.2.2"
 
 ajv@^6.12.4:
-  version "6.12.6"
-  dependencies:
-    fast-deep-equal "^3.1.1"
-    fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
-    uri-js "^4.2.2"
-
-ajv@^6.12.5, ajv@^6.9.1:
   version "6.12.6"
   dependencies:
     fast-deep-equal "^3.1.1"
@@ -1455,15 +1614,20 @@ ansi-html-community@^0.0.8:
 ansi-regex@^5.0.1:
   version "5.0.1"
 
-ansi-styles@^3.2.1:
-  version "3.2.1"
-  dependencies:
-    color-convert "^1.9.0"
+ansi-regex@^6.0.1:
+  version "6.2.2"
+  resolved "https://npm.yandex-team.ru/ansi-regex/-/ansi-regex-6.2.2.tgz?rbtorrent="
+  integrity sha512-Bq3SmSpyFHaWjPk8If9yc6svM8c56dB5BAtW4Qbw5jHTwwXXcTLoRMkpDJp6VL0XzlWaCHTXrkFURMYmD0sLqg==
 
 ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   version "4.3.0"
   dependencies:
     color-convert "^2.0.1"
+
+ansi-styles@^6.1.0:
+  version "6.2.3"
+  resolved "https://npm.yandex-team.ru/ansi-styles/-/ansi-styles-6.2.3.tgz?rbtorrent="
+  integrity sha512-4Dj6M28JB+oAH8kFkTLUo+a2jwOFkuqb3yucU0CANcRRUbxS0cP0nZYCGjcc3BNXwRIsUVmDGgzawme7zvJHvg==
 
 anymatch@~3.1.2:
   version "3.1.3"
@@ -1563,6 +1727,11 @@ balanced-match@^1.0.0:
 base64-js@^1.3.1:
   version "1.5.1"
 
+baseline-browser-mapping@^2.8.25:
+  version "2.8.31"
+  resolved "https://npm.yandex-team.ru/baseline-browser-mapping/-/baseline-browser-mapping-2.8.31.tgz?rbtorrent="
+  integrity sha512-a28v2eWrrRWPpJSzxc+mKwm0ZtVx/G8SepdQZDArnXYU/XS+IF6mp8aB/4E+hH1tyGCoDo3KlUCdlSxGDsRkAw==
+
 batch@0.6.1:
   version "0.6.1"
 
@@ -1595,19 +1764,21 @@ bl@^4.1.0:
     inherits "^2.0.4"
     readable-stream "^3.4.0"
 
-body-parser@1.20.1:
-  version "1.20.1"
+body-parser@1.20.3:
+  version "1.20.3"
+  resolved "https://npm.yandex-team.ru/body-parser/-/body-parser-1.20.3.tgz?rbtorrent="
+  integrity sha512-7rAxByjUMqQ3/bHJy7D6OGXvx/MMc4IqBn/X0fcM1QUcAItpZrBEYhWGem+tzXH90c+G01ypMcYJBO9Y30203g==
   dependencies:
     bytes "3.1.2"
-    content-type "~1.0.4"
+    content-type "~1.0.5"
     debug "2.6.9"
     depd "2.0.0"
     destroy "1.2.0"
     http-errors "2.0.0"
     iconv-lite "0.4.24"
     on-finished "2.4.1"
-    qs "6.11.0"
-    raw-body "2.5.1"
+    qs "6.13.0"
+    raw-body "2.5.2"
     type-is "~1.6.18"
     unpipe "1.0.0"
 
@@ -1633,18 +1804,23 @@ brace-expansion@^2.0.1:
   dependencies:
     balanced-match "^1.0.0"
 
-braces@^3.0.2, braces@~3.0.2:
-  version "3.0.2"
+braces@^3.0.3, braces@~3.0.2:
+  version "3.0.3"
+  resolved "https://npm.yandex-team.ru/braces/-/braces-3.0.3.tgz?rbtorrent="
+  integrity sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==
   dependencies:
-    fill-range "^7.0.1"
+    fill-range "^7.1.1"
 
-browserslist@^4.14.5, browserslist@^4.21.3, browserslist@^4.21.5, "browserslist@>= 4.21.0":
-  version "4.21.5"
+browserslist@^4.21.3, browserslist@^4.21.5, browserslist@^4.26.3, "browserslist@>= 4.21.0":
+  version "4.28.0"
+  resolved "https://npm.yandex-team.ru/browserslist/-/browserslist-4.28.0.tgz?rbtorrent="
+  integrity sha512-tbydkR/CxfMwelN0vwdP/pLkDwyAASZ+VfWm4EOwlB6SWhx1sYnWLqo8N5j0rAzPfzfRaxt0mM/4wPU/Su84RQ==
   dependencies:
-    caniuse-lite "^1.0.30001449"
-    electron-to-chromium "^1.4.284"
-    node-releases "^2.0.8"
-    update-browserslist-db "^1.0.10"
+    baseline-browser-mapping "^2.8.25"
+    caniuse-lite "^1.0.30001754"
+    electron-to-chromium "^1.5.249"
+    node-releases "^2.0.27"
+    update-browserslist-db "^1.1.4"
 
 buffer-from@^1.0.0:
   version "1.1.2"
@@ -1663,6 +1839,8 @@ bytes@3.0.0:
 
 bytes@3.1.2:
   version "3.1.2"
+  resolved "https://npm.yandex-team.ru/bytes/-/bytes-3.1.2.tgz?rbtorrent=ddea92658fe4ad0060298ba85e14cea6f4fa4a1b"
+  integrity sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
 
 cacache@^15.0.3, cacache@^15.0.5, cacache@^15.2.0:
   version "15.3.0"
@@ -1688,6 +1866,8 @@ cacache@^15.0.3, cacache@^15.0.5, cacache@^15.2.0:
 
 cacache@^16.1.0:
   version "16.1.3"
+  resolved "https://npm.yandex-team.ru/cacache/-/cacache-16.1.3.tgz?rbtorrent=a565e1a86ab180237ca5ccdc1e7b31ddabd694c1"
+  integrity sha512-/+Emcj9DAXxX4cwlLmRI9c166RuL3w30zp4R7Joiv2cQTtTtA+jeuCAjH3ZlGnYS3tKENSrKhAzVVP9GVyzeYQ==
   dependencies:
     "@npmcli/fs" "^2.1.0"
     "@npmcli/move-file" "^2.0.0"
@@ -1708,11 +1888,39 @@ cacache@^16.1.0:
     tar "^6.1.11"
     unique-filename "^2.0.0"
 
-call-bind@^1.0.0:
-  version "1.0.2"
+cacache@^17.0.0:
+  version "17.1.4"
+  resolved "https://npm.yandex-team.ru/cacache/-/cacache-17.1.4.tgz?rbtorrent=19cdf3ea7b0eecacebf193205d1c225ab00d8cf8"
+  integrity sha512-/aJwG2l3ZMJ1xNAnqbMpA40of9dj/pIH3QfiuQSqjfPJF747VR0J/bHn+/KdNnHKc6XQcWt/AfRSBft82W1d2A==
   dependencies:
-    function-bind "^1.1.1"
-    get-intrinsic "^1.0.2"
+    "@npmcli/fs" "^3.1.0"
+    fs-minipass "^3.0.0"
+    glob "^10.2.2"
+    lru-cache "^7.7.1"
+    minipass "^7.0.3"
+    minipass-collect "^1.0.2"
+    minipass-flush "^1.0.5"
+    minipass-pipeline "^1.2.4"
+    p-map "^4.0.0"
+    ssri "^10.0.0"
+    tar "^6.1.11"
+    unique-filename "^3.0.0"
+
+call-bind-apply-helpers@^1.0.1, call-bind-apply-helpers@^1.0.2:
+  version "1.0.2"
+  resolved "https://npm.yandex-team.ru/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz?rbtorrent="
+  integrity sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==
+  dependencies:
+    es-errors "^1.3.0"
+    function-bind "^1.1.2"
+
+call-bound@^1.0.2:
+  version "1.0.4"
+  resolved "https://npm.yandex-team.ru/call-bound/-/call-bound-1.0.4.tgz?rbtorrent="
+  integrity sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==
+  dependencies:
+    call-bind-apply-helpers "^1.0.2"
+    get-intrinsic "^1.3.0"
 
 callsites@^3.0.0:
   version "3.1.0"
@@ -1723,15 +1931,10 @@ camel-case@^4.1.2:
     pascal-case "^3.1.2"
     tslib "^2.0.3"
 
-caniuse-lite@^1.0.30001449, caniuse-lite@^1.0.30001464:
-  version "1.0.30001481"
-
-chalk@^2.0.0:
-  version "2.4.2"
-  dependencies:
-    ansi-styles "^3.2.1"
-    escape-string-regexp "^1.0.5"
-    supports-color "^5.3.0"
+caniuse-lite@^1.0.30001464, caniuse-lite@^1.0.30001754:
+  version "1.0.30001757"
+  resolved "https://npm.yandex-team.ru/caniuse-lite/-/caniuse-lite-1.0.30001757.tgz?rbtorrent="
+  integrity sha512-r0nnL/I28Zi/yjk1el6ilj27tKcdjLsNqAOZr0yVjWPrSQyHgKI2INaEWw21bAQSv2LXRt1XuCS/GomNpWOxsQ==
 
 chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.1:
   version "4.1.2"
@@ -1816,11 +2019,6 @@ cmd-shim@^5.0.0:
   dependencies:
     mkdirp-infer-owner "^2.0.0"
 
-color-convert@^1.9.0:
-  version "1.9.3"
-  dependencies:
-    color-name "1.1.3"
-
 color-convert@^2.0.1:
   version "2.0.1"
   dependencies:
@@ -1828,9 +2026,6 @@ color-convert@^2.0.1:
 
 color-name@~1.1.4:
   version "1.1.4"
-
-color-name@1.1.3:
-  version "1.1.3"
 
 color-support@^1.1.2, color-support@^1.1.3:
   version "1.1.3"
@@ -1889,8 +2084,10 @@ content-disposition@0.5.4:
   dependencies:
     safe-buffer "5.2.1"
 
-content-type@~1.0.4:
+content-type@~1.0.4, content-type@~1.0.5:
   version "1.0.5"
+  resolved "https://npm.yandex-team.ru/content-type/-/content-type-1.0.5.tgz?rbtorrent=f556e07c837ef7d53f4835dba6b69a0e1dacae22"
+  integrity sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==
 
 convert-source-map@^1.7.0:
   version "1.9.0"
@@ -1898,8 +2095,10 @@ convert-source-map@^1.7.0:
 cookie-signature@1.0.6:
   version "1.0.6"
 
-cookie@0.5.0:
-  version "0.5.0"
+cookie@0.7.1:
+  version "0.7.1"
+  resolved "https://npm.yandex-team.ru/cookie/-/cookie-0.7.1.tgz?rbtorrent="
+  integrity sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==
 
 core-js-compat@^3.25.1:
   version "3.30.1"
@@ -1917,8 +2116,10 @@ cosmiconfig@^8.1.3:
     parse-json "^5.0.0"
     path-type "^4.0.0"
 
-cross-spawn@^7.0.2, cross-spawn@^7.0.3:
-  version "7.0.3"
+cross-spawn@^7.0.2, cross-spawn@^7.0.3, cross-spawn@^7.0.6:
+  version "7.0.6"
+  resolved "https://npm.yandex-team.ru/cross-spawn/-/cross-spawn-7.0.6.tgz?rbtorrent="
+  integrity sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==
   dependencies:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
@@ -1957,13 +2158,15 @@ dargs@^7.0.0:
 dateformat@^4.5.0:
   version "4.6.3"
 
-debug@^4.1.0, debug@^4.1.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4, debug@4:
+debug@^4.1.0, debug@^4.1.1, debug@^4.3.1, debug@^4.3.2, debug@^4.3.3, debug@^4.3.4, debug@4:
   version "4.3.4"
   dependencies:
     ms "2.1.2"
 
 debug@2.6.9:
   version "2.6.9"
+  resolved "https://npm.yandex-team.ru/debug/-/debug-2.6.9.tgz?rbtorrent=b02284ec84efd1aee23ff49704863922a0155cb1"
+  integrity sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==
   dependencies:
     ms "2.0.0"
 
@@ -2003,6 +2206,8 @@ deprecation@^2.0.0, deprecation@^2.3.1:
 
 destroy@1.2.0:
   version "1.2.0"
+  resolved "https://npm.yandex-team.ru/destroy/-/destroy-1.2.0.tgz?rbtorrent=5e2313f4c22911936287ddc65b3b345afc51f3e0"
+  integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
 
 detect-node@^2.0.4:
   version "2.1.0"
@@ -2070,16 +2275,36 @@ dot-case@^3.0.4:
 dotenv@^16.3.1:
   version "16.3.1"
 
+dunder-proto@^1.0.1:
+  version "1.0.1"
+  resolved "https://npm.yandex-team.ru/dunder-proto/-/dunder-proto-1.0.1.tgz?rbtorrent="
+  integrity sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==
+  dependencies:
+    call-bind-apply-helpers "^1.0.1"
+    es-errors "^1.3.0"
+    gopd "^1.2.0"
+
+eastasianwidth@^0.2.0:
+  version "0.2.0"
+  resolved "https://npm.yandex-team.ru/eastasianwidth/-/eastasianwidth-0.2.0.tgz?rbtorrent=48a1942e24c9694bc3fe74193b62c270de25b792"
+  integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
+
 ee-first@1.1.1:
   version "1.1.1"
+  resolved "https://npm.yandex-team.ru/ee-first/-/ee-first-1.1.1.tgz?rbtorrent=b33e875b5c9b99376469b3d4fc2448b418091933"
+  integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 ejs@^3.1.8:
-  version "3.1.9"
+  version "3.1.10"
+  resolved "https://npm.yandex-team.ru/ejs/-/ejs-3.1.10.tgz?rbtorrent="
+  integrity sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==
   dependencies:
     jake "^10.8.5"
 
-electron-to-chromium@^1.4.284:
-  version "1.4.377"
+electron-to-chromium@^1.5.249:
+  version "1.5.260"
+  resolved "https://npm.yandex-team.ru/electron-to-chromium/-/electron-to-chromium-1.5.260.tgz?rbtorrent="
+  integrity sha512-ov8rBoOBhVawpzdre+Cmz4FB+y66Eqrk6Gwqd8NGxuhv99GQ8XqMAr351KEkOt7gukXWDg6gJWEMKgL2RLMPtA==
 
 email-addresses@^5.0.0:
   version "5.0.0"
@@ -2087,19 +2312,33 @@ email-addresses@^5.0.0:
 emoji-regex@^8.0.0:
   version "8.0.0"
 
+emoji-regex@^9.2.2:
+  version "9.2.2"
+  resolved "https://npm.yandex-team.ru/emoji-regex/-/emoji-regex-9.2.2.tgz?rbtorrent=b0f455337b66ea63401408ca14fd65d75aaa4983"
+  integrity sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==
+
 emojis-list@^3.0.0:
   version "3.0.0"
 
 encodeurl@~1.0.2:
   version "1.0.2"
+  resolved "https://npm.yandex-team.ru/encodeurl/-/encodeurl-1.0.2.tgz?rbtorrent=2ee1d518c4b14b1d485befc7a1100de1702f4015"
+  integrity sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=
+
+encodeurl@~2.0.0:
+  version "2.0.0"
+  resolved "https://npm.yandex-team.ru/encodeurl/-/encodeurl-2.0.0.tgz?rbtorrent="
+  integrity sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==
 
 encoding@^0.1.0, encoding@^0.1.12, encoding@^0.1.13:
   version "0.1.13"
   dependencies:
     iconv-lite "^0.6.2"
 
-enhanced-resolve@^5.0.0, enhanced-resolve@^5.13.0:
-  version "5.13.0"
+enhanced-resolve@^5.0.0, enhanced-resolve@^5.17.3:
+  version "5.18.3"
+  resolved "https://npm.yandex-team.ru/enhanced-resolve/-/enhanced-resolve-5.18.3.tgz?rbtorrent="
+  integrity sha512-d4lC8xfavMeBjzGr2vECC3fsGXziXZQyJxD868h2M/mBI3PwAuODxAkLkq5HYuvrPYcUtiLzsTo8U3PgX3Ocww==
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
@@ -2124,11 +2363,30 @@ error-ex@^1.3.1:
 error@^10.4.0:
   version "10.4.0"
 
+es-define-property@^1.0.1:
+  version "1.0.1"
+  resolved "https://npm.yandex-team.ru/es-define-property/-/es-define-property-1.0.1.tgz?rbtorrent="
+  integrity sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==
+
+es-errors@^1.3.0:
+  version "1.3.0"
+  resolved "https://npm.yandex-team.ru/es-errors/-/es-errors-1.3.0.tgz?rbtorrent="
+  integrity sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==
+
 es-module-lexer@^1.2.1:
   version "1.2.1"
 
-escalade@^3.1.1:
-  version "3.1.1"
+es-object-atoms@^1.0.0, es-object-atoms@^1.1.1:
+  version "1.1.1"
+  resolved "https://npm.yandex-team.ru/es-object-atoms/-/es-object-atoms-1.1.1.tgz?rbtorrent="
+  integrity sha512-FGgH2h8zKNim9ljj7dankFPcICIK9Cp5bm+c2gQSYePhpaG5+esrLODihIorn+Pe6FGJzWhXQotPv73jTaldXA==
+  dependencies:
+    es-errors "^1.3.0"
+
+escalade@^3.2.0:
+  version "3.2.0"
+  resolved "https://npm.yandex-team.ru/escalade/-/escalade-3.2.0.tgz?rbtorrent="
+  integrity sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==
 
 escape-html@~1.0.3:
   version "1.0.3"
@@ -2232,6 +2490,8 @@ esutils@^2.0.2:
 
 etag@~1.8.1:
   version "1.8.1"
+  resolved "https://npm.yandex-team.ru/etag/-/etag-1.8.1.tgz?rbtorrent=2f3ff4ae5ba58604fad50c32ca223b29bd8561a6"
+  integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
 eventemitter3@^4.0.0, eventemitter3@^4.0.4:
   version "4.0.7"
@@ -2252,35 +2512,42 @@ execa@^5.0.0, execa@^5.1.1:
     signal-exit "^3.0.3"
     strip-final-newline "^2.0.0"
 
+exponential-backoff@^3.1.1:
+  version "3.1.3"
+  resolved "https://npm.yandex-team.ru/exponential-backoff/-/exponential-backoff-3.1.3.tgz?rbtorrent="
+  integrity sha512-ZgEeZXj30q+I0EN+CbSSpIyPaJ5HVQD18Z1m+u1FXbAeT94mr1zw50q4q6jiiC447Nl/YTcIYSAftiGqetwXCA==
+
 express@^4.17.3:
-  version "4.18.2"
+  version "4.21.2"
+  resolved "https://npm.yandex-team.ru/express/-/express-4.21.2.tgz?rbtorrent="
+  integrity sha512-28HqgMZAmih1Czt9ny7qr6ek2qddF4FclbMzwhCREB6OFfH+rXAnuNCwo1/wFvrtbgsQDb4kSbX9de9lFbrXnA==
   dependencies:
     accepts "~1.3.8"
     array-flatten "1.1.1"
-    body-parser "1.20.1"
+    body-parser "1.20.3"
     content-disposition "0.5.4"
     content-type "~1.0.4"
-    cookie "0.5.0"
+    cookie "0.7.1"
     cookie-signature "1.0.6"
     debug "2.6.9"
     depd "2.0.0"
-    encodeurl "~1.0.2"
+    encodeurl "~2.0.0"
     escape-html "~1.0.3"
     etag "~1.8.1"
-    finalhandler "1.2.0"
+    finalhandler "1.3.1"
     fresh "0.5.2"
     http-errors "2.0.0"
-    merge-descriptors "1.0.1"
+    merge-descriptors "1.0.3"
     methods "~1.1.2"
     on-finished "2.4.1"
     parseurl "~1.3.3"
-    path-to-regexp "0.1.7"
+    path-to-regexp "0.1.12"
     proxy-addr "~2.0.7"
-    qs "6.11.0"
+    qs "6.13.0"
     range-parser "~1.2.1"
     safe-buffer "5.2.1"
-    send "0.18.0"
-    serve-static "1.15.0"
+    send "0.19.0"
+    serve-static "1.16.2"
     setprototypeof "1.2.0"
     statuses "2.0.1"
     type-is "~1.6.18"
@@ -2350,16 +2617,20 @@ filenamify@^4.3.0:
     strip-outer "^1.0.1"
     trim-repeated "^1.0.0"
 
-fill-range@^7.0.1:
-  version "7.0.1"
+fill-range@^7.1.1:
+  version "7.1.1"
+  resolved "https://npm.yandex-team.ru/fill-range/-/fill-range-7.1.1.tgz?rbtorrent="
+  integrity sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==
   dependencies:
     to-regex-range "^5.0.1"
 
-finalhandler@1.2.0:
-  version "1.2.0"
+finalhandler@1.3.1:
+  version "1.3.1"
+  resolved "https://npm.yandex-team.ru/finalhandler/-/finalhandler-1.3.1.tgz?rbtorrent="
+  integrity sha512-6BN9trH7bp3qvnrRyzsBz+g3lZxTNZTbVO2EV1CS0WIcDbawYVdYvGflME/9QP0h0pYlCDBCTjYa9nZzMDpyxQ==
   dependencies:
     debug "2.6.9"
-    encodeurl "~1.0.2"
+    encodeurl "~2.0.0"
     escape-html "~1.0.3"
     on-finished "2.4.1"
     parseurl "~1.3.3"
@@ -2412,7 +2683,17 @@ flatted@^3.1.0:
   version "3.2.7"
 
 follow-redirects@^1.0.0:
-  version "1.15.2"
+  version "1.15.11"
+  resolved "https://npm.yandex-team.ru/follow-redirects/-/follow-redirects-1.15.11.tgz?rbtorrent="
+  integrity sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==
+
+foreground-child@^3.1.0:
+  version "3.3.1"
+  resolved "https://npm.yandex-team.ru/foreground-child/-/foreground-child-3.3.1.tgz?rbtorrent="
+  integrity sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==
+  dependencies:
+    cross-spawn "^7.0.6"
+    signal-exit "^4.0.1"
 
 forwarded@0.2.0:
   version "0.2.0"
@@ -2422,6 +2703,8 @@ fraction.js@^4.2.0:
 
 fresh@0.5.2:
   version "0.5.2"
+  resolved "https://npm.yandex-team.ru/fresh/-/fresh-0.5.2.tgz?rbtorrent=77477f1b23ed690a472992b3218a06a2c06907f6"
+  integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
 
 fs-extra@^8.1.0:
   version "8.1.0"
@@ -2432,17 +2715,30 @@ fs-extra@^8.1.0:
 
 fs-minipass@^2.0.0, fs-minipass@^2.1.0:
   version "2.1.0"
+  resolved "https://npm.yandex-team.ru/fs-minipass/-/fs-minipass-2.1.0.tgz?rbtorrent=8d70fff9f6b1413da0b5bdfe4369a1d1b0c1dba9"
+  integrity sha512-V/JgOLFCS+R6Vcq0slCuaeWEdNC3ouDlJMNIsacH2VtALiu9mV4LPrHc5cDl8k5aw6J8jwgWWpiTo5RYhmIzvg==
   dependencies:
     minipass "^3.0.0"
 
-fs-monkey@^1.0.3:
-  version "1.0.3"
+fs-minipass@^3.0.0:
+  version "3.0.3"
+  resolved "https://npm.yandex-team.ru/fs-minipass/-/fs-minipass-3.0.3.tgz?rbtorrent=f7913e5018abf8b4509914b2e118cc0848a04f8a"
+  integrity sha512-XUBA9XClHbnJWSfBzjkm6RvPsyg3sryZt06BEQoXcF7EK/xpGaQYJgQKDJSUH5SGZ76Y7pFx1QBnXz09rU5Fbw==
+  dependencies:
+    minipass "^7.0.3"
+
+fs-monkey@^1.0.4:
+  version "1.1.0"
+  resolved "https://npm.yandex-team.ru/fs-monkey/-/fs-monkey-1.1.0.tgz?rbtorrent="
+  integrity sha512-QMUezzXWII9EV5aTFXW1UBVUO77wYPpjqIF8/AviUCThNeSYZykpoTixUeaNNBwmCev0AMDWMAni+f8Hxb1IFw==
 
 fs.realpath@^1.0.0:
   version "1.0.0"
 
-function-bind@^1.1.1:
-  version "1.1.1"
+function-bind@^1.1.1, function-bind@^1.1.2:
+  version "1.1.2"
+  resolved "https://npm.yandex-team.ru/function-bind/-/function-bind-1.1.2.tgz?rbtorrent=423982b67750a5091c8f795109f07009f2be6eac"
+  integrity sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==
 
 gauge@^3.0.0:
   version "3.0.2"
@@ -2472,12 +2768,29 @@ gauge@^4.0.3:
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
 
-get-intrinsic@^1.0.2:
-  version "1.2.0"
+get-intrinsic@^1.2.5, get-intrinsic@^1.3.0:
+  version "1.3.0"
+  resolved "https://npm.yandex-team.ru/get-intrinsic/-/get-intrinsic-1.3.0.tgz?rbtorrent="
+  integrity sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==
   dependencies:
-    function-bind "^1.1.1"
-    has "^1.0.3"
-    has-symbols "^1.0.3"
+    call-bind-apply-helpers "^1.0.2"
+    es-define-property "^1.0.1"
+    es-errors "^1.3.0"
+    es-object-atoms "^1.1.1"
+    function-bind "^1.1.2"
+    get-proto "^1.0.1"
+    gopd "^1.2.0"
+    has-symbols "^1.1.0"
+    hasown "^2.0.2"
+    math-intrinsics "^1.1.0"
+
+get-proto@^1.0.1:
+  version "1.0.1"
+  resolved "https://npm.yandex-team.ru/get-proto/-/get-proto-1.0.1.tgz?rbtorrent="
+  integrity sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==
+  dependencies:
+    dunder-proto "^1.0.1"
+    es-object-atoms "^1.0.0"
 
 get-stream@^6.0.0:
   version "6.0.1"
@@ -2510,6 +2823,20 @@ glob-parent@^6.0.2:
 
 glob-to-regexp@^0.4.1:
   version "0.4.1"
+  resolved "https://npm.yandex-team.ru/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz?rbtorrent=73ef341fadd737fcac9cc5dee8bfc9434db361bc"
+  integrity sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==
+
+glob@^10.2.2:
+  version "10.5.0"
+  resolved "https://npm.yandex-team.ru/glob/-/glob-10.5.0.tgz?rbtorrent="
+  integrity sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==
+  dependencies:
+    foreground-child "^3.1.0"
+    jackspeak "^3.1.2"
+    minimatch "^9.0.4"
+    minipass "^7.1.2"
+    package-json-from-dist "^1.0.0"
+    path-scurry "^1.11.1"
 
 glob@^7.0.0, glob@^7.0.3, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
   version "7.2.3"
@@ -2523,6 +2850,8 @@ glob@^7.0.0, glob@^7.0.3, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
 
 glob@^8.0.1:
   version "8.1.0"
+  resolved "https://npm.yandex-team.ru/glob/-/glob-8.1.0.tgz?rbtorrent=4a1b49c73faeab383f2117f1662ae3c24b1b1565"
+  integrity sha512-r8hpEjiQEYlF2QU0df3dS+nxxSIreXQS1qRhMJM0Q5NDdR386C7jb7Hwwod8Fgiuex+k0GFjgft18yvxm5XoCQ==
   dependencies:
     fs.realpath "^1.0.0"
     inflight "^1.0.4"
@@ -2557,7 +2886,12 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
+gopd@^1.2.0:
+  version "1.2.0"
+  resolved "https://npm.yandex-team.ru/gopd/-/gopd-1.2.0.tgz?rbtorrent="
+  integrity sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==
+
+graceful-fs@^4.1.2, graceful-fs@^4.1.5, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.11, graceful-fs@^4.2.4, graceful-fs@^4.2.6:
   version "4.2.11"
 
 grapheme-splitter@^1.0.4:
@@ -2569,14 +2903,13 @@ grouped-queue@^2.0.0:
 handle-thing@^2.0.0:
   version "2.0.1"
 
-has-flag@^3.0.0:
-  version "3.0.0"
-
 has-flag@^4.0.0:
   version "4.0.0"
 
-has-symbols@^1.0.3:
-  version "1.0.3"
+has-symbols@^1.1.0:
+  version "1.1.0"
+  resolved "https://npm.yandex-team.ru/has-symbols/-/has-symbols-1.1.0.tgz?rbtorrent="
+  integrity sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==
 
 has-unicode@^2.0.1:
   version "2.0.1"
@@ -2585,6 +2918,13 @@ has@^1.0.3:
   version "1.0.3"
   dependencies:
     function-bind "^1.1.1"
+
+hasown@^2.0.2:
+  version "2.0.2"
+  resolved "https://npm.yandex-team.ru/hasown/-/hasown-2.0.2.tgz?rbtorrent="
+  integrity sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==
+  dependencies:
+    function-bind "^1.1.2"
 
 he@^1.2.0:
   version "1.2.0"
@@ -2596,6 +2936,13 @@ hosted-git-info@^4.0.1:
   version "4.1.0"
   dependencies:
     lru-cache "^6.0.0"
+
+hosted-git-info@^6.0.0:
+  version "6.1.3"
+  resolved "https://npm.yandex-team.ru/hosted-git-info/-/hosted-git-info-6.1.3.tgz?rbtorrent="
+  integrity sha512-HVJyzUrLIL1c0QmviVh5E8VGyUS7xCFPS6yydaVd1UegW+ibV/CohqTH9MkOLDp5o+rb82DMo77PTuc9F/8GKw==
+  dependencies:
+    lru-cache "^7.5.1"
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -2636,7 +2983,7 @@ htmlparser2@^6.1.0:
     domutils "^2.5.2"
     entities "^2.0.0"
 
-http-cache-semantics@^4.1.0:
+http-cache-semantics@^4.1.0, http-cache-semantics@^4.1.1:
   version "4.1.1"
 
 http-deceiver@^1.2.7:
@@ -2652,6 +2999,8 @@ http-errors@~1.6.2:
 
 http-errors@2.0.0:
   version "2.0.0"
+  resolved "https://npm.yandex-team.ru/http-errors/-/http-errors-2.0.0.tgz?rbtorrent=1853a70f7cc99a2e4d1ee38b7b666ca87007c339"
+  integrity sha512-FtwrG/euBzaEjYeRqOgly7G0qviiXoJWnvEH2Z1plBdXgbyjv34pHTSb9zoeHMyDy33+DWy5Wt9Wo+TURtOYSQ==
   dependencies:
     depd "2.0.0"
     inherits "2.0.4"
@@ -2671,13 +3020,17 @@ http-proxy-agent@^4.0.1:
 
 http-proxy-agent@^5.0.0:
   version "5.0.0"
+  resolved "https://npm.yandex-team.ru/http-proxy-agent/-/http-proxy-agent-5.0.0.tgz?rbtorrent=5aca9bda5b60ab0dba23a313e7138bad2c85bb40"
+  integrity sha512-n2hY8YdoRE1i7r6M0w9DIw5GgZN0G25P8zLCRQ8rjXtTU3vsNFBI/vWK/UIeE6g5MUUz6avwAPXmL6Fy9D/90w==
   dependencies:
     "@tootallnate/once" "2"
     agent-base "6"
     debug "4"
 
 http-proxy-middleware@^2.0.3:
-  version "2.0.6"
+  version "2.0.9"
+  resolved "https://npm.yandex-team.ru/http-proxy-middleware/-/http-proxy-middleware-2.0.9.tgz?rbtorrent="
+  integrity sha512-c1IyJYLYppU574+YI7R4QyX2ystMtVXZwIdzazUIPIJsHuWNd+mho2j+bKoHftndicGj9yh+xjd+l0yj7VeT1Q==
   dependencies:
     "@types/http-proxy" "^1.17.8"
     http-proxy "^1.18.1"
@@ -2726,6 +3079,13 @@ ignore-walk@^4.0.1:
   version "4.0.1"
   dependencies:
     minimatch "^3.0.4"
+
+ignore-walk@^6.0.0:
+  version "6.0.5"
+  resolved "https://npm.yandex-team.ru/ignore-walk/-/ignore-walk-6.0.5.tgz?rbtorrent="
+  integrity sha512-VuuG0wCnjhnylG1ABXT3dAuIpTNDs/G8jlpmwXY03fXoXy/8ZK8/T+hMzt8L4WnrLCJgdybqgPagnF/f97cg3A==
+  dependencies:
+    minimatch "^9.0.0"
 
 ignore@^5.2.0:
   version "5.2.4"
@@ -2791,8 +3151,10 @@ interpret@^1.0.0:
 interpret@^3.1.1:
   version "3.1.1"
 
-ip@^2.0.0:
-  version "2.0.0"
+ip-address@^10.0.1:
+  version "10.1.0"
+  resolved "https://npm.yandex-team.ru/ip-address/-/ip-address-10.1.0.tgz?rbtorrent="
+  integrity sha512-XXADHxXmvT9+CRxhXg56LJovE+bmWnEWB78LB83VZTprKTmaC5QfruXocxzTZ2Kl0DNwKuBdlIhjL8LeY8Sf8Q==
 
 ipaddr.js@^2.0.1:
   version "2.0.1"
@@ -2808,7 +3170,7 @@ is-binary-path@~2.1.0:
   dependencies:
     binary-extensions "^2.0.0"
 
-is-core-module@^2.11.0:
+is-core-module@^2.11.0, is-core-module@^2.8.1:
   version "2.12.0"
   dependencies:
     has "^1.0.3"
@@ -2835,6 +3197,8 @@ is-lambda@^1.0.1:
 
 is-number@^7.0.0:
   version "7.0.0"
+  resolved "https://npm.yandex-team.ru/is-number/-/is-number-7.0.0.tgz?rbtorrent=a36365cac002ce7b5ebe1740bef8809e8e2d89b3"
+  integrity sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==
 
 is-path-inside@^3.0.3:
   version "3.0.3"
@@ -2887,6 +3251,15 @@ isexe@^2.0.0:
 isobject@^3.0.1:
   version "3.0.1"
 
+jackspeak@^3.1.2:
+  version "3.4.3"
+  resolved "https://npm.yandex-team.ru/jackspeak/-/jackspeak-3.4.3.tgz?rbtorrent="
+  integrity sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==
+  dependencies:
+    "@isaacs/cliui" "^8.0.2"
+  optionalDependencies:
+    "@pkgjs/parseargs" "^0.11.0"
+
 jake@^10.8.5:
   version "10.8.5"
   dependencies:
@@ -2910,26 +3283,39 @@ js-sdsl@^4.1.4:
 
 js-tokens@^4.0.0:
   version "4.0.0"
+  resolved "https://npm.yandex-team.ru/js-tokens/-/js-tokens-4.0.0.tgz?rbtorrent=d2567250e6aaa096fbb43dc41d38561d75586575"
+  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
 js-yaml@^3.13.0:
-  version "3.14.1"
+  version "3.14.2"
+  resolved "https://npm.yandex-team.ru/js-yaml/-/js-yaml-3.14.2.tgz?rbtorrent="
+  integrity sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
 js-yaml@^4.1.0:
-  version "4.1.0"
+  version "4.1.1"
+  resolved "https://npm.yandex-team.ru/js-yaml/-/js-yaml-4.1.1.tgz?rbtorrent="
+  integrity sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==
   dependencies:
     argparse "^2.0.1"
 
-jsesc@^2.5.1:
-  version "2.5.2"
+jsesc@^3.0.2:
+  version "3.1.0"
+  resolved "https://npm.yandex-team.ru/jsesc/-/jsesc-3.1.0.tgz?rbtorrent="
+  integrity sha512-/sM3dO2FOzXjKQhJuo0Q173wf2KOo8t4I8vHy6lF9poUp7bKT0/NHE8fPX23PwfhnykfqnC2xRxOnVw5XuGIaA==
 
 jsesc@~0.5.0:
   version "0.5.0"
 
 json-parse-even-better-errors@^2.3.0, json-parse-even-better-errors@^2.3.1:
   version "2.3.1"
+
+json-parse-even-better-errors@^3.0.0:
+  version "3.0.2"
+  resolved "https://npm.yandex-team.ru/json-parse-even-better-errors/-/json-parse-even-better-errors-3.0.2.tgz?rbtorrent="
+  integrity sha512-fi0NG4bPjCHunUJffmLd0gxssIgkNmArMvis4iNah6Owg1MCJjWhEcDLmsK6iGkJq3tHwbDkTlce70/tmXN4cQ==
 
 json-schema-traverse@^0.4.1:
   version "0.4.1"
@@ -2989,8 +3375,10 @@ load-yaml-file@^0.2.0:
     pify "^4.0.1"
     strip-bom "^3.0.0"
 
-loader-runner@^4.2.0:
-  version "4.3.0"
+loader-runner@^4.3.1:
+  version "4.3.1"
+  resolved "https://npm.yandex-team.ru/loader-runner/-/loader-runner-4.3.1.tgz?rbtorrent="
+  integrity sha512-IWqP2SCPhyVFTBtRcgMHdzlf9ul25NwaFx4wCEH/KjAXuuHY4yNjvPXsBokp8jCB936PyWRaPKUNh8NvylLp2Q==
 
 loader-utils@^2.0.0:
   version "2.0.4"
@@ -3029,6 +3417,11 @@ lower-case@^2.0.2:
   dependencies:
     tslib "^2.0.3"
 
+lru-cache@^10.2.0:
+  version "10.4.3"
+  resolved "https://npm.yandex-team.ru/lru-cache/-/lru-cache-10.4.3.tgz?rbtorrent="
+  integrity sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==
+
 lru-cache@^5.1.1:
   version "5.1.1"
   dependencies:
@@ -3039,8 +3432,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lru-cache@^7.7.1:
+lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
   version "7.18.3"
+  resolved "https://npm.yandex-team.ru/lru-cache/-/lru-cache-7.18.3.tgz?rbtorrent=e313639f6e0102f77cbb15369e672d5f0efed0e4"
+  integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
 
 make-dir@^3.0.2:
   version "3.1.0"
@@ -3067,6 +3462,91 @@ make-fetch-happen@^10.0.1:
     socks-proxy-agent "^7.0.0"
     ssri "^9.0.0"
 
+make-fetch-happen@^10.0.3:
+  version "10.2.1"
+  resolved "https://npm.yandex-team.ru/make-fetch-happen/-/make-fetch-happen-10.2.1.tgz?rbtorrent=a2548fea2c02614e37d85e17f24e00bbc5070999"
+  integrity sha512-NgOPbRiaQM10DYXvN3/hhGVI2M5MtITFryzBGxHM5p4wnFxsVCbxkrBrDsk+EZ5OB4jEOT7AjDxtdF+KVEFT7w==
+  dependencies:
+    agentkeepalive "^4.2.1"
+    cacache "^16.1.0"
+    http-cache-semantics "^4.1.0"
+    http-proxy-agent "^5.0.0"
+    https-proxy-agent "^5.0.0"
+    is-lambda "^1.0.1"
+    lru-cache "^7.7.1"
+    minipass "^3.1.6"
+    minipass-collect "^1.0.2"
+    minipass-fetch "^2.0.3"
+    minipass-flush "^1.0.5"
+    minipass-pipeline "^1.2.4"
+    negotiator "^0.6.3"
+    promise-retry "^2.0.1"
+    socks-proxy-agent "^7.0.0"
+    ssri "^9.0.0"
+
+make-fetch-happen@^11.0.0:
+  version "11.1.1"
+  resolved "https://npm.yandex-team.ru/make-fetch-happen/-/make-fetch-happen-11.1.1.tgz?rbtorrent=f5a65752841dbd259f00f3e428abbfc8af76161c"
+  integrity sha512-rLWS7GCSTcEujjVBs2YqG7Y4643u8ucvCJeSRqiLYhesrDuzeuFIk37xREzAsfQaqzl8b9rNCE4m6J8tvX4Q8w==
+  dependencies:
+    agentkeepalive "^4.2.1"
+    cacache "^17.0.0"
+    http-cache-semantics "^4.1.1"
+    http-proxy-agent "^5.0.0"
+    https-proxy-agent "^5.0.0"
+    is-lambda "^1.0.1"
+    lru-cache "^7.7.1"
+    minipass "^5.0.0"
+    minipass-fetch "^3.0.0"
+    minipass-flush "^1.0.5"
+    minipass-pipeline "^1.2.4"
+    negotiator "^0.6.3"
+    promise-retry "^2.0.1"
+    socks-proxy-agent "^7.0.0"
+    ssri "^10.0.0"
+
+make-fetch-happen@^11.0.1:
+  version "11.1.1"
+  resolved "https://npm.yandex-team.ru/make-fetch-happen/-/make-fetch-happen-11.1.1.tgz?rbtorrent=f5a65752841dbd259f00f3e428abbfc8af76161c"
+  integrity sha512-rLWS7GCSTcEujjVBs2YqG7Y4643u8ucvCJeSRqiLYhesrDuzeuFIk37xREzAsfQaqzl8b9rNCE4m6J8tvX4Q8w==
+  dependencies:
+    agentkeepalive "^4.2.1"
+    cacache "^17.0.0"
+    http-cache-semantics "^4.1.1"
+    http-proxy-agent "^5.0.0"
+    https-proxy-agent "^5.0.0"
+    is-lambda "^1.0.1"
+    lru-cache "^7.7.1"
+    minipass "^5.0.0"
+    minipass-fetch "^3.0.0"
+    minipass-flush "^1.0.5"
+    minipass-pipeline "^1.2.4"
+    negotiator "^0.6.3"
+    promise-retry "^2.0.1"
+    socks-proxy-agent "^7.0.0"
+    ssri "^10.0.0"
+
+make-fetch-happen@^11.1.1:
+  version "11.1.1"
+  resolved "https://npm.yandex-team.ru/make-fetch-happen/-/make-fetch-happen-11.1.1.tgz?rbtorrent=f5a65752841dbd259f00f3e428abbfc8af76161c"
+  integrity sha512-rLWS7GCSTcEujjVBs2YqG7Y4643u8ucvCJeSRqiLYhesrDuzeuFIk37xREzAsfQaqzl8b9rNCE4m6J8tvX4Q8w==
+  dependencies:
+    agentkeepalive "^4.2.1"
+    cacache "^17.0.0"
+    http-cache-semantics "^4.1.1"
+    http-proxy-agent "^5.0.0"
+    https-proxy-agent "^5.0.0"
+    is-lambda "^1.0.1"
+    lru-cache "^7.7.1"
+    minipass "^5.0.0"
+    minipass-fetch "^3.0.0"
+    minipass-flush "^1.0.5"
+    minipass-pipeline "^1.2.4"
+    negotiator "^0.6.3"
+    promise-retry "^2.0.1"
+    socks-proxy-agent "^7.0.0"
+    ssri "^10.0.0"
+
 make-fetch-happen@^9.1.0:
   version "9.1.0"
   dependencies:
@@ -3087,8 +3567,15 @@ make-fetch-happen@^9.1.0:
     socks-proxy-agent "^6.0.0"
     ssri "^8.0.0"
 
+math-intrinsics@^1.1.0:
+  version "1.1.0"
+  resolved "https://npm.yandex-team.ru/math-intrinsics/-/math-intrinsics-1.1.0.tgz?rbtorrent="
+  integrity sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==
+
 media-typer@0.3.0:
   version "0.3.0"
+  resolved "https://npm.yandex-team.ru/media-typer/-/media-typer-0.3.0.tgz?rbtorrent=9b7ee58e7e88a03f8f10c81220d0de520b216f82"
+  integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
 "mem-fs-editor@^8.1.2 || ^9.0.0", mem-fs-editor@^9.0.0:
   version "9.7.0"
@@ -3113,12 +3600,16 @@ media-typer@0.3.0:
     vinyl-file "^3.0.0"
 
 memfs@^3.4.3:
-  version "3.5.1"
+  version "3.5.3"
+  resolved "https://npm.yandex-team.ru/memfs/-/memfs-3.5.3.tgz?rbtorrent=286a8c2aae7ac6efc3cb1b65c06379dc35d23fa7"
+  integrity sha512-UERzLsxzllchadvbPs5aolHh65ISpKpM+ccLbOJ8/vvpBKmAWf+la7dXFy7Mr0ySHbdHrFv5kGFCUHHe6GFEmw==
   dependencies:
-    fs-monkey "^1.0.3"
+    fs-monkey "^1.0.4"
 
-merge-descriptors@1.0.1:
-  version "1.0.1"
+merge-descriptors@1.0.3:
+  version "1.0.3"
+  resolved "https://npm.yandex-team.ru/merge-descriptors/-/merge-descriptors-1.0.3.tgz?rbtorrent="
+  integrity sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==
 
 merge-stream@^2.0.0:
   version "2.0.0"
@@ -3130,9 +3621,11 @@ methods@~1.1.2:
   version "1.1.2"
 
 micromatch@^4.0.0, micromatch@^4.0.2, micromatch@^4.0.4:
-  version "4.0.5"
+  version "4.0.8"
+  resolved "https://npm.yandex-team.ru/micromatch/-/micromatch-4.0.8.tgz?rbtorrent="
+  integrity sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==
   dependencies:
-    braces "^3.0.2"
+    braces "^3.0.3"
     picomatch "^2.3.1"
 
 "mime-db@>= 1.43.0 < 2", mime-db@1.52.0:
@@ -3145,6 +3638,8 @@ mime-types@^2.1.27, mime-types@^2.1.31, mime-types@~2.1.17, mime-types@~2.1.24, 
 
 mime@1.6.0:
   version "1.6.0"
+  resolved "https://npm.yandex-team.ru/mime/-/mime-1.6.0.tgz?rbtorrent=2e4f9e69f07040a5800dfea8e3d043e637d69b02"
+  integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
 mimic-fn@^2.1.0:
   version "2.1.0"
@@ -3164,11 +3659,20 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
 
 minimatch@^5.0.1:
   version "5.1.6"
+  resolved "https://npm.yandex-team.ru/minimatch/-/minimatch-5.1.6.tgz?rbtorrent=1207d7dfdc5522831e65586973e56b77299a2fae"
+  integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
   dependencies:
     brace-expansion "^2.0.1"
 
 minimatch@^7.2.0:
   version "7.4.6"
+  dependencies:
+    brace-expansion "^2.0.1"
+
+minimatch@^9.0.0, minimatch@^9.0.4:
+  version "9.0.5"
+  resolved "https://npm.yandex-team.ru/minimatch/-/minimatch-9.0.5.tgz?rbtorrent="
+  integrity sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==
   dependencies:
     brace-expansion "^2.0.1"
 
@@ -3191,8 +3695,21 @@ minipass-fetch@^1.3.2, minipass-fetch@^1.4.1:
 
 minipass-fetch@^2.0.3:
   version "2.1.2"
+  resolved "https://npm.yandex-team.ru/minipass-fetch/-/minipass-fetch-2.1.2.tgz?rbtorrent=d6830dc4a0cadc8b31013e4f1d214eeac3d04086"
+  integrity sha512-LT49Zi2/WMROHYoqGgdlQIZh8mLPZmOrN2NdJjMXxYe4nkN6FUyuPuOAOedNJDrx0IRGg9+4guZewtp8hE6TxA==
   dependencies:
     minipass "^3.1.6"
+    minipass-sized "^1.0.3"
+    minizlib "^2.1.2"
+  optionalDependencies:
+    encoding "^0.1.13"
+
+minipass-fetch@^3.0.0:
+  version "3.0.5"
+  resolved "https://npm.yandex-team.ru/minipass-fetch/-/minipass-fetch-3.0.5.tgz?rbtorrent="
+  integrity sha512-2N8elDQAtSnFV0Dk7gt15KHsS0Fyz6CbYZ360h0WTYV1Ty46li3rAXVOQj1THMNLdmrD9Vt5pBPtWtVkpwGBqg==
+  dependencies:
+    minipass "^7.0.3"
     minipass-sized "^1.0.3"
     minizlib "^2.1.2"
   optionalDependencies:
@@ -3221,11 +3738,25 @@ minipass-sized@^1.0.3:
 
 minipass@^3.0.0, minipass@^3.1.0, minipass@^3.1.1, minipass@^3.1.3, minipass@^3.1.6:
   version "3.3.6"
+  resolved "https://npm.yandex-team.ru/minipass/-/minipass-3.3.6.tgz?rbtorrent=680bf999bad33605f187295e16ea34058afa93fc"
+  integrity sha512-DxiNidxSEK+tHG6zOIklvNOwm3hvCrbUrdtzY74U6HKTJxvIDfOUL5W5P2Ghd3DTkhhKPYGqeNUIh5qcM4YBfw==
   dependencies:
     yallist "^4.0.0"
 
-minipass@^4.0.0:
-  version "4.2.8"
+"minipass@^5.0.0 || ^6.0.2 || ^7.0.0":
+  version "7.1.2"
+  resolved "https://npm.yandex-team.ru/minipass/-/minipass-7.1.2.tgz?rbtorrent="
+  integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
+
+minipass@^5.0.0:
+  version "5.0.0"
+  resolved "https://npm.yandex-team.ru/minipass/-/minipass-5.0.0.tgz?rbtorrent=0ffcf4882a8efd021c7d6f7a8617fa8a1b52de18"
+  integrity sha512-3FnjYuehv9k6ovOEbyOswadCDPX1piCfhV8ncmYtHOjuPwylVWsghTLo7rabjC3Rx5xD4HDx8Wm1xnMF7S5qFQ==
+
+minipass@^7.0.3, minipass@^7.1.2:
+  version "7.1.2"
+  resolved "https://npm.yandex-team.ru/minipass/-/minipass-7.1.2.tgz?rbtorrent="
+  integrity sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==
 
 minizlib@^2.0.0, minizlib@^2.1.1, minizlib@^2.1.2:
   version "2.1.2"
@@ -3248,6 +3779,8 @@ ms@^2.0.0, ms@2.1.3:
 
 ms@2.0.0:
   version "2.0.0"
+  resolved "https://npm.yandex-team.ru/ms/-/ms-2.0.0.tgz?rbtorrent=b9c1399c483ed1bf4d9fff8735579b86c77001f8"
+  integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
 
 ms@2.1.2:
   version "2.1.2"
@@ -3270,8 +3803,10 @@ multimatch@^5.0.0:
 mute-stream@0.0.8:
   version "0.0.8"
 
-nanoid@^3.3.6:
-  version "3.3.6"
+nanoid@^3.3.11:
+  version "3.3.11"
+  resolved "https://npm.yandex-team.ru/nanoid/-/nanoid-3.3.11.tgz?rbtorrent="
+  integrity sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==
 
 natural-compare-lite@^1.4.0:
   version "1.4.0"
@@ -3297,7 +3832,9 @@ node-fetch@^2.6.7:
     whatwg-url "^5.0.0"
 
 node-forge@^1:
-  version "1.3.1"
+  version "1.3.2"
+  resolved "https://npm.yandex-team.ru/node-forge/-/node-forge-1.3.2.tgz?rbtorrent="
+  integrity sha512-6xKiQ+cph9KImrRh0VsjH2d8/GXA4FIMlgU4B757iI1ApvcyA9VlouP0yZJha01V+huImO+kKMU7ih+2+E14fw==
 
 node-gyp@^8.2.0:
   version "8.4.1"
@@ -3313,13 +3850,39 @@ node-gyp@^8.2.0:
     tar "^6.1.2"
     which "^2.0.2"
 
-node-releases@^2.0.8:
-  version "2.0.10"
+node-gyp@^9.0.0:
+  version "9.4.1"
+  resolved "https://npm.yandex-team.ru/node-gyp/-/node-gyp-9.4.1.tgz?rbtorrent=e20517c3f9ffb9bbcf45885a7705e67d4bf6a30c"
+  integrity sha512-OQkWKbjQKbGkMf/xqI1jjy3oCTgMKJac58G2+bjZb3fza6gW2YrCSdMQYaoTb70crvE//Gngr4f0AgVHmqHvBQ==
+  dependencies:
+    env-paths "^2.2.0"
+    exponential-backoff "^3.1.1"
+    glob "^7.1.4"
+    graceful-fs "^4.2.6"
+    make-fetch-happen "^10.0.3"
+    nopt "^6.0.0"
+    npmlog "^6.0.0"
+    rimraf "^3.0.2"
+    semver "^7.3.5"
+    tar "^6.1.2"
+    which "^2.0.2"
+
+node-releases@^2.0.27:
+  version "2.0.27"
+  resolved "https://npm.yandex-team.ru/node-releases/-/node-releases-2.0.27.tgz?rbtorrent="
+  integrity sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==
 
 nopt@^5.0.0:
   version "5.0.0"
   dependencies:
     abbrev "1"
+
+nopt@^6.0.0:
+  version "6.0.0"
+  resolved "https://npm.yandex-team.ru/nopt/-/nopt-6.0.0.tgz?rbtorrent=003880a1a050c3e92379bab88ddf3c8bfda84c13"
+  integrity sha512-ZwLpbTgdhuZUnZzjd7nb1ZV+4DoiC6/sfiVKok72ym/4Tlf+DFdlHYmT2JPmcNNWV6Pi3SDf1kT+A4r9RTuT9g==
+  dependencies:
+    abbrev "^1.0.0"
 
 normalize-package-data@^2.5.0:
   version "2.5.0"
@@ -3328,6 +3891,16 @@ normalize-package-data@^2.5.0:
     resolve "^1.10.0"
     semver "2 || 3 || 4 || 5"
     validate-npm-package-license "^3.0.1"
+
+normalize-package-data@^5.0.0:
+  version "5.0.0"
+  resolved "https://npm.yandex-team.ru/normalize-package-data/-/normalize-package-data-5.0.0.tgz?rbtorrent=ac387f08ea3f5c8788aea4d857d00584024dd615"
+  integrity sha512-h9iPVIfrVZ9wVYQnxFgtw1ugSvGEMOlyPWWtm8BMJhnwyEL/FLbYbTY3V3PpjI/BUK67n9PEWDu6eHzu1fB15Q==
+  dependencies:
+    hosted-git-info "^6.0.0"
+    is-core-module "^2.8.1"
+    semver "^7.3.5"
+    validate-npm-package-license "^3.0.4"
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
@@ -3340,8 +3913,22 @@ npm-bundled@^1.1.1:
   dependencies:
     npm-normalize-package-bin "^1.0.1"
 
+npm-bundled@^3.0.0:
+  version "3.0.1"
+  resolved "https://npm.yandex-team.ru/npm-bundled/-/npm-bundled-3.0.1.tgz?rbtorrent="
+  integrity sha512-+AvaheE/ww1JEwRHOrn4WHNzOxGtVp+adrg2AeZS/7KuxGUYFuBta98wYpfHBbJp6Tg6j1NKSEVHNcfZzJHQwQ==
+  dependencies:
+    npm-normalize-package-bin "^3.0.0"
+
 npm-install-checks@^4.0.0:
   version "4.0.0"
+  dependencies:
+    semver "^7.1.1"
+
+npm-install-checks@^6.0.0:
+  version "6.3.0"
+  resolved "https://npm.yandex-team.ru/npm-install-checks/-/npm-install-checks-6.3.0.tgz?rbtorrent=30e33c36013d5f87e79ce79f28e75a89931ed2fb"
+  integrity sha512-W29RiK/xtpCGqn6f3ixfRYGk+zRyr+Ew9F2E20BfXxT5/euLdA/Nm7fO7OeTGuAmTs30cpgInyJ0cYe708YTZw==
   dependencies:
     semver "^7.1.1"
 
@@ -3350,6 +3937,21 @@ npm-normalize-package-bin@^1.0.1:
 
 npm-normalize-package-bin@^2.0.0:
   version "2.0.0"
+
+npm-normalize-package-bin@^3.0.0:
+  version "3.0.1"
+  resolved "https://npm.yandex-team.ru/npm-normalize-package-bin/-/npm-normalize-package-bin-3.0.1.tgz?rbtorrent=6d322b486ed4547912c042cd53e4bca44610d12d"
+  integrity sha512-dMxCf+zZ+3zeQZXKxmyuCKlIDPGuv8EF940xbkC4kQVDTtqoh6rJFO+JTKSA6/Rwi0getWmtuy4Itup0AMcaDQ==
+
+npm-package-arg@^10.0.0:
+  version "10.1.0"
+  resolved "https://npm.yandex-team.ru/npm-package-arg/-/npm-package-arg-10.1.0.tgz?rbtorrent=6782a40695557bee5804110c21a652efb0a6c4ef"
+  integrity sha512-uFyyCEmgBfZTtrKk/5xDfHp6+MdrqGotX/VoOyEEl3mBwiEE5FlBaePanazJSVMPT7vKepcjYBY2ztg9A3yPIA==
+  dependencies:
+    hosted-git-info "^6.0.0"
+    proc-log "^3.0.0"
+    semver "^7.3.5"
+    validate-npm-package-name "^5.0.0"
 
 npm-package-arg@^8.0.1, npm-package-arg@^8.1.2, npm-package-arg@^8.1.5:
   version "8.1.5"
@@ -3366,6 +3968,13 @@ npm-packlist@^3.0.0:
     npm-bundled "^1.1.1"
     npm-normalize-package-bin "^1.0.1"
 
+npm-packlist@^7.0.0:
+  version "7.0.4"
+  resolved "https://npm.yandex-team.ru/npm-packlist/-/npm-packlist-7.0.4.tgz?rbtorrent=3f1bd9224890846b0e7921537bc4837afa5412f9"
+  integrity sha512-d6RGEuRrNS5/N84iglPivjaJPxhDbZmlbTwTDX2IbcRHG5bZCdtysYMhwiPvcF4GisXHGn7xsxv+GQ7T/02M5Q==
+  dependencies:
+    ignore-walk "^6.0.0"
+
 npm-pick-manifest@^6.0.0, npm-pick-manifest@^6.1.0, npm-pick-manifest@^6.1.1:
   version "6.1.1"
   dependencies:
@@ -3373,6 +3982,16 @@ npm-pick-manifest@^6.0.0, npm-pick-manifest@^6.1.0, npm-pick-manifest@^6.1.1:
     npm-normalize-package-bin "^1.0.1"
     npm-package-arg "^8.1.2"
     semver "^7.3.4"
+
+npm-pick-manifest@^8.0.0:
+  version "8.0.2"
+  resolved "https://npm.yandex-team.ru/npm-pick-manifest/-/npm-pick-manifest-8.0.2.tgz?rbtorrent=71455709f44d32ee7541f4831f164892253e8952"
+  integrity sha512-1dKY+86/AIiq1tkKVD3l0WI+Gd3vkknVGAggsFeBkTvbhMQ1OND/LKkYv4JtXPKUJ8bOTCyLiqEg2P6QNdK+Gg==
+  dependencies:
+    npm-install-checks "^6.0.0"
+    npm-normalize-package-bin "^3.0.0"
+    npm-package-arg "^10.0.0"
+    semver "^7.3.5"
 
 npm-registry-fetch@^12.0.0, npm-registry-fetch@^12.0.1:
   version "12.0.2"
@@ -3383,6 +4002,19 @@ npm-registry-fetch@^12.0.0, npm-registry-fetch@^12.0.1:
     minipass-json-stream "^1.0.1"
     minizlib "^2.1.2"
     npm-package-arg "^8.1.5"
+
+npm-registry-fetch@^14.0.0:
+  version "14.0.5"
+  resolved "https://npm.yandex-team.ru/npm-registry-fetch/-/npm-registry-fetch-14.0.5.tgz?rbtorrent=21999b7ee841e718aedc0f153d527c0da1e9e3c3"
+  integrity sha512-kIDMIo4aBm6xg7jOttupWZamsZRkAqMqwqqbVXnUqstY5+tapvv6bkH/qMR76jdgV+YljEUCyWx3hRYMrJiAgA==
+  dependencies:
+    make-fetch-happen "^11.0.0"
+    minipass "^5.0.0"
+    minipass-fetch "^3.0.0"
+    minipass-json-stream "^1.0.1"
+    minizlib "^2.1.2"
+    npm-package-arg "^10.0.0"
+    proc-log "^3.0.0"
 
 npm-run-path@^4.0.1:
   version "4.0.1"
@@ -3413,14 +4045,18 @@ nth-check@^2.0.1:
 object-assign@^4.0.1, object-assign@^4.1.1:
   version "4.1.1"
 
-object-inspect@^1.9.0:
-  version "1.12.3"
+object-inspect@^1.13.3:
+  version "1.13.4"
+  resolved "https://npm.yandex-team.ru/object-inspect/-/object-inspect-1.13.4.tgz?rbtorrent="
+  integrity sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==
 
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
 
 on-finished@2.4.1:
   version "2.4.1"
+  resolved "https://npm.yandex-team.ru/on-finished/-/on-finished-2.4.1.tgz?rbtorrent=1be00ab6be77c7d1e37b7ed6b27ad37b13f34a60"
+  integrity sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==
   dependencies:
     ee-first "1.1.1"
 
@@ -3524,6 +4160,11 @@ p-transform@^1.3.0:
 p-try@^2.0.0:
   version "2.2.0"
 
+package-json-from-dist@^1.0.0:
+  version "1.0.1"
+  resolved "https://npm.yandex-team.ru/package-json-from-dist/-/package-json-from-dist-1.0.1.tgz?rbtorrent="
+  integrity sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==
+
 pacote@^12.0.0, pacote@^12.0.2:
   version "12.0.3"
   dependencies:
@@ -3546,6 +4187,30 @@ pacote@^12.0.0, pacote@^12.0.2:
     rimraf "^3.0.2"
     ssri "^8.0.1"
     tar "^6.1.0"
+
+pacote@^15.2.0:
+  version "15.2.0"
+  resolved "https://npm.yandex-team.ru/pacote/-/pacote-15.2.0.tgz?rbtorrent=b7814500c27870ab08fe0e3b06c8205149de9e31"
+  integrity sha512-rJVZeIwHTUta23sIZgEIM62WYwbmGbThdbnkt81ravBplQv+HjyroqnLRNH2+sLJHcGZmLRmhPwACqhfTcOmnA==
+  dependencies:
+    "@npmcli/git" "^4.0.0"
+    "@npmcli/installed-package-contents" "^2.0.1"
+    "@npmcli/promise-spawn" "^6.0.1"
+    "@npmcli/run-script" "^6.0.0"
+    cacache "^17.0.0"
+    fs-minipass "^3.0.0"
+    minipass "^5.0.0"
+    npm-package-arg "^10.0.0"
+    npm-packlist "^7.0.0"
+    npm-pick-manifest "^8.0.0"
+    npm-registry-fetch "^14.0.0"
+    proc-log "^3.0.0"
+    promise-retry "^2.0.1"
+    read-package-json "^6.0.0"
+    read-package-json-fast "^3.0.0"
+    sigstore "^1.3.0"
+    ssri "^10.0.0"
+    tar "^6.1.11"
 
 param-case@^3.0.4:
   version "3.0.4"
@@ -3594,14 +4259,26 @@ path-key@^3.0.0, path-key@^3.1.0:
 path-parse@^1.0.7:
   version "1.0.7"
 
-path-to-regexp@0.1.7:
-  version "0.1.7"
+path-scurry@^1.11.1:
+  version "1.11.1"
+  resolved "https://npm.yandex-team.ru/path-scurry/-/path-scurry-1.11.1.tgz?rbtorrent="
+  integrity sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==
+  dependencies:
+    lru-cache "^10.2.0"
+    minipass "^5.0.0 || ^6.0.2 || ^7.0.0"
+
+path-to-regexp@0.1.12:
+  version "0.1.12"
+  resolved "https://npm.yandex-team.ru/path-to-regexp/-/path-to-regexp-0.1.12.tgz?rbtorrent="
+  integrity sha512-RA1GjUVMnvYFxuqovrEqZoxxW5NUZqbwKtYz/Tt7nXerk0LbLblQmrsgdeOxV5SFHf0UDggjS/bSeOZwt1pmEQ==
 
 path-type@^4.0.0:
   version "4.0.0"
 
-picocolors@^1.0.0:
-  version "1.0.0"
+picocolors@^1.0.0, picocolors@^1.1.1:
+  version "1.1.1"
+  resolved "https://npm.yandex-team.ru/picocolors/-/picocolors-1.1.1.tgz?rbtorrent="
+  integrity sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==
 
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
   version "2.3.1"
@@ -3662,19 +4339,14 @@ postcss-selector-parser@^6.0.2, postcss-selector-parser@^6.0.4:
 postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   version "4.2.0"
 
-"postcss@^7.0.0 || ^8.0.1", postcss@^8.1.0, postcss@^8.4.19, postcss@^8.4.23:
-  version "8.4.23"
+"postcss@^7.0.0 || ^8.0.1", postcss@^8.1.0, postcss@^8.2.14, postcss@^8.4.19, postcss@^8.4.23:
+  version "8.5.6"
+  resolved "https://npm.yandex-team.ru/postcss/-/postcss-8.5.6.tgz?rbtorrent="
+  integrity sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==
   dependencies:
-    nanoid "^3.3.6"
-    picocolors "^1.0.0"
-    source-map-js "^1.0.2"
-
-postcss@^8.2.14:
-  version "8.4.24"
-  dependencies:
-    nanoid "^3.3.6"
-    picocolors "^1.0.0"
-    source-map-js "^1.0.2"
+    nanoid "^3.3.11"
+    picocolors "^1.1.1"
+    source-map-js "^1.2.1"
 
 preferred-pm@^3.0.3:
   version "3.0.3"
@@ -3701,6 +4373,11 @@ pretty-error@^4.0.0:
 
 proc-log@^1.0.0:
   version "1.0.0"
+
+proc-log@^3.0.0:
+  version "3.0.0"
+  resolved "https://npm.yandex-team.ru/proc-log/-/proc-log-3.0.0.tgz?rbtorrent=a1029c3cccc6192dc1a36838518112ac599e78ad"
+  integrity sha512-++Vn7NS4Xf9NacaU9Xq3URUuqZETPsf8L4j5/ckhaRYsfPeRyzGw+iDjFhV/Jr3uNmTvvddEJFWh5R1gRgUH8A==
 
 process-nextick-args@^2.0.0, process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -3729,10 +4406,12 @@ proxy-addr@~2.0.7:
 punycode@^2.1.0:
   version "2.3.0"
 
-qs@6.11.0:
-  version "6.11.0"
+qs@6.13.0:
+  version "6.13.0"
+  resolved "https://npm.yandex-team.ru/qs/-/qs-6.13.0.tgz?rbtorrent="
+  integrity sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==
   dependencies:
-    side-channel "^1.0.4"
+    side-channel "^1.0.6"
 
 queue-microtask@^1.2.2:
   version "1.2.3"
@@ -3744,9 +4423,13 @@ randombytes@^2.1.0:
 
 range-parser@^1.2.1, range-parser@~1.2.1:
   version "1.2.1"
+  resolved "https://npm.yandex-team.ru/range-parser/-/range-parser-1.2.1.tgz?rbtorrent=ff745a9bc988d28205171cc44081bb83f3efdbfc"
+  integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
-raw-body@2.5.1:
-  version "2.5.1"
+raw-body@2.5.2:
+  version "2.5.2"
+  resolved "https://npm.yandex-team.ru/raw-body/-/raw-body-2.5.2.tgz?rbtorrent=a27f995a386dc1abf4f665d3429c3213a9c1b69f"
+  integrity sha512-8zGqypfENjCIqGhgXToC8aB2r7YrBX+AQAfIPs/Mlk+BtPTztOvTS01NRW/3Eh60J+a48lt8qsCzirQ6loCVfA==
   dependencies:
     bytes "3.1.2"
     http-errors "2.0.0"
@@ -3761,6 +4444,24 @@ read-package-json-fast@^2.0.1, read-package-json-fast@^2.0.2, read-package-json-
   dependencies:
     json-parse-even-better-errors "^2.3.0"
     npm-normalize-package-bin "^1.0.1"
+
+read-package-json-fast@^3.0.0:
+  version "3.0.2"
+  resolved "https://npm.yandex-team.ru/read-package-json-fast/-/read-package-json-fast-3.0.2.tgz?rbtorrent=cd5bdb5027592951f829451e93b6e78cf73ad0b4"
+  integrity sha512-0J+Msgym3vrLOUB3hzQCuZHII0xkNGCtz/HJH9xZshwv9DbDwkw1KaE3gx/e2J5rpEY5rtOy6cyhKOPrkP7FZw==
+  dependencies:
+    json-parse-even-better-errors "^3.0.0"
+    npm-normalize-package-bin "^3.0.0"
+
+read-package-json@^6.0.0:
+  version "6.0.4"
+  resolved "https://npm.yandex-team.ru/read-package-json/-/read-package-json-6.0.4.tgz?rbtorrent=88a78889524f248f5b1bb2a9da780662aafea88c"
+  integrity sha512-AEtWXYfopBj2z5N5PbkAOeNHRPUg5q+Nen7QLxV8M2zJq1ym6/lCz3fYNTCXe19puu2d06jfHhrP7v/S2PtMMw==
+  dependencies:
+    glob "^10.2.2"
+    json-parse-even-better-errors "^3.0.0"
+    normalize-package-data "^5.0.0"
+    npm-normalize-package-bin "^3.0.0"
 
 read-pkg-up@^7.0.1:
   version "7.0.1"
@@ -3847,9 +4548,6 @@ regenerate-unicode-properties@^10.1.0:
 
 regenerate@^1.4.2:
   version "1.4.2"
-
-regenerator-runtime@^0.13.11:
-  version "0.13.11"
 
 regenerator-transform@^0.15.1:
   version "0.15.1"
@@ -3983,15 +4681,10 @@ sass@^1.3.0, sass@^1.62.1:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
-schema-utils@^3.1.1, schema-utils@^3.1.2:
-  version "3.1.2"
-  dependencies:
-    "@types/json-schema" "^7.0.8"
-    ajv "^6.12.5"
-    ajv-keywords "^3.5.2"
-
-schema-utils@^4.0.0:
-  version "4.0.1"
+schema-utils@^4.0.0, schema-utils@^4.3.0, schema-utils@^4.3.3:
+  version "4.3.3"
+  resolved "https://npm.yandex-team.ru/schema-utils/-/schema-utils-4.3.3.tgz?rbtorrent="
+  integrity sha512-eflK8wEtyOE6+hsaRVPxvUKYCpRgzLqDTb8krvAsRIwOGlHoSgYLgBXoubGgLd2fT41/OUYdb48v4k4WWHQurA==
   dependencies:
     "@types/json-schema" "^7.0.9"
     ajv "^8.9.0"
@@ -4010,27 +4703,39 @@ selfsigned@^2.1.1:
     node-forge "^1"
 
 semver@^6.0.0:
-  version "6.3.0"
+  version "6.3.1"
+  resolved "https://npm.yandex-team.ru/semver/-/semver-6.3.1.tgz?rbtorrent=e1dd2293882096d15aa6668155640147bb44f66c"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.1.1:
-  version "6.3.0"
+  version "6.3.1"
+  resolved "https://npm.yandex-team.ru/semver/-/semver-6.3.1.tgz?rbtorrent=e1dd2293882096d15aa6668155640147bb44f66c"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.1.2:
-  version "6.3.0"
+  version "6.3.1"
+  resolved "https://npm.yandex-team.ru/semver/-/semver-6.3.1.tgz?rbtorrent=e1dd2293882096d15aa6668155640147bb44f66c"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^6.3.0:
-  version "6.3.0"
+  version "6.3.1"
+  resolved "https://npm.yandex-team.ru/semver/-/semver-6.3.1.tgz?rbtorrent=e1dd2293882096d15aa6668155640147bb44f66c"
+  integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
 semver@^7.1.1, semver@^7.1.3, semver@^7.2.1, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
-  version "7.5.0"
-  dependencies:
-    lru-cache "^6.0.0"
+  version "7.7.3"
+  resolved "https://npm.yandex-team.ru/semver/-/semver-7.7.3.tgz?rbtorrent="
+  integrity sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==
 
 "semver@2 || 3 || 4 || 5":
-  version "5.7.1"
+  version "5.7.2"
+  resolved "https://npm.yandex-team.ru/semver/-/semver-5.7.2.tgz?rbtorrent=b68b1e3347520c6da3a90df1cbe55d28b824e323"
+  integrity sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==
 
-send@0.18.0:
-  version "0.18.0"
+send@0.19.0:
+  version "0.19.0"
+  resolved "https://npm.yandex-team.ru/send/-/send-0.19.0.tgz?rbtorrent="
+  integrity sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==
   dependencies:
     debug "2.6.9"
     depd "2.0.0"
@@ -4046,8 +4751,10 @@ send@0.18.0:
     range-parser "~1.2.1"
     statuses "2.0.1"
 
-serialize-javascript@^6.0.1:
-  version "6.0.1"
+serialize-javascript@^6.0.2:
+  version "6.0.2"
+  resolved "https://npm.yandex-team.ru/serialize-javascript/-/serialize-javascript-6.0.2.tgz?rbtorrent="
+  integrity sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==
   dependencies:
     randombytes "^2.1.0"
 
@@ -4062,13 +4769,15 @@ serve-index@^1.9.1:
     mime-types "~2.1.17"
     parseurl "~1.3.2"
 
-serve-static@1.15.0:
-  version "1.15.0"
+serve-static@1.16.2:
+  version "1.16.2"
+  resolved "https://npm.yandex-team.ru/serve-static/-/serve-static-1.16.2.tgz?rbtorrent="
+  integrity sha512-VqpjJZKadQB/PEbEwvFdO43Ax5dFBZ2UECszz8bQ7pi7wt//PWe1P6MN7eCnjsatYtBT6EuiClbjSWP2WrIoTw==
   dependencies:
-    encodeurl "~1.0.2"
+    encodeurl "~2.0.0"
     escape-html "~1.0.3"
     parseurl "~1.3.3"
-    send "0.18.0"
+    send "0.19.0"
 
 set-blocking@^2.0.0:
   version "2.0.0"
@@ -4078,6 +4787,8 @@ setprototypeof@1.1.0:
 
 setprototypeof@1.2.0:
   version "1.2.0"
+  resolved "https://npm.yandex-team.ru/setprototypeof/-/setprototypeof-1.2.0.tgz?rbtorrent=639214bef3d5c2047ec9150a2c6982dc65fef215"
+  integrity sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==
 
 shallow-clone@^3.0.0:
   version "3.0.1"
@@ -4102,15 +4813,64 @@ shelljs@^0.8.5:
     interpret "^1.0.0"
     rechoir "^0.6.2"
 
-side-channel@^1.0.4:
-  version "1.0.4"
+side-channel-list@^1.0.0:
+  version "1.0.0"
+  resolved "https://npm.yandex-team.ru/side-channel-list/-/side-channel-list-1.0.0.tgz?rbtorrent="
+  integrity sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==
   dependencies:
-    call-bind "^1.0.0"
-    get-intrinsic "^1.0.2"
-    object-inspect "^1.9.0"
+    es-errors "^1.3.0"
+    object-inspect "^1.13.3"
+
+side-channel-map@^1.0.1:
+  version "1.0.1"
+  resolved "https://npm.yandex-team.ru/side-channel-map/-/side-channel-map-1.0.1.tgz?rbtorrent="
+  integrity sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==
+  dependencies:
+    call-bound "^1.0.2"
+    es-errors "^1.3.0"
+    get-intrinsic "^1.2.5"
+    object-inspect "^1.13.3"
+
+side-channel-weakmap@^1.0.2:
+  version "1.0.2"
+  resolved "https://npm.yandex-team.ru/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz?rbtorrent="
+  integrity sha512-WPS/HvHQTYnHisLo9McqBHOJk2FkHO/tlpvldyrnem4aeQp4hai3gythswg6p01oSoTl58rcpiFAjF2br2Ak2A==
+  dependencies:
+    call-bound "^1.0.2"
+    es-errors "^1.3.0"
+    get-intrinsic "^1.2.5"
+    object-inspect "^1.13.3"
+    side-channel-map "^1.0.1"
+
+side-channel@^1.0.6:
+  version "1.1.0"
+  resolved "https://npm.yandex-team.ru/side-channel/-/side-channel-1.1.0.tgz?rbtorrent="
+  integrity sha512-ZX99e6tRweoUXqR+VBrslhda51Nh5MTQwou5tnUDgbtyM0dBgmhEDtWGP/xbKn6hqfPRHujUNwz5fy/wbbhnpw==
+  dependencies:
+    es-errors "^1.3.0"
+    object-inspect "^1.13.3"
+    side-channel-list "^1.0.0"
+    side-channel-map "^1.0.1"
+    side-channel-weakmap "^1.0.2"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.7:
   version "3.0.7"
+
+signal-exit@^4.0.1:
+  version "4.1.0"
+  resolved "https://npm.yandex-team.ru/signal-exit/-/signal-exit-4.1.0.tgz?rbtorrent=87147f490e7277207efc3cf48a3eef5537521e86"
+  integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
+
+sigstore@^1.3.0:
+  version "1.9.0"
+  resolved "https://npm.yandex-team.ru/sigstore/-/sigstore-1.9.0.tgz?rbtorrent=228a97ec8f8e1f2098c4ef9129a1489e1367a8e4"
+  integrity sha512-0Zjz0oe37d08VeOtBIuB6cRriqXse2e8w+7yIy2XSXjshRKxbc2KkhXjL229jXSxEm7UbcjS76wcJDGQddVI9A==
+  dependencies:
+    "@sigstore/bundle" "^1.1.0"
+    "@sigstore/protobuf-specs" "^0.2.0"
+    "@sigstore/sign" "^1.0.0"
+    "@sigstore/tuf" "^1.0.3"
+    make-fetch-happen "^11.0.1"
 
 slash@^3.0.0:
   version "3.0.0"
@@ -4134,15 +4894,19 @@ socks-proxy-agent@^6.0.0:
 
 socks-proxy-agent@^7.0.0:
   version "7.0.0"
+  resolved "https://npm.yandex-team.ru/socks-proxy-agent/-/socks-proxy-agent-7.0.0.tgz?rbtorrent=712d2d04d2e8d0c0ce42d6821295a2b0a19c4742"
+  integrity sha512-Fgl0YPZ902wEsAyiQ+idGd1A7rSFx/ayC1CQVMw5P+EQx2V0SgpGtf6OKFhVjPflPUl9YMmEOnmfjCdMUsygww==
   dependencies:
     agent-base "^6.0.2"
     debug "^4.3.3"
     socks "^2.6.2"
 
 socks@^2.6.2:
-  version "2.7.1"
+  version "2.8.7"
+  resolved "https://npm.yandex-team.ru/socks/-/socks-2.8.7.tgz?rbtorrent="
+  integrity sha512-HLpt+uLy/pxB+bum/9DzAgiKS8CX1EvbWxI4zlmgGCExImLdiad2iCwXT5Z4c9c3Eq8rP2318mPW2c+QbtjK8A==
   dependencies:
-    ip "^2.0.0"
+    ip-address "^10.0.1"
     smart-buffer "^4.2.0"
 
 sort-keys@^4.2.0:
@@ -4150,8 +4914,10 @@ sort-keys@^4.2.0:
   dependencies:
     is-plain-obj "^2.0.0"
 
-source-map-js@^1.0.2, "source-map-js@>=0.6.2 <2.0.0":
-  version "1.0.2"
+source-map-js@^1.2.1, "source-map-js@>=0.6.2 <2.0.0":
+  version "1.2.1"
+  resolved "https://npm.yandex-team.ru/source-map-js/-/source-map-js-1.2.1.tgz?rbtorrent="
+  integrity sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==
 
 source-map-support@~0.5.20:
   version "0.5.21"
@@ -4202,6 +4968,13 @@ spdy@^4.0.2:
 sprintf-js@~1.0.2:
   version "1.0.3"
 
+ssri@^10.0.0:
+  version "10.0.6"
+  resolved "https://npm.yandex-team.ru/ssri/-/ssri-10.0.6.tgz?rbtorrent="
+  integrity sha512-MGrFH9Z4NP9Iyhqn16sDtBpRRNJ0Y2hNa6D65h736fVSaPCHr4DM4sWUNvVaSuC+0OBGhwsrydQwmgfg5LncqQ==
+  dependencies:
+    minipass "^7.0.3"
+
 ssri@^8.0.0, ssri@^8.0.1:
   version "8.0.1"
   dependencies:
@@ -4209,6 +4982,8 @@ ssri@^8.0.0, ssri@^8.0.1:
 
 ssri@^9.0.0:
   version "9.0.1"
+  resolved "https://npm.yandex-team.ru/ssri/-/ssri-9.0.1.tgz?rbtorrent=2aab3b8ff27b4834cce729c8f148de5260b7d565"
+  integrity sha512-o57Wcn66jMQvfHG1FlYbWeZWW/dHZhJXjpIcTfXldXEk5nz5lStPo3mK0OJQfGR3RbZUlbISexbljkJzuEj/8Q==
   dependencies:
     minipass "^3.1.1"
 
@@ -4217,6 +4992,8 @@ ssri@^9.0.0:
 
 statuses@2.0.1:
   version "2.0.1"
+  resolved "https://npm.yandex-team.ru/statuses/-/statuses-2.0.1.tgz?rbtorrent=ece2fe4b2f6c9cb99b2c75dc3491ad47d6ed6fa2"
+  integrity sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==
 
 string_decoder@^1.1.1:
   version "1.3.0"
@@ -4228,6 +5005,15 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://npm.yandex-team.ru/string-width/-/string-width-4.2.3.tgz?rbtorrent=f8412787e89a7bf0fb94ec78f0b1f13d94822a61"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
 "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.1.0, string-width@^4.2.3:
   version "4.2.3"
   dependencies:
@@ -4235,10 +5021,33 @@ string_decoder@~1.1.1:
     is-fullwidth-code-point "^3.0.0"
     strip-ansi "^6.0.1"
 
+string-width@^5.0.1, string-width@^5.1.2:
+  version "5.1.2"
+  resolved "https://npm.yandex-team.ru/string-width/-/string-width-5.1.2.tgz?rbtorrent=52857c0825e5c414bc3be3d1b493a5a8e9fab9ad"
+  integrity sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==
+  dependencies:
+    eastasianwidth "^0.2.0"
+    emoji-regex "^9.2.2"
+    strip-ansi "^7.0.1"
+
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://npm.yandex-team.ru/strip-ansi/-/strip-ansi-6.0.1.tgz?rbtorrent=e155382c29545da38fa473395e43b5f24dc0c529"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
 strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   dependencies:
     ansi-regex "^5.0.1"
+
+strip-ansi@^7.0.1:
+  version "7.1.2"
+  resolved "https://npm.yandex-team.ru/strip-ansi/-/strip-ansi-7.1.2.tgz?rbtorrent="
+  integrity sha512-gmBGslpoQJtgnMAvOVqGZpEz9dyoKTCzy2nfz/n8aIFhN/jCE/rCmcxabB6jOOHV+0WNnylOxaxBQPSvcWklhA==
+  dependencies:
+    ansi-regex "^6.0.1"
 
 strip-bom-buf@^1.0.0:
   version "1.0.0"
@@ -4273,11 +5082,6 @@ strip-outer@^1.0.1:
 style-loader@^3.3.2:
   version "3.3.2"
 
-supports-color@^5.3.0:
-  version "5.5.0"
-  dependencies:
-    has-flag "^3.0.0"
-
 supports-color@^7.1.0:
   version "7.2.0"
   dependencies:
@@ -4291,50 +5095,41 @@ supports-color@^8.0.0:
 supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
 
-tapable@^2.0.0, tapable@^2.1.1, tapable@^2.2.0:
-  version "2.2.1"
+tapable@^2.0.0, tapable@^2.2.0, tapable@^2.3.0:
+  version "2.3.0"
+  resolved "https://npm.yandex-team.ru/tapable/-/tapable-2.3.0.tgz?rbtorrent="
+  integrity sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==
 
 tar@^6.0.2, tar@^6.1.0, tar@^6.1.11, tar@^6.1.2:
-  version "6.1.13"
+  version "6.2.1"
+  resolved "https://npm.yandex-team.ru/tar/-/tar-6.2.1.tgz?rbtorrent="
+  integrity sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==
   dependencies:
     chownr "^2.0.0"
     fs-minipass "^2.0.0"
-    minipass "^4.0.0"
+    minipass "^5.0.0"
     minizlib "^2.1.1"
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-terser-webpack-plugin@^5.3.10:
-  version "5.3.10"
+terser-webpack-plugin@^5.3.10, terser-webpack-plugin@^5.3.11:
+  version "5.3.14"
+  resolved "https://npm.yandex-team.ru/terser-webpack-plugin/-/terser-webpack-plugin-5.3.14.tgz?rbtorrent="
+  integrity sha512-vkZjpUjb6OMS7dhV+tILUW6BhpDR7P2L/aQSAv+Uwk+m8KATX9EccViHTJR2qDtACKPIYndLGCyl3FMo+r2LMw==
   dependencies:
-    "@jridgewell/trace-mapping" "^0.3.20"
+    "@jridgewell/trace-mapping" "^0.3.25"
     jest-worker "^27.4.5"
-    schema-utils "^3.1.1"
-    serialize-javascript "^6.0.1"
-    terser "^5.26.0"
+    schema-utils "^4.3.0"
+    serialize-javascript "^6.0.2"
+    terser "^5.31.1"
 
-terser-webpack-plugin@^5.3.7:
-  version "5.3.7"
-  dependencies:
-    "@jridgewell/trace-mapping" "^0.3.17"
-    jest-worker "^27.4.5"
-    schema-utils "^3.1.1"
-    serialize-javascript "^6.0.1"
-    terser "^5.16.5"
-
-terser@^5.10.0, terser@^5.16.5:
-  version "5.17.1"
-  dependencies:
-    "@jridgewell/source-map" "^0.3.2"
-    acorn "^8.5.0"
-    commander "^2.20.0"
-    source-map-support "~0.5.20"
-
-terser@^5.26.0:
-  version "5.26.0"
+terser@^5.10.0, terser@^5.31.1:
+  version "5.44.1"
+  resolved "https://npm.yandex-team.ru/terser/-/terser-5.44.1.tgz?rbtorrent="
+  integrity sha512-t/R3R/n0MSwnnazuPpPNVO60LX0SKL45pyl9YlvxIdkH0Of7D5qM2EVe+yASRIlY5pZ73nclYJfNANGWPwFDZw==
   dependencies:
     "@jridgewell/source-map" "^0.3.3"
-    acorn "^8.8.2"
+    acorn "^8.15.0"
     commander "^2.20.0"
     source-map-support "~0.5.20"
 
@@ -4355,16 +5150,17 @@ tmp@^0.0.33:
   dependencies:
     os-tmpdir "~1.0.2"
 
-to-fast-properties@^2.0.0:
-  version "2.0.0"
-
 to-regex-range@^5.0.1:
   version "5.0.1"
+  resolved "https://npm.yandex-team.ru/to-regex-range/-/to-regex-range-5.0.1.tgz?rbtorrent=9c494e247bd2815d7991a87d6c0fa999f42b3641"
+  integrity sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==
   dependencies:
     is-number "^7.0.0"
 
 toidentifier@1.0.1:
   version "1.0.1"
+  resolved "https://npm.yandex-team.ru/toidentifier/-/toidentifier-1.0.1.tgz?rbtorrent=9f32d166d5476ef5bc672790eadb9a23aad1dbf9"
+  integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
 
 tr46@~0.0.3:
   version "0.0.3"
@@ -4396,6 +5192,15 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
+tuf-js@^1.1.7:
+  version "1.1.7"
+  resolved "https://npm.yandex-team.ru/tuf-js/-/tuf-js-1.1.7.tgz?rbtorrent=d219bf88f529f3882a5e7c3429d62705b2eb932f"
+  integrity sha512-i3P9Kgw3ytjELUfpuKVDNBJvk4u5bXL6gskv572mcevPbSKCV3zt3djhmlEQ65yERjIbOSncy7U4cQJaB1CBCg==
+  dependencies:
+    "@tufjs/models" "1.0.4"
+    debug "^4.3.4"
+    make-fetch-happen "^11.1.1"
+
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
   dependencies:
@@ -4415,6 +5220,8 @@ type-fest@^0.8.1:
 
 type-is@~1.6.18:
   version "1.6.18"
+  resolved "https://npm.yandex-team.ru/type-is/-/type-is-1.6.18.tgz?rbtorrent=38f82e5ad1ec85b7be95c74b669214119903c229"
+  integrity sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.24"
@@ -4444,8 +5251,17 @@ unique-filename@^1.1.1:
 
 unique-filename@^2.0.0:
   version "2.0.1"
+  resolved "https://npm.yandex-team.ru/unique-filename/-/unique-filename-2.0.1.tgz?rbtorrent=06865828fa05959068f4d63df0c920996d5592a7"
+  integrity sha512-ODWHtkkdx3IAR+veKxFV+VBkUMcN+FaqzUUd7IZzt+0zhDZFPFxhlqwPF3YQvMHx1TD0tdgYl+kuPnJ8E6ql7A==
   dependencies:
     unique-slug "^3.0.0"
+
+unique-filename@^3.0.0:
+  version "3.0.0"
+  resolved "https://npm.yandex-team.ru/unique-filename/-/unique-filename-3.0.0.tgz?rbtorrent=f9c9a0344f9c5f48b9ad4d41ad1ffe5566990fa4"
+  integrity sha512-afXhuC55wkAmZ0P18QsVE6kp8JaxrEokN2HGIoIVv2ijHQd419H0+6EigAFcIzXeMIkcIkNBpB3L/DXB3cTS/g==
+  dependencies:
+    unique-slug "^4.0.0"
 
 unique-slug@^2.0.0:
   version "2.0.2"
@@ -4454,6 +5270,15 @@ unique-slug@^2.0.0:
 
 unique-slug@^3.0.0:
   version "3.0.0"
+  resolved "https://npm.yandex-team.ru/unique-slug/-/unique-slug-3.0.0.tgz?rbtorrent=4e1477f0cd385f0b252860c8e4c9c426fea833de"
+  integrity sha512-8EyMynh679x/0gqE9fT9oilG+qEt+ibFyqjuVTsZn1+CMxH+XLlpvr2UZx4nVcCwTpx81nICr2JQFkM+HPLq4w==
+  dependencies:
+    imurmurhash "^0.1.4"
+
+unique-slug@^4.0.0:
+  version "4.0.0"
+  resolved "https://npm.yandex-team.ru/unique-slug/-/unique-slug-4.0.0.tgz?rbtorrent=ec9b4a3baa6fab3afefc15be62bc4428e34aff0e"
+  integrity sha512-WrcA6AyEfqDX5bWige/4NQfPZMtASNVxdmWR76WESYQVAACSgWcR6e9i0mofqqBxYFtL4oAxPIptY73/0YE1DQ==
   dependencies:
     imurmurhash "^0.1.4"
 
@@ -4465,15 +5290,19 @@ universalify@^0.1.0:
 
 unpipe@~1.0.0, unpipe@1.0.0:
   version "1.0.0"
+  resolved "https://npm.yandex-team.ru/unpipe/-/unpipe-1.0.0.tgz?rbtorrent=db35d7e949011b32e4923cd85a989fa998b0c852"
+  integrity sha1-sr9O6FFKrmFltIF4KdIbLvSZBOw=
 
 untildify@^4.0.0:
   version "4.0.0"
 
-update-browserslist-db@^1.0.10:
-  version "1.0.11"
+update-browserslist-db@^1.1.4:
+  version "1.1.4"
+  resolved "https://npm.yandex-team.ru/update-browserslist-db/-/update-browserslist-db-1.1.4.tgz?rbtorrent="
+  integrity sha512-q0SPT4xyU84saUX+tomz1WLkxUbuaJnR1xWt17M7fJtEJigJeWUNGUqrauFXsHnqev9y9JTRGwk13tFBuKby4A==
   dependencies:
-    escalade "^3.1.1"
-    picocolors "^1.0.0"
+    escalade "^3.2.0"
+    picocolors "^1.1.1"
 
 uri-js@^4.2.2:
   version "4.4.1"
@@ -4492,7 +5321,7 @@ utils-merge@1.0.1:
 uuid@^8.3.2:
   version "8.3.2"
 
-validate-npm-package-license@^3.0.1:
+validate-npm-package-license@^3.0.1, validate-npm-package-license@^3.0.4:
   version "3.0.4"
   dependencies:
     spdx-correct "^3.0.0"
@@ -4502,6 +5331,11 @@ validate-npm-package-name@^3.0.0:
   version "3.0.0"
   dependencies:
     builtins "^1.0.3"
+
+validate-npm-package-name@^5.0.0:
+  version "5.0.1"
+  resolved "https://npm.yandex-team.ru/validate-npm-package-name/-/validate-npm-package-name-5.0.1.tgz?rbtorrent="
+  integrity sha512-OljLrQ9SQdOUqTaQxqL5dEfZWrXExyyWsozYlAWFawPVNuD83igl7uJD2RTkNMbniIYgt8l81eCJGIdQF7avLQ==
 
 vary@~1.1.2:
   version "1.1.2"
@@ -4528,8 +5362,10 @@ vinyl@^2.0.1:
 walk-up-path@^1.0.0:
   version "1.0.0"
 
-watchpack@^2.4.0:
-  version "2.4.0"
+watchpack@^2.4.4:
+  version "2.4.4"
+  resolved "https://npm.yandex-team.ru/watchpack/-/watchpack-2.4.4.tgz?rbtorrent="
+  integrity sha512-c5EGNOiyxxV5qmTtAB7rbiXxi1ooX1pQKMLX/MIabJjRA0SJBQOjKF+KSVfHkr9U1cADPon0mRiVe/riyaiDUA==
   dependencies:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
@@ -4547,13 +5383,15 @@ wcwidth@^1.0.1:
 webidl-conversions@^3.0.0:
   version "3.0.1"
 
-webpack-cli@^5.0.2, webpack-cli@5.x.x:
-  version "5.0.2"
+webpack-cli@^5.0.2, webpack-cli@^5.1.4, webpack-cli@5.x.x:
+  version "5.1.4"
+  resolved "https://npm.yandex-team.ru/webpack-cli/-/webpack-cli-5.1.4.tgz?rbtorrent=cfd6cbfbd20f359902b91451286df38b8fd7b313"
+  integrity sha512-pIDJHIEI9LR0yxHXQ+Qh95k2EvXpWzZ5l+d+jIo+RdSm9MiHfzazIxwwni/p7+x4eJZuvG1AJwgC4TNQ7NRgsg==
   dependencies:
     "@discoveryjs/json-ext" "^0.5.0"
-    "@webpack-cli/configtest" "^2.0.1"
-    "@webpack-cli/info" "^2.0.1"
-    "@webpack-cli/serve" "^2.0.2"
+    "@webpack-cli/configtest" "^2.1.1"
+    "@webpack-cli/info" "^2.0.2"
+    "@webpack-cli/serve" "^2.0.5"
     colorette "^2.0.14"
     commander "^10.0.1"
     cross-spawn "^7.0.3"
@@ -4564,8 +5402,10 @@ webpack-cli@^5.0.2, webpack-cli@5.x.x:
     rechoir "^0.8.0"
     webpack-merge "^5.7.3"
 
-webpack-dev-middleware@^5.3.1:
-  version "5.3.3"
+webpack-dev-middleware@^5.3.4:
+  version "5.3.4"
+  resolved "https://npm.yandex-team.ru/webpack-dev-middleware/-/webpack-dev-middleware-5.3.4.tgz?rbtorrent="
+  integrity sha512-BVdTqhhs+0IfoeAf7EoH5WE+exCmqGerHfDM0IL096Px60Tq2Mn9MAbnaGUe6HiMa41KMCYF19gyzZmBcq/o4Q==
   dependencies:
     colorette "^2.0.10"
     memfs "^3.4.3"
@@ -4574,7 +5414,9 @@ webpack-dev-middleware@^5.3.1:
     schema-utils "^4.0.0"
 
 webpack-dev-server@^4.13.3:
-  version "4.13.3"
+  version "4.15.2"
+  resolved "https://npm.yandex-team.ru/webpack-dev-server/-/webpack-dev-server-4.15.2.tgz?rbtorrent="
+  integrity sha512-0XavAZbNJ5sDrCbkpWL8mia0o5WPOd2YGtxrEiZkBK9FjLppIUK2TgxK6qGD2P3hUXTJNNPVibrerKcx5WkR1g==
   dependencies:
     "@types/bonjour" "^3.5.9"
     "@types/connect-history-api-fallback" "^1.3.5"
@@ -4582,7 +5424,7 @@ webpack-dev-server@^4.13.3:
     "@types/serve-index" "^1.9.1"
     "@types/serve-static" "^1.13.10"
     "@types/sockjs" "^0.3.33"
-    "@types/ws" "^8.5.1"
+    "@types/ws" "^8.5.5"
     ansi-html-community "^0.0.8"
     bonjour-service "^1.0.11"
     chokidar "^3.5.3"
@@ -4604,7 +5446,7 @@ webpack-dev-server@^4.13.3:
     serve-index "^1.9.1"
     sockjs "^0.3.24"
     spdy "^4.0.2"
-    webpack-dev-middleware "^5.3.1"
+    webpack-dev-middleware "^5.3.4"
     ws "^8.13.0"
 
 webpack-merge@^5.7.3:
@@ -4613,36 +5455,41 @@ webpack-merge@^5.7.3:
     clone-deep "^4.0.1"
     wildcard "^2.0.0"
 
-webpack-sources@^3.2.3:
-  version "3.2.3"
+webpack-sources@^3.3.3:
+  version "3.3.3"
+  resolved "https://npm.yandex-team.ru/webpack-sources/-/webpack-sources-3.3.3.tgz?rbtorrent="
+  integrity sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==
 
 "webpack@^4.0.0 || ^5.0.0", "webpack@^4.37.0 || ^5.0.0", webpack@^5.0.0, webpack@^5.1.0, webpack@^5.20.0, webpack@^5.81.0, webpack@>=5, webpack@5.x.x:
-  version "5.81.0"
+  version "5.103.0"
+  resolved "https://npm.yandex-team.ru/webpack/-/webpack-5.103.0.tgz?rbtorrent="
+  integrity sha512-HU1JOuV1OavsZ+mfigY0j8d1TgQgbZ6M+J75zDkpEAwYeXjWSqrGJtgnPblJjd/mAyTNQ7ygw0MiKOn6etz8yw==
   dependencies:
-    "@types/eslint-scope" "^3.7.3"
-    "@types/estree" "^1.0.0"
-    "@webassemblyjs/ast" "^1.11.5"
-    "@webassemblyjs/wasm-edit" "^1.11.5"
-    "@webassemblyjs/wasm-parser" "^1.11.5"
-    acorn "^8.7.1"
-    acorn-import-assertions "^1.7.6"
-    browserslist "^4.14.5"
+    "@types/eslint-scope" "^3.7.7"
+    "@types/estree" "^1.0.8"
+    "@types/json-schema" "^7.0.15"
+    "@webassemblyjs/ast" "^1.14.1"
+    "@webassemblyjs/wasm-edit" "^1.14.1"
+    "@webassemblyjs/wasm-parser" "^1.14.1"
+    acorn "^8.15.0"
+    acorn-import-phases "^1.0.3"
+    browserslist "^4.26.3"
     chrome-trace-event "^1.0.2"
-    enhanced-resolve "^5.13.0"
+    enhanced-resolve "^5.17.3"
     es-module-lexer "^1.2.1"
     eslint-scope "5.1.1"
     events "^3.2.0"
     glob-to-regexp "^0.4.1"
-    graceful-fs "^4.2.9"
+    graceful-fs "^4.2.11"
     json-parse-even-better-errors "^2.3.1"
-    loader-runner "^4.2.0"
+    loader-runner "^4.3.1"
     mime-types "^2.1.27"
     neo-async "^2.6.2"
-    schema-utils "^3.1.2"
-    tapable "^2.1.1"
-    terser-webpack-plugin "^5.3.7"
-    watchpack "^2.4.0"
-    webpack-sources "^3.2.3"
+    schema-utils "^4.3.3"
+    tapable "^2.3.0"
+    terser-webpack-plugin "^5.3.11"
+    watchpack "^2.4.4"
+    webpack-sources "^3.3.3"
 
 websocket-driver@^0.7.4, websocket-driver@>=0.5.1:
   version "0.7.4"
@@ -4668,6 +5515,15 @@ which-pm@2.0.0:
 
 which@^2.0.1, which@^2.0.2:
   version "2.0.2"
+  resolved "https://npm.yandex-team.ru/which/-/which-2.0.2.tgz?rbtorrent=555fb1d5b81803e43aa893a20c974171eb647dee"
+  integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
+  dependencies:
+    isexe "^2.0.0"
+
+which@^3.0.0:
+  version "3.0.1"
+  resolved "https://npm.yandex-team.ru/which/-/which-3.0.1.tgz?rbtorrent=e38ce8136fd6347635e65781f9b4cb7f6a25f358"
+  integrity sha512-XA1b62dzQzLfaEOSQFTCOd5KFf/1VSzZo7/7TUjnya6u0vGGKzU96UQBZTAThCb2j4/xjBAyii1OhRLJEivHvg==
   dependencies:
     isexe "^2.0.0"
 
@@ -4680,7 +5536,18 @@ wildcard@^2.0.0:
   version "2.0.1"
 
 word-wrap@^1.2.3:
-  version "1.2.3"
+  version "1.2.5"
+  resolved "https://npm.yandex-team.ru/word-wrap/-/word-wrap-1.2.5.tgz?rbtorrent=f5fb275d0fde0a28a1f5f2cb469e8227067eb466"
+  integrity sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==
+
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+  version "7.0.0"
+  resolved "https://npm.yandex-team.ru/wrap-ansi/-/wrap-ansi-7.0.0.tgz?rbtorrent=312c52ab2db72fb9dc9b57f62d1ee32019be6356"
+  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
 
 wrap-ansi@^7.0.0:
   version "7.0.0"
@@ -4688,6 +5555,15 @@ wrap-ansi@^7.0.0:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
+
+wrap-ansi@^8.1.0:
+  version "8.1.0"
+  resolved "https://npm.yandex-team.ru/wrap-ansi/-/wrap-ansi-8.1.0.tgz?rbtorrent=35ac52325e795798568a877b07e6bafe0efb1965"
+  integrity sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==
+  dependencies:
+    ansi-styles "^6.1.0"
+    string-width "^5.0.1"
+    strip-ansi "^7.0.1"
 
 wrappy@1:
   version "1.0.2"
@@ -4699,7 +5575,9 @@ write-file-atomic@^4.0.0:
     signal-exit "^3.0.7"
 
 ws@^8.13.0:
-  version "8.13.0"
+  version "8.18.3"
+  resolved "https://npm.yandex-team.ru/ws/-/ws-8.18.3.tgz?rbtorrent="
+  integrity sha512-PEIGCY5tSlUt50cqyMXfCzX+oOPqN0vuGqWzbcJ2xvnkzkq46oOpz7dQaTDBdfICb4N14+GARUDw2XV2N4tvzg==
 
 yallist@^3.0.2:
   version "3.1.1"
@@ -4748,7 +5626,9 @@ yeoman-environment@^3.2.0, yeoman-environment@^3.9.1:
     untildify "^4.0.0"
 
 yeoman-generator@^5.7.0:
-  version "5.8.0"
+  version "5.10.0"
+  resolved "https://npm.yandex-team.ru/yeoman-generator/-/yeoman-generator-5.10.0.tgz?rbtorrent=9b5ee8c1c3a7d588b6ec6133b95e34f17846c503"
+  integrity sha512-iDUKykV7L4nDNzeYSedRmSeJ5eMYFucnKDi6KN1WNASXErgPepKqsQw55TgXPHnmpcyOh2Dd/LAZkyc+f0qaAw==
   dependencies:
     chalk "^4.1.0"
     dargs "^7.0.0"
@@ -4758,6 +5638,7 @@ yeoman-generator@^5.7.0:
     lodash "^4.17.11"
     mem-fs-editor "^9.0.0"
     minimist "^1.2.5"
+    pacote "^15.2.0"
     read-pkg-up "^7.0.1"
     run-async "^2.0.0"
     semver "^7.2.1"
