@@ -1,4 +1,5 @@
-import { Api, ApiListResponse } from '../base/api';
+import { Api } from '../base/api';
+import { ApiListResponse } from '@/types/components/base/api';
 import {
 	Product,
 	ILarekApi,

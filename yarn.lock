@@ -2735,6 +2735,11 @@ fs-monkey@^1.0.4:
 fs.realpath@^1.0.0:
   version "1.0.0"
 
+fsevents@~2.3.2:
+  version "2.3.3"
+  resolved "https://npm.yandex-team.ru/fsevents/-/fsevents-2.3.3.tgz?rbtorrent=af48e653c1b69837ab1b663db0e3cccbadea9099"
+  integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
+
 function-bind@^1.1.1, function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://npm.yandex-team.ru/function-bind/-/function-bind-1.1.2.tgz?rbtorrent=423982b67750a5091c8f795109f07009f2be6eac"
@@ -5648,3 +5653,8 @@ yeoman-generator@^5.7.0:
 
 yocto-queue@^0.1.0:
   version "0.1.0"
+
+zod@^4.1.13:
+  version "4.1.13"
+  resolved "https://npm.yandex-team.ru/zod/-/zod-4.1.13.tgz?rbtorrent="
+  integrity sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==
