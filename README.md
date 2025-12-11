@@ -405,7 +405,7 @@ interface PageData {
 **Настройки (`PageSettings`):**
 ```typescript
 interface PageSettings {
-    basketView: IView<HeaderBasketData>;  // Инжектируемый View корзины
+    onBasketClick: () => void;  // Callback клика по кнопке корзины
 }
 ```
 
@@ -414,42 +414,12 @@ interface PageSettings {
 | Свойство | Модификатор | Тип | Описание |
 |----------|-------------|-----|----------|
 | `gallery` | `protected` | `HTMLElement` | Контейнер галереи (`.gallery`) |
-| `basketView` | `protected` | `IView<HeaderBasketData>` | Инжектируемый View корзины в хедере |
+| `basketButton` | `protected` | `HTMLButtonElement` | Кнопка корзины в хедере |
+| `basketCounter` | `protected` | `HTMLElement` | Счётчик товаров в корзине |
 
 **Конструктор:**
 ```typescript
 constructor(element: HTMLElement, settings: PageSettings)
-```
-
----
-
-#### HeaderBasketView
-
-**Назначение:** Кнопка корзины в хедере со счётчиком товаров.
-
-**Данные (`HeaderBasketData`):**
-```typescript
-interface HeaderBasketData {
-    count: number;  // Количество товаров в корзине
-}
-```
-
-**Настройки (`HeaderBasketSettings`):**
-```typescript
-interface HeaderBasketSettings {
-    onClick: () => void;  // Callback клика по кнопке
-}
-```
-
-**Класс `HeaderBasketView<HeaderBasketData, HeaderBasketSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `counterElement` | `protected` | `HTMLElement` | Счётчик товаров |
-
-**Конструктор:**
-```typescript
-constructor(element: HTMLButtonElement, settings: HeaderBasketSettings)
 ```
 
 ---
@@ -877,10 +847,8 @@ constructor(element: HTMLElement, settings: OrderSuccessSettings)
 Контроллеры связывают Model и View, подписываясь на события и координируя взаимодействие.
 
 **Иерархия компонентов:**
-- **View** — простые компоненты без контроллера (`ProductPreviewView`, `BasketProductView`, `HeaderBasketView`, `ModalTitleView`, `ModalActionsView`)
-- **Screen** — композитные экраны, у каждого свой контроллер
-
-Контроллер создаётся для **экранов** (Screen), а не для каждой мелкой View. Простые View управляются через родительский экран.
+- **Простые View** — компоненты без контроллера, управляются родительским View (`ProductPreviewView`, `BasketProductView`, `ModalTitleView`, `ModalActionsView`)
+- **View с контроллером** — самостоятельные экраны приложения (`PageView`, `ModalView`, `ProductModalView`, `BasketModalView`, `OrderFormView`, `ContactsFormView`, `OrderSuccessView`)
 
 ---
 
@@ -902,7 +870,7 @@ class Controller<T> {
 
 #### MainController<AppState>
 
-**Обслуживает:** `PageView` (главный экран)
+**Обслуживает:** `PageView`
 
 **Назначение:** Управление главной страницей — галерея, хедер, блокировка при модалке.
 
@@ -917,7 +885,7 @@ class Controller<T> {
 **Методы:**
 | Метод | Описание |
 |-------|----------|
-| `init()` | Инициализация экрана, подписка на события |
+| `init()` | Инициализация View, подписка на события |
 | `renderGallery(products: Product[])` | Рендерит карточки товаров в галерею |
 | `updateBasketCounter(count: number)` | Обновляет счётчик корзины |
 | `handleProductClick(id: ProductId)` | Emit `product:select` |
@@ -929,7 +897,7 @@ class Controller<T> {
 
 #### ModalController<AppState>
 
-**Обслуживает:** `ModalView` (контейнер модалок)
+**Обслуживает:** `ModalView`
 
 **Назначение:** Управление контейнером модалки — открытие, закрытие, подстановка контента.
 
@@ -950,7 +918,7 @@ class Controller<T> {
 
 #### ProductController<AppState>
 
-**Обслуживает:** `ProductModalView` (экран товара)
+**Обслуживает:** `ProductModalView`
 
 **Назначение:** Управление детальной карточкой товара в модалке.
 
@@ -964,7 +932,7 @@ class Controller<T> {
 **Методы:**
 | Метод | Описание |
 |-------|----------|
-| `init()` | Инициализация экрана, подписка на события |
+| `init()` | Инициализация View, подписка на события |
 | `showProduct(id: ProductId)` | Получает данные, рендерит карточку, открывает модалку |
 | `handleToggleBasket(id: ProductId)` | Emit `product:add` или `product:remove` |
 | `getButtonState(id: ProductId)` | Возвращает текст и состояние кнопки |
@@ -973,7 +941,7 @@ class Controller<T> {
 
 #### BasketController<AppState>
 
-**Обслуживает:** `BasketModalView` (экран корзины)
+**Обслуживает:** `BasketModalView`
 
 **Назначение:** Управление модалкой корзины.
 
@@ -987,7 +955,7 @@ class Controller<T> {
 **Методы:**
 | Метод | Описание |
 |-------|----------|
-| `init()` | Инициализация экрана, подписка на события |
+| `init()` | Инициализация View, подписка на события |
 | `showBasket()` | Рендерит корзину, открывает модалку |
 | `renderBasket()` | Перерисовывает список товаров |
 | `handleDelete(id: ProductId)` | Удаляет товар из модели |
@@ -997,7 +965,7 @@ class Controller<T> {
 
 #### OrderController<AppState>
 
-**Обслуживает:** `OrderFormView` (экран заказа)
+**Обслуживает:** `OrderFormView`
 
 **Назначение:** Управление формой заказа (шаг 1).
 
@@ -1011,7 +979,7 @@ class Controller<T> {
 **Методы:**
 | Метод | Описание |
 |-------|----------|
-| `init()` | Инициализация экрана, подписка на события |
+| `init()` | Инициализация View, подписка на события |
 | `showOrderForm()` | Рендерит форму, открывает модалку |
 | `handlePaymentChange(method: PaymentMethod)` | Обновляет способ оплаты в модели |
 | `handleAddressChange(value: string)` | Обновляет адрес в модели |
@@ -1022,7 +990,7 @@ class Controller<T> {
 
 #### ContactsController<AppState>
 
-**Обслуживает:** `ContactsFormView` (экран контактов)
+**Обслуживает:** `ContactsFormView`
 
 **Назначение:** Управление формой контактов (шаг 2).
 
@@ -1036,7 +1004,7 @@ class Controller<T> {
 **Методы:**
 | Метод | Описание |
 |-------|----------|
-| `init()` | Инициализация экрана, подписка на события |
+| `init()` | Инициализация View, подписка на события |
 | `showContactsForm()` | Рендерит форму, открывает модалку |
 | `handleEmailChange(value: string)` | Обновляет email в модели |
 | `handlePhoneChange(value: string)` | Обновляет телефон в модели |
@@ -1047,7 +1015,7 @@ class Controller<T> {
 
 #### SuccessController<AppState>
 
-**Обслуживает:** `OrderSuccessView` (экран успеха)
+**Обслуживает:** `OrderSuccessView`
 
 **Назначение:** Управление экраном успешного заказа.
 
@@ -1059,8 +1027,8 @@ class Controller<T> {
 **Методы:**
 | Метод | Описание |
 |-------|----------|
-| `init()` | Инициализация экрана, подписка на события |
-| `showSuccess(total: number)` | Рендерит экран с суммой списания |
+| `init()` | Инициализация View, подписка на события |
+| `showSuccess(total: number)` | Рендерит View с суммой списания |
 | `handleClose()` | Очищает данные, emit `success:close` |
 
 ---
