@@ -145,3 +145,26 @@ export function createElement<T extends HTMLElement>(
     }
     return element;
 }
+
+/**
+ * Форматирование цены (чистая функция)
+ * @param value — числовое значение
+ * @param currency — название валюты
+ */
+export function formatPrice(value: number, currency: string): string {
+    return `${value} ${currency}`;
+}
+
+/**
+ * Форматирование цены с учётом null (чистая функция)
+ * @param value — числовое значение или null
+ * @param currency — название валюты
+ * @param priceless — текст для null значения
+ */
+export function formatPriceOrPriceless(
+    value: number | null,
+    currency: string,
+    priceless: string
+): string {
+    return value === null ? priceless : formatPrice(value, currency);
+}

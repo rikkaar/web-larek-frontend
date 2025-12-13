@@ -21,18 +21,22 @@ export interface ModalTitleData {
 // ============================================================================
 
 /**
- * Данные для футера модалки (базовый)
+ * Данные для футера модалки (универсальный)
+ * secondary — любой текст (ошибка, цена и т.д.), форматирование снаружи
  */
 export interface ModalActionsData {
 	button: ButtonData;
-	error?: string;
+	secondary?: string;
 }
 
 /**
  * Настройки для футера модалки
  */
 export interface ModalActionsSettings {
-	onSubmit: () => void;
+	/** Инжектированный View кнопки */
+	buttonView: IView<ButtonData>;
+	/** Селектор вторичного элемента (ошибка, цена и т.д.) */
+	secondarySelector: string;
 }
 
 // ============================================================================

@@ -5,7 +5,7 @@
 import { ProductId } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
-import { ModalContentData, ModalContentSettings, ModalTitleData } from './modal';
+import { ModalActionsData, ModalContentData, ModalContentSettings } from './modal';
 
 // ============================================================================
 // BasketProduct (элемент корзины)
@@ -28,25 +28,6 @@ export interface BasketProductSettings {
 }
 
 // ============================================================================
-// BasketActions (футер корзины — кнопка + цена)
-// ============================================================================
-
-/**
- * Данные для футера корзины
- */
-export interface BasketActionsData {
-	button: ButtonData;
-	total: number;
-}
-
-/**
- * Настройки для футера корзины
- */
-export interface BasketActionsSettings {
-	onSubmit: () => void;
-}
-
-// ============================================================================
 // BasketModal (контент модалки корзины)
 // ============================================================================
 
@@ -55,6 +36,7 @@ export interface BasketActionsSettings {
  */
 export interface BasketModalData extends ModalContentData {
 	items: BasketProductData[];
+	/** Общая сумма — форматируется снаружи и передаётся в actionsView.secondary */
 	total: number;
 	button: ButtonData;
 }
@@ -66,10 +48,10 @@ export interface BasketModalData extends ModalContentData {
 export interface BasketModalSettings extends ModalContentSettings {
 	/** View для элемента корзины */
 	itemView: IView<BasketProductData>;
-	/** View для футера корзины */
-	actionsView: IView<BasketActionsData>;
+	/** View для футера (используем универсальный ModalActionsView) */
+	actionsView: IView<ModalActionsData>;
 	/** Callback удаления элемента */
 	onDelete: (id: ProductId) => void;
-	/** Callback оформления */
-	onSubmit: () => void;
+	/** Функция форматирования цены */
+	formatPrice: (value: number) => string;
 }
