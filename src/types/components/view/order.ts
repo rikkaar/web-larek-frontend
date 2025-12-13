@@ -2,8 +2,8 @@
  * Типы для Order View компонентов
  */
 
+import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
-import { ModalContentData, ModalContentSettings } from './modal';
 
 // ============================================================================
 // OrderSuccess (успешный заказ)
@@ -12,7 +12,7 @@ import { ModalContentData, ModalContentSettings } from './modal';
 /**
  * Данные для успешного заказа
  */
-export interface OrderSuccessData extends ModalContentData {
+export interface OrderSuccessData {
 	/** Сумма списания */
 	total: number;
 	/** Кнопка "За новыми покупками" */
@@ -22,7 +22,11 @@ export interface OrderSuccessData extends ModalContentData {
 /**
  * Настройки для OrderSuccess
  */
-export interface OrderSuccessSettings extends ModalContentSettings {
-	/** Клик по кнопке */
-	onClick: () => void;
+export interface OrderSuccessSettings {
+	/** Селектор описания (сумма) */
+	descriptionSelector: string;
+	/** Инжектированный View кнопки */
+	buttonView: IView<ButtonData>;
+	/** Функция форматирования суммы */
+	formatTotal: (value: number) => string;
 }
