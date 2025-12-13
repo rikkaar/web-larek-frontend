@@ -1,18 +1,21 @@
+import { SelectorElement, SelectorCollection, ElementChild, ElementProps } from '@/types/html';
+
 export function pascalToKebab(value: string): string {
     return value.replace(/([a-z0–9])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
-export function isSelector(x: any): x is string {
+export function isSelector(x: unknown): x is string {
     return (typeof x === "string") && x.length > 1;
 }
 
-export function isEmpty(value: any): boolean {
+export function isEmpty(value: unknown): boolean {
     return value === null || value === undefined;
 }
 
-export type SelectorCollection<T> = string | NodeListOf<Element> | T[];
-
-export function ensureAllElements<T extends HTMLElement>(selectorElement: SelectorCollection<T>, context: HTMLElement = document as unknown as HTMLElement): T[] {
+export function ensureAllElements<T extends HTMLElement>(
+    selectorElement: SelectorCollection<T>,
+    context: HTMLElement = document as unknown as HTMLElement
+): T[] {
     if (isSelector(selectorElement)) {
         return Array.from(context.querySelectorAll(selectorElement)) as T[];
     }
@@ -24,8 +27,6 @@ export function ensureAllElements<T extends HTMLElement>(selectorElement: Select
     }
     throw new Error(`Unknown selector element`);
 }
-
-export type SelectorElement<T> = T | string;
 
 export function ensureElement<T extends HTMLElement>(selectorElement: SelectorElement<T>, context?: HTMLElement): T {
     if (isSelector(selectorElement)) {
@@ -66,7 +67,7 @@ export function getObjectProperties(obj: object, filter?: (name: string, prop: P
         )
     )
         .filter(([name, prop]: [string, PropertyDescriptor]) => filter ? filter(name, prop) : (name !== 'constructor'))
-        .map(([name, prop]) => name);
+        .map(([name]) => name);
 }
 
 /**
@@ -103,16 +104,22 @@ export function isBoolean(v: unknown): v is boolean {
 }
 
 /**
+ * Проверка на дочерний элемент (HTMLElement или массив HTMLElement)
+ * Используется для element.replaceChildren
+ */
+export function isChildElement(x: unknown): x is import('@/types/html').ElementChild {
+    return x instanceof HTMLElement || Array.isArray(x);
+}
+
+/**
  * Фабрика DOM-элементов в простейшей реализации
  * здесь не учтено много факторов
  * в интернет можно найти более полные реализации
  */
-export function createElement<
-    T extends HTMLElement
-    >(
+export function createElement<T extends HTMLElement>(
     tagName: keyof HTMLElementTagNameMap,
-    props?: Partial<Record<keyof T, string | boolean | object>>,
-    children?: HTMLElement | HTMLElement []
+    props?: ElementProps<T>,
+    children?: ElementChild
 ): T {
     const element = document.createElement(tagName) as T;
     if (props) {
