@@ -5,6 +5,7 @@
 import { ProductId, ProductCategory } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
+import { ChipData } from './chip';
 import { ModalContentData, ModalContentSettings, ModalTitleData, ModalActionsData } from './modal';
 
 // ============================================================================
@@ -26,7 +27,16 @@ export interface ProductPreviewData {
  * Настройки для ProductPreview
  */
 export interface ProductPreviewSettings {
+	/** Селекторы элементов */
+	titleSelector: string;
+	imageSelector: string;
+	priceSelector: string;
+	/** Инжектированный View для категории (ChipView) */
+	categoryView: IView<ChipData>;
+	/** Callback клика по карточке */
 	onClick: (id: ProductId) => void;
+	/** Функция форматирования цены */
+	formatPrice: (value: number | null) => string;
 }
 
 // ============================================================================
@@ -54,18 +64,3 @@ export interface ProductModalSettings extends ModalContentSettings {
 	/** Callback добавления/удаления из корзины */
 	onToggleBasket: (id: ProductId) => void;
 }
-
-// ============================================================================
-// Маппинг категорий
-// ============================================================================
-
-/**
- * Маппинг категории на CSS-класс модификатора
- */
-export const categoryClassMap: Record<ProductCategory, string> = {
-	'софт-скил': 'card__category_soft',
-	'хард-скил': 'card__category_hard',
-	'другое': 'card__category_other',
-	'дополнительное': 'card__category_additional',
-	'кнопка': 'card__category_button',
-};
