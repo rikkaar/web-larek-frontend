@@ -2,12 +2,15 @@
  * Типы для Page View (главная страница)
  */
 
+import { IView } from '@/types/components/base/view';
+import { HeaderBasketData } from './headerBasket';
+
 /**
  * Данные для страницы
  */
 export interface PageData {
-	/** Счетчик корзины */
-	basketCounter: number;
+	/** Данные для корзины в хедере */
+	basket: HeaderBasketData;
 	/** Элементы галереи */
 	gallery: HTMLElement[];
 	/** Заблокирована ли страница (при открытой модалке) */
@@ -18,6 +21,11 @@ export interface PageData {
  * Настройки для страницы
  */
 export interface PageSettings {
-	/** Клик по кнопке корзины */
-	onBasketClick: () => void;
+	/** Селекторы */
+	wrapperSelector: string;
+	gallerySelector: string;
+	/** CSS-класс для блокировки скролла */
+	lockedClass: string;
+	/** Инжектированный View корзины */
+	basketView: IView<HeaderBasketData>;
 }
