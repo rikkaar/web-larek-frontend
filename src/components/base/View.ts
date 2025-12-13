@@ -1,5 +1,5 @@
 import { IView } from '@/types/components/base/view';
-import { SelectorElement, ElementChild, ElementValue } from '@/types/html';
+import { SelectorElement, ElementChild, ElementValue, DisableableElement } from '@/types/html';
 import {
 	ensureElement,
 	isSelector,
@@ -13,15 +13,19 @@ import {
  *
  * @template T - тип данных для рендеринга
  * @template S - тип настроек компонента (callbacks, вложенные View)
+ * @template E - тип корневого DOM-элемента (по умолчанию HTMLElement)
  */
-export abstract class View<T, S extends object = object>
-	implements IView<T, S>
+export abstract class View<
+	T,
+	S extends object = object,
+	E extends HTMLElement = HTMLElement
+> implements IView<T, S, E>
 {
 	/**
 	 * Трюк для копирующего конструктора:
 	 * позволяет создавать экземпляр дочернего класса, не зная его имени
 	 */
-	['constructor']!: new (element: HTMLElement, settings: S) => this;
+	['constructor']!: new (element: E, settings: S) => this;
 
 	/**
 	 * Кеш DOM-элементов для оптимизации повторных запросов
@@ -33,7 +37,7 @@ export abstract class View<T, S extends object = object>
 	 * @param settings - настройки компонента (callbacks, вложенные View)
 	 */
 	constructor(
-		public readonly element: HTMLElement,
+		public readonly element: E,
 		protected readonly settings: S
 	) {
 		this.init();
@@ -57,7 +61,7 @@ export abstract class View<T, S extends object = object>
 	 */
 	copy(settings?: Partial<S>): this {
 		return new this.constructor(
-			this.element.cloneNode(true) as HTMLElement,
+			this.element.cloneNode(true) as E,
 			Object.assign({}, this.settings, settings ?? {})
 		);
 	}
@@ -69,7 +73,7 @@ export abstract class View<T, S extends object = object>
 	 * @param data - частичные данные для обновления
 	 * @returns корневой элемент
 	 */
-	render(data?: Partial<T>): HTMLElement {
+	render(data?: Partial<T>): E {
 		if (data && typeof data === 'object') {
 			Object.assign(this, data);
 		}
@@ -120,9 +124,10 @@ export abstract class View<T, S extends object = object>
 
 	/**
 	 * Устанавливает disabled-состояние элемента.
+	 * Поддерживает: button, fieldset, optgroup, option, select, textarea, input
 	 */
 	protected setDisabled(
-		query: SelectorElement<HTMLButtonElement>,
+		query: SelectorElement<DisableableElement>,
 		disabled: boolean
 	): void {
 		const el = this.ensure(query);

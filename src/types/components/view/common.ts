@@ -5,21 +5,6 @@
 import { ProductCategory } from '@/types/components/model/larekApi';
 
 /**
- * Данные для кнопки
- */
-export interface ButtonData {
-	label: string;
-	disabled?: boolean;
-}
-
-/**
- * Настройки для кнопки
- */
-export interface ButtonSettings {
-	onClick: (event: MouseEvent) => void;
-}
-
-/**
  * Цвета категорий продуктов (модификаторы CSS)
  */
 export type CategoryColor =

@@ -4,7 +4,7 @@
 
 import { ProductId } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
-import { ButtonData } from './common';
+import { ButtonData } from './button';
 import { ModalContentData, ModalContentSettings, ModalTitleData } from './modal';
 
 // ============================================================================

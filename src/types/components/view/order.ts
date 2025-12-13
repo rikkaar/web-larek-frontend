@@ -2,7 +2,7 @@
  * Типы для Order View компонентов
  */
 
-import { ButtonData } from './common';
+import { ButtonData } from './button';
 import { ModalContentData, ModalContentSettings } from './modal';
 
 // ============================================================================

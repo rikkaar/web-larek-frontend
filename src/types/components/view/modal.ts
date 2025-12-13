@@ -3,7 +3,7 @@
  */
 
 import { IView } from '@/types/components/base/view';
-import { ButtonData } from './common';
+import { ButtonData } from './button';
 
 // ============================================================================
 // Modal Title (заголовок)

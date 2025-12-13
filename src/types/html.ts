@@ -21,3 +21,15 @@ export type ElementCreator<T extends HTMLElement = HTMLElement> = [
 	keyof HTMLElementTagNameMap,
 	ElementProps<T>
 ];
+
+/**
+ * Тип элементов, поддерживающих атрибут disabled
+ */
+export type DisableableElement =
+	| HTMLButtonElement
+	| HTMLFieldSetElement
+	| HTMLOptGroupElement
+	| HTMLOptionElement
+	| HTMLSelectElement
+	| HTMLTextAreaElement
+	| HTMLInputElement;

@@ -2,7 +2,7 @@
  * Экспорт типов View-компонентов
  */
 
-export * from './common';
+export * from './button';
 export * from './page';
 export * from './modal';
 export * from './product';
