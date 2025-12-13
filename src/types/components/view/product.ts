@@ -6,7 +6,6 @@ import { ProductId, ProductCategory } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
 import { ChipData } from './chip';
-import { ModalContentData, ModalContentSettings, ModalTitleData, ModalActionsData } from './modal';
 
 // ============================================================================
 // ProductPreview (карточка в галерее)
@@ -46,8 +45,8 @@ export interface ProductPreviewSettings {
 /**
  * Данные для карточки продукта в модалке
  */
-export interface ProductModalData extends ModalContentData {
-	id: ProductId;
+export interface ProductModalData {
+	title: string;
 	image: string;
 	price: number | null;
 	category: ProductCategory;
@@ -58,9 +57,15 @@ export interface ProductModalData extends ModalContentData {
 /**
  * Настройки для ProductModal
  */
-export interface ProductModalSettings extends ModalContentSettings {
-	/** View для футера (кнопка "В корзину") */
-	actionsView: IView<ModalActionsData>;
-	/** Callback добавления/удаления из корзины */
-	onToggleBasket: (id: ProductId) => void;
+export interface ProductModalSettings {
+	/** Селекторы элементов */
+	imageSelector: string;
+	titleSelector: string;
+	descriptionSelector: string;
+	priceSelector: string;
+	/** Инжектированные View */
+	categoryView: IView<ChipData>;
+	buttonView: IView<ButtonData>;
+	/** Функция форматирования цены */
+	formatPrice: (value: number | null) => string;
 }
