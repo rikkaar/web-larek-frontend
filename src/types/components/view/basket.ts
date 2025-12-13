@@ -16,6 +16,7 @@ import { ModalActionsData, ModalContentData, ModalContentSettings } from './moda
  */
 export interface BasketProductData {
 	id: ProductId;
+	index: number;
 	title: string;
 	price: number;
 }
@@ -24,7 +25,15 @@ export interface BasketProductData {
  * Настройки для элемента корзины
  */
 export interface BasketProductSettings {
+	/** Селекторы элементов */
+	indexSelector: string;
+	titleSelector: string;
+	priceSelector: string;
+	deleteSelector: string;
+	/** Callback удаления */
 	onDelete: (id: ProductId) => void;
+	/** Функция форматирования цены */
+	formatPrice: (value: number) => string;
 }
 
 // ============================================================================
