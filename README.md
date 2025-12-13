@@ -154,6 +154,49 @@ type ApiListResponse<T> = {
 
 ---
 
+### LarekApi
+
+**Назначение:** Сервис для работы с API магазина. Наследует базовый `Api`, добавляет специфичные методы и обработку CDN для изображений.
+
+**Наследует:** `Api`
+
+**Имплементирует:** `ILarekApi`
+
+```typescript
+interface ILarekApi {
+    getProducts(): Promise<Product[]>;           // Получить каталог товаров
+    getProduct(id: string): Promise<Product>;    // Получить товар по ID
+    createOrder(order: OrderRequest): Promise<OrderResult>;  // Создать заказ
+}
+```
+
+**Конструктор:**
+```typescript
+constructor(cdn: string, baseUrl: string, options?: RequestInit)
+```
+
+| Параметр | Тип | Описание |
+|----------|-----|----------|
+| `cdn` | `string` | URL CDN для изображений |
+| `baseUrl` | `string` | Базовый URL API |
+| `options` | `RequestInit` | Опции fetch (опционально) |
+
+**Свойства:**
+
+| Свойство | Модификатор | Тип | Описание |
+|----------|-------------|-----|----------|
+| `cdn` | `readonly` | `string` | URL CDN для изображений |
+
+**Методы:**
+
+| Метод | Сигнатура | Описание |
+|-------|-----------|----------|
+| `getProducts` | `getProducts(): Promise<Product[]>` | Получить список всех товаров |
+| `getProduct` | `getProduct(id: string): Promise<Product>` | Получить товар по ID |
+| `createOrder` | `createOrder(order: OrderRequest): Promise<OrderResult>` | Создать заказ |
+
+---
+
 ### IView (Интерфейс)
 
 **Назначение:** Базовый контракт для всех View-компонентов. Определяет единый интерфейс работы с представлениями.
@@ -299,35 +342,6 @@ interface FormErrors {
 ---
 
 ### Компоненты Model-слоя
-
-#### LarekApi
-
-**Расположение:** `components/model/larekApi.ts`
-
-**Назначение:** Клиент для работы с API магазина. Наследует базовый `Api`, добавляет специфичные методы и обработку CDN для изображений.
-
-**Имплементирует:** `ILarekApi`
-
-```typescript
-interface ILarekApi {
-    getProducts(): Promise<Product[]>;           // Получить каталог товаров
-    getProduct(id: string): Promise<Product>;    // Получить товар по ID
-    createOrder(order: OrderRequest): Promise<OrderResult>;  // Создать заказ
-}
-```
-
-**Конструктор:**
-```typescript
-constructor(cdn: string, baseUrl: string, options?: RequestInit)
-```
-
-| Параметр | Описание |
-|----------|----------|
-| `cdn` | URL CDN для изображений |
-| `baseUrl` | Базовый URL API |
-| `options` | Опции fetch |
-
----
 
 #### AppState
 
