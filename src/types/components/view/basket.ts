@@ -5,7 +5,6 @@
 import { ProductId } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
-import { ModalActionsData, ModalContentData, ModalContentSettings } from './modal';
 
 // ============================================================================
 // BasketProduct (элемент корзины)
@@ -43,24 +42,22 @@ export interface BasketProductSettings {
 /**
  * Данные для модалки корзины
  */
-export interface BasketModalData extends ModalContentData {
+export interface BasketModalData {
 	items: BasketProductData[];
-	/** Общая сумма — форматируется снаружи и передаётся в actionsView.secondary */
 	total: number;
 	button: ButtonData;
 }
 
 /**
  * Настройки для модалки корзины
- * Инжектированные View передаются через settings
  */
-export interface BasketModalSettings extends ModalContentSettings {
-	/** View для элемента корзины */
+export interface BasketModalSettings {
+	/** Селекторы элементов */
+	listSelector: string;
+	priceSelector: string;
+	/** Инжектированные View */
 	itemView: IView<BasketProductData>;
-	/** View для футера (используем универсальный ModalActionsView) */
-	actionsView: IView<ModalActionsData>;
-	/** Callback удаления элемента */
-	onDelete: (id: ProductId) => void;
+	buttonView: IView<ButtonData>;
 	/** Функция форматирования цены */
 	formatPrice: (value: number) => string;
 }
