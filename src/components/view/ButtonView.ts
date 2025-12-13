@@ -43,6 +43,15 @@ export class ButtonView<T = void> extends View<
 	}
 
 	/**
+	 * Сеттер для активного состояния (если activeClass указан в settings)
+	 */
+	set active(value: boolean) {
+		if (this.settings.activeClass) {
+			this.toggleClass(this.element, this.settings.activeClass, value);
+		}
+	}
+
+	/**
 	 * Фабричный метод для быстрого создания кнопки.
 	 * Возвращает готовый HTMLButtonElement.
 	 *
