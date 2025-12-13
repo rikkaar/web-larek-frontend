@@ -1,10 +1,54 @@
+import { ProductCategory } from '@/types/components/model/larekApi';
+import { ChipColor, ChipLabelMap, ChipClassMap } from '@/types/components/view/chip';
+
 export const API_URL = `${process.env.API_ORIGIN}/api/weblarek`;
 export const CDN_URL = `${process.env.API_ORIGIN}/content/weblarek`;
+
+/**
+ * Маппинг категории продукта на цвет Chip
+ */
+export const categoryToChipColor: Record<ProductCategory, ChipColor> = {
+	'софт-скил': 'soft',
+	'хард-скил': 'hard',
+	'другое': 'other',
+	'дополнительное': 'additional',
+	'кнопка': 'button',
+};
+
+/**
+ * Маппинг цвета Chip на текст (для DI в ChipView)
+ * При добавлении нового ChipColor TypeScript потребует добавить его сюда
+ */
+export const chipLabelMap: ChipLabelMap = {
+	soft: 'софт-скил',
+	hard: 'хард-скил',
+	other: 'другое',
+	additional: 'дополнительное',
+	button: 'кнопка',
+};
+
+/**
+ * Маппинг цвета Chip на CSS-класс (для DI в ChipView)
+ * При добавлении нового ChipColor TypeScript потребует добавить его сюда
+ */
+export const chipClassMap: ChipClassMap = {
+	soft: 'card__category_soft',
+	hard: 'card__category_hard',
+	other: 'card__category_other',
+	additional: 'card__category_additional',
+	button: 'card__category_button',
+};
 
 /**
  * Связующие элементы для View слоя: querySelectors, Статические данные, lc-ключи, параметры компонента и т.д.
  */
 export const settings = {
+	/** Настройки Chip (категории) */
+	chip: {
+		labels: chipLabelMap,
+		classes: chipClassMap,
+	},
+
 	/** Шаблоны */
 	templates: {
 		productPreview: '#card-catalog',

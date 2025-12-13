@@ -3,6 +3,7 @@
  */
 
 export * from './button';
+export * from './chip';
 export * from './page';
 export * from './modal';
 export * from './product';
