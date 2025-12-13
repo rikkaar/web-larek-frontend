@@ -76,6 +76,8 @@ export const settings = {
 		closeButton: '.modal__close',
 		content: '.modal__content',
 		activeClass: 'modal_active',
+		title: '.modal__title',
+		actions: '.modal__actions',
 	},
 
 	/** Селекторы карточки продукта */
