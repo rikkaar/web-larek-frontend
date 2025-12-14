@@ -6,7 +6,7 @@
  * Типы форм выводятся из zod-схем (infer).
  */
 
-import { Product, ProductId, ILarekApi } from './larekApi';
+import { Product, ProductId, NormalizedProduct, ILarekApi } from './larekApi';
 import { IFormValidator } from '../common/formValidator';
 import { OrderFormValues, ContactsFormValues } from '../common/formSchemas';
 
@@ -54,14 +54,14 @@ export interface IAppState {
 	// Каталог продуктов
 	// =========================================================================
 
-	/** Список всех продуктов */
-	products: Product[];
+	/** Список всех продуктов (нормализованных) */
+	products: NormalizedProduct[];
 
-	/** Загрузить продукты в каталог (вызывается после получения с API) */
+	/** Загрузить продукты в каталог (нормализует price: null → 0) */
 	setProducts(products: Product[]): void;
 
-	/** Получить продукт по ID (для отображения деталей) */
-	getProduct(id: ProductId): Product | undefined;
+	/** Получить продукт по ID */
+	getProduct(id: ProductId): NormalizedProduct | undefined;
 
 	// =========================================================================
 	// Корзина
@@ -70,7 +70,7 @@ export interface IAppState {
 	/** ID товаров в корзине */
 	basket: ProductId[];
 
-	/** Добавить товар в корзину (игнорирует товары без цены) */
+	/** Добавить товар в корзину */
 	addToBasket(id: ProductId): void;
 
 	/** Удалить товар из корзины */
@@ -89,7 +89,7 @@ export interface IAppState {
 	getBasketCount(): number;
 
 	/** Получить список продуктов в корзине */
-	getBasketProducts(): Product[];
+	getBasketProducts(): NormalizedProduct[];
 
 	// =========================================================================
 	// Модальные окна

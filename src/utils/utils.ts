@@ -150,21 +150,8 @@ export function createElement<T extends HTMLElement>(
  * Форматирование цены (чистая функция)
  * @param value — числовое значение
  * @param currency — название валюты
+ * @param priceless — текст для значения 0 (бесценный товар)
  */
-export function formatPrice(value: number, currency: string): string {
-    return `${value} ${currency}`;
-}
-
-/**
- * Форматирование цены с учётом null (чистая функция)
- * @param value — числовое значение или null
- * @param currency — название валюты
- * @param priceless — текст для null значения
- */
-export function formatPriceOrPriceless(
-    value: number | null,
-    currency: string,
-    priceless: string
-): string {
-    return value === null ? priceless : formatPrice(value, currency);
+export function formatPrice(value: number, currency: string, priceless: string): string {
+    return value === 0 ? priceless : `${value} ${currency}`;
 }

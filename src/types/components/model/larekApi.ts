@@ -22,7 +22,7 @@ export type ProductCategory =
 export type PaymentMethod = 'online' | 'cash';
 
 /**
- * Продукт
+ * Продукт (как приходит с API)
  */
 export interface Product {
 	id: ProductId;
@@ -31,6 +31,15 @@ export interface Product {
 	title: string;
 	category: ProductCategory;
 	price: number | null;
+}
+
+/**
+ * Нормализованный продукт (price: number, null → 0)
+ * Используется внутри приложения для консистентности.
+ * Товары с price === 0 считаются бесценными.
+ */
+export interface NormalizedProduct extends Omit<Product, 'price'> {
+	price: number;
 }
 
 /**
