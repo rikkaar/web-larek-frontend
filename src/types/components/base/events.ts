@@ -1,8 +1,9 @@
-// Хорошая практика даже простые типы выносить в алиасы
-// Зато когда захотите поменять это достаточно сделать в одном месте
-export type EventName = string | RegExp;
-export type Subscriber = Function;
-export type EmitterEvent = {
-    eventName: string,
-    data: unknown
-};
+/**
+ * Типы для EventEmitter
+ */
+
+/** Обработчик события */
+export type EventHandler = (data: object) => void;
+
+/** Карта событий: имя события → набор обработчиков */
+export type EventsMap = Map<string, Set<EventHandler>>;
