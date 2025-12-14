@@ -58,6 +58,18 @@ export interface ModalSettings {
 }
 
 /**
+ * Настройки для ModalView (расширяем базовые)
+ */
+export interface ModalViewSettings extends ModalSettings {
+	/** Селектор кнопки закрытия */
+	closeSelector: string;
+	/** Селектор контента */
+	contentSelector: string;
+	/** CSS-класс активного состояния */
+	activeClass: string;
+}
+
+/**
  * Интерфейс модалки-контейнера
  */
 export interface IModal {

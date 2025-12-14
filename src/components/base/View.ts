@@ -1,5 +1,5 @@
 import { IView } from '@/types/components/base/view';
-import { SelectorElement, ElementChild, ElementValue, DisableableElement } from '@/types/html';
+import { SelectorElement, ElementValue, DisableableElement } from '@/types/html';
 import {
 	ensureElement,
 	isSelector,
@@ -37,12 +37,12 @@ export abstract class View<
 	 * @param settings - настройки компонента (callbacks, вложенные View)
 	 */
 	constructor(
-		public readonly element: E,
+		public element: E, // не readonly — Screen устанавливает в init()
 		protected readonly settings: S
 	) {
 		this.init();
 		if (!this.element) {
-			throw new Error('View: element is not defined');
+			throw new Error('Element is not defined');
 		}
 	}
 
@@ -88,25 +88,17 @@ export abstract class View<
 	 * Находит элемент по селектору с кешированием.
 	 * При повторном вызове с тем же селектором возвращает закешированный элемент.
 	 */
-	protected ensure<E extends HTMLElement>(
-		query: SelectorElement<E>,
+	protected ensure<T extends HTMLElement>(
+		query: SelectorElement<T>,
 		root: HTMLElement = this.element
-	): E {
+	): T {
 		if (!isSelector(query)) {
 			return ensureElement(query);
 		}
 		if (!this.cache[query]) {
 			this.cache[query] = ensureElement(query, root);
 		}
-		return this.cache[query] as E;
-	}
-
-	/**
-	 * Устанавливает текстовое содержимое элемента.
-	 */
-	protected setText(query: SelectorElement<HTMLElement>, value: string): void {
-		const el = this.ensure(query);
-		el.textContent = value;
+		return this.cache[query] as T;
 	}
 
 	/**
@@ -119,12 +111,11 @@ export abstract class View<
 	): void {
 		const el = this.ensure(query);
 		el.src = src;
-        el.alt = alt;
+		el.alt = alt ?? '';
 	}
 
 	/**
 	 * Устанавливает disabled-состояние элемента.
-	 * Поддерживает: button, fieldset, optgroup, option, select, textarea, input
 	 */
 	protected setDisabled(
 		query: SelectorElement<DisableableElement>,
@@ -147,50 +138,14 @@ export abstract class View<
 	}
 
 	/**
-	 * Устанавливает видимость элемента.
-	 */
-	protected setVisible(
-		query: SelectorElement<HTMLElement>,
-		isVisible: boolean
-	): void {
-		const el = this.ensure(query);
-		if (isVisible) {
-			el.style.removeProperty('display');
-		} else {
-			el.style.display = 'none';
-		}
-	}
-
-	/**
-	 * Скрывает элемент (display: none).
-	 */
-	protected setHidden(
-		query: SelectorElement<HTMLElement>,
-		hidden: boolean
-	): void {
-		this.setVisible(query, !hidden);
-	}
-
-	/**
-	 * Заменяет содержимое контейнера на новые элементы.
-	 */
-	protected setChildren(
-		query: SelectorElement<HTMLElement>,
-		children: ElementChild
-	): void {
-		const el = this.ensure(query);
-		el.replaceChildren(...(Array.isArray(children) ? children : [children]));
-	}
-
-	/**
 	 * Универсальная установка значения элемента.
 	 * Поддерживает: string (textContent), HTMLElement/HTMLElement[] (children), object (props).
 	 */
-	protected setValue<E extends HTMLElement>(
-		query: SelectorElement<E>,
-		value: ElementValue<E>
+	protected setValue<T extends HTMLElement>(
+		query: SelectorElement<T>,
+		value: ElementValue<T>
 	): void {
-		const el = this.ensure(query);
+		const el = query instanceof HTMLElement ? query : this.ensure(query);
 		if (typeof value === 'string') {
 			el.textContent = value;
 		} else if (isChildElement(value)) {
@@ -200,4 +155,3 @@ export abstract class View<
 		}
 	}
 }
-

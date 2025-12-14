@@ -30,9 +30,14 @@ export enum AppStateChanges {
 	products = 'state:products',
 	/** Изменилась корзина (добавление/удаление товара) */
 	basket = 'state:basket',
-	/** Изменилось состояние модального окна */
+	/** Изменилось состояние модального окна (для закрытия previous) */
 	modal = 'state:modal',
+	/** Изменились данные формы заказа */
+	order = 'state:order',
+	/** Изменились данные формы контактов */
+	contacts = 'state:contacts',
 }
+
 
 /**
  * Настройки AppState
@@ -123,6 +128,12 @@ export interface IAppState {
 
 	/** Сбросить валидаторы (после успешного заказа) */
 	resetValidators(): void;
+
+	/** Уведомить об изменении формы заказа */
+	notifyOrderChange(): void;
+
+	/** Уведомить об изменении формы контактов */
+	notifyContactsChange(): void;
 }
 
 /**

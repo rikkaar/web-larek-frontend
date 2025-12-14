@@ -9,6 +9,16 @@ module.exports = {
         "prettier"
     ],
     "overrides": [
+        {
+            "files": ["*.js"],
+            "env": {
+                "node": true
+            },
+            "rules": {
+                "@typescript-eslint/no-require-imports": "off",
+                "@typescript-eslint/no-var-requires": "off"
+            }
+        }
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {

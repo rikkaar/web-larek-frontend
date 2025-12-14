@@ -26,15 +26,10 @@ export class ProductPreviewView extends View<
 	private currentId!: ProductId;
 
 	protected init(): void {
-		this.element.addEventListener('click', this.handleClick);
+		this.element.addEventListener('click', () => {
+			this.settings.onClick(this.currentId);
+		});
 	}
-
-	/**
-	 * Обработчик клика по карточке
-	 */
-	private handleClick = (): void => {
-		this.settings.onClick(this.currentId);
-	};
 
 	/**
 	 * Сеттер для ID (сохраняем для callback)

@@ -15,8 +15,8 @@ export type { StandardSchemaV1 };
  * Состояние формы
  */
 export interface FormState<T> {
-	/** Текущие значения полей */
-	values: T;
+	/** Текущие значения полей (может быть неполным до валидации) */
+	values: Partial<T>;
 	/** Ошибки валидации по полям */
 	errors: Partial<Record<keyof T, string>>;
 	/** Валидна ли форма */
@@ -33,8 +33,8 @@ export interface IFormValidator<T> {
 	/** Получить текущее состояние */
 	getState(): FormState<T>;
 
-	/** Получить текущие значения */
-	getValues(): T;
+	/** Получить текущие значения (может быть неполным до валидации) */
+	getValues(): Partial<T>;
 
 	/** Получить ошибки как массив строк */
 	getErrorsArray(): string[];

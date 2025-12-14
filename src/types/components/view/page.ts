@@ -4,6 +4,7 @@
 
 import { IView } from '@/types/components/base/view';
 import { HeaderBasketData } from './headerBasket';
+import { ProductId, NormalizedProduct } from '@/types/components/model/larekApi';
 
 /**
  * Данные для страницы
@@ -28,4 +29,25 @@ export interface PageSettings {
 	lockedClass: string;
 	/** Инжектированный View корзины */
 	basketView: IView<HeaderBasketData>;
+}
+
+// ============================================================================
+// PageScreen (экран главной страницы)
+// ============================================================================
+
+/**
+ * Настройки PageScreen = методы Controller
+ */
+export interface PageScreenSettings {
+	onProductClick: (id: ProductId) => void;
+	onBasketClick: () => void;
+}
+
+/**
+ * Данные для PageScreen
+ */
+export interface PageScreenData {
+	products?: NormalizedProduct[];
+	basketCount?: number;
+	locked?: boolean;
 }

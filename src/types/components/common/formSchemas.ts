@@ -23,7 +23,7 @@ export const orderFormSchema = z.object({
 export type OrderFormValues = z.infer<typeof orderFormSchema>;
 
 /**
- * Начальные значения формы заказа
+ * Начальные значения формы заказа (partial, т.к. payment не выбран)
  */
 export const orderFormInitialValues: Partial<OrderFormValues> = {
 	payment: undefined,

@@ -23,17 +23,12 @@ export class BasketProductView extends View<BasketProductData, BasketProductSett
 
 	protected init(): void {
 		const deleteBtn = this.ensure<HTMLButtonElement>(this.settings.deleteSelector);
-		deleteBtn.addEventListener('click', this.handleDelete);
+		deleteBtn.addEventListener('click', () => {
+			if (this.currentId) {
+				this.settings.onDelete(this.currentId);
+			}
+		});
 	}
-
-	/**
-	 * Обработчик удаления
-	 */
-	private handleDelete = (): void => {
-		if (this.currentId) {
-			this.settings.onDelete(this.currentId);
-		}
-	};
 
 	/**
 	 * Сеттер для ID (сохраняем для callback)

@@ -1,6 +1,6 @@
 export interface IView<T, S = object, E extends HTMLElement = HTMLElement> {
 	element: E; // корневой элемент
-	copy(settings?: S): IView<T, S, E>; // копирующий конструктор
+	copy(settings?: Partial<S>): IView<T, S, E>; // копирующий конструктор
 	render(data?: Partial<T>): E; // метод рендера
 }
 

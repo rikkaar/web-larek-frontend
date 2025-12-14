@@ -64,7 +64,7 @@ export class AppState implements IAppState {
 	/**
 	 * Уведомить об изменении состояния
 	 */
-	protected notifyChanged(changed: AppStateChanges): void {
+	protected notify(changed: AppStateChanges): void {
 		this.settings.onChange(changed);
 	}
 
@@ -82,7 +82,7 @@ export class AppState implements IAppState {
 			const normalized = normalizeProduct(product);
 			this._products.set(normalized.id, normalized);
 		}
-		this.notifyChanged(AppStateChanges.products);
+		this.notify(AppStateChanges.products);
 	}
 
 	getProduct(id: ProductId): NormalizedProduct | undefined {
@@ -101,21 +101,21 @@ export class AppState implements IAppState {
 		if (this._basket.has(id)) return;
 
 		this._basket.add(id);
-		this.notifyChanged(AppStateChanges.basket);
+		this.notify(AppStateChanges.basket);
 	}
 
 	removeFromBasket(id: ProductId): void {
 		if (!this._basket.has(id)) return;
 
 		this._basket.delete(id);
-		this.notifyChanged(AppStateChanges.basket);
+		this.notify(AppStateChanges.basket);
 	}
 
 	clearBasket(): void {
 		if (this._basket.size === 0) return;
 
 		this._basket.clear();
-		this.notifyChanged(AppStateChanges.basket);
+		this.notify(AppStateChanges.basket);
 	}
 
 	isInBasket(id: ProductId): boolean {
@@ -146,7 +146,7 @@ export class AppState implements IAppState {
 		if (this._openedModal === modal) return;
 
 		this._openedModal = modal;
-		this.notifyChanged(AppStateChanges.modal);
+		this.notify(AppStateChanges.modal);
 	}
 
 	// =========================================================================
@@ -176,5 +176,13 @@ export class AppState implements IAppState {
 	resetValidators(): void {
 		this.settings.orderValidator.reset();
 		this.settings.contactsValidator.reset();
+	}
+
+	notifyOrderChange(): void {
+		this.notify(AppStateChanges.order);
+	}
+
+	notifyContactsChange(): void {
+		this.notify(AppStateChanges.contacts);
 	}
 }

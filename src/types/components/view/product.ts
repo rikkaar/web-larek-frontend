@@ -2,10 +2,11 @@
  * Типы для Product View компонентов
  */
 
-import { ProductId, ProductCategory } from '@/types/components/model/larekApi';
+import { ProductId, ProductCategory, NormalizedProduct } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
 import { ChipData } from './chip';
+import { ModalScreenSettings } from './screen';
 
 // ============================================================================
 // ProductPreview (карточка в галерее)
@@ -55,17 +56,36 @@ export interface ProductModalData {
 }
 
 /**
- * Настройки для ProductModal
+ * Настройки для ProductModal.
+ *
+ * View получает Controller — this.settings содержит методы Controller.
+ * View сам создаёт вложенные View (ButtonView, ChipView) из глобального settings.
  */
 export interface ProductModalSettings {
-	/** Селекторы элементов */
-	imageSelector: string;
-	titleSelector: string;
-	descriptionSelector: string;
-	priceSelector: string;
-	/** Инжектированные View */
-	categoryView: IView<ChipData>;
-	buttonView: IView<ButtonData>;
+	/** Callback: добавить/убрать из корзины */
+	onToggleBasket: () => void;
 	/** Функция форматирования цены */
 	formatPrice: (value: number | null) => string;
+}
+
+// ============================================================================
+// ProductScreen (экран продукта)
+// ============================================================================
+
+/**
+ * Настройки ProductScreen = методы Controller
+ */
+export interface ProductScreenSettings extends ModalScreenSettings {
+	/** Callback: добавить/убрать из корзины */
+	onToggleBasket: () => void;
+}
+
+/**
+ * Данные для ProductScreen
+ */
+export interface ProductScreenData extends NormalizedProduct {
+	/** Товар в корзине? */
+	isInBasket: boolean;
+	/** Открыть модалку */
+	isActive?: boolean;
 }

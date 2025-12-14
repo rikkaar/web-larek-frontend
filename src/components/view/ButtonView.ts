@@ -18,15 +18,10 @@ export class ButtonView<T = void> extends View<
 	 * Инициализация: навешиваем обработчик клика
 	 */
 	protected init(): void {
-		this.element.addEventListener('click', this.handleClick);
+		this.element.addEventListener('click', (event: MouseEvent) => {
+			this.settings.onClick({ event });
+		});
 	}
-
-	/**
-	 * Обработчик клика с привязкой контекста через стрелочную функцию
-	 */
-	private handleClick = (event: MouseEvent): void => {
-		this.settings.onClick({ event });
-	};
 
 	/**
 	 * Сеттер для текста кнопки

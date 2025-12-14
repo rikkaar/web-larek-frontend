@@ -5,6 +5,7 @@
 import { ProductId } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
+import { ModalScreenSettings } from './screen';
 
 // ============================================================================
 // BasketProduct (элемент корзины)
@@ -60,4 +61,28 @@ export interface BasketModalSettings {
 	buttonView: IView<ButtonData>;
 	/** Функция форматирования цены */
 	formatPrice: (value: number) => string;
+}
+
+// ============================================================================
+// BasketScreen (экран корзины)
+// ============================================================================
+
+/**
+ * Настройки BasketScreen = методы Controller
+ */
+export interface BasketScreenSettings extends ModalScreenSettings {
+	/** Callback: удалить товар */
+	onRemove: (id: ProductId) => void;
+	/** Callback: перейти к оформлению */
+	onCheckout: () => void;
+}
+
+/**
+ * Данные для BasketScreen
+ */
+export interface BasketScreenData {
+	items: BasketProductData[];
+	total: number;
+	isDisabled?: boolean;
+	isActive?: boolean;
 }

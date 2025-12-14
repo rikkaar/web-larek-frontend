@@ -1,33 +1,12 @@
 import { View } from '@/components/base/View';
-import { ModalData, ModalSettings, IModal } from '@/types/components/view/modal';
+import { ModalData, ModalViewSettings, IModal } from '@/types/components/view/modal';
 
-/**
- * Настройки для ModalView (расширяем базовые)
- */
-export interface ModalViewSettings extends ModalSettings {
-	/** Селектор кнопки закрытия */
-	closeSelector: string;
-	/** Селектор контента */
-	contentSelector: string;
-	/** CSS-класс активного состояния */
-	activeClass: string;
-}
+export { ModalViewSettings };
 
 /**
  * View для модального окна.
  * Контейнер — один на всё приложение.
  * Контент вставляется динамически.
- *
- * @example
- * const modal = new ModalView(ensureElement('#modal-container'), {
- *   closeSelector: '.modal__close',
- *   contentSelector: '.modal__content',
- *   activeClass: 'modal_active',
- *   onClose: () => events.emit('modal:close'),
- * });
- *
- * modal.render({ content: someView.element });
- * modal.open();
  */
 export class ModalView
 	extends View<ModalData, ModalViewSettings>
@@ -36,43 +15,55 @@ export class ModalView
 	/** Текущая открытая модалка (всегда одна) */
 	protected static _openedModal: ModalView | null = null;
 
+	/** Флаг: слушатели уже навешены на элемент */
+	private static _listenersAttached = false;
+
 	protected init(): void {
-		// Клик по кнопке закрытия
+		// Навешиваем слушатели только один раз
+		if (ModalView._listenersAttached) return;
+		ModalView._listenersAttached = true;
+
+		// Клик по кнопке закрытия или overlay
 		this.ensure(this.settings.closeSelector).addEventListener(
 			'click',
-			this.handleClose
+			(e) => this.handleClose(e)
 		);
-		// Клик по overlay (сам элемент .modal)
-		this.element.addEventListener('click', this.handleOverlayClick);
+		this.element.addEventListener('click', (e) => this.handleClose(e));
+
 		// ESC закрывает модалку
-		document.addEventListener('keydown', this.handleKeyDown);
+		document.addEventListener('keydown', (event: KeyboardEvent) => {
+			if (event.key === 'Escape' && ModalView._openedModal) {
+				ModalView._openedModal.handleClose();
+			}
+		});
 	}
 
 	/**
-	 * Обработчик клика по overlay
-	 * Закрывает только если кликнули именно на overlay, а не на контейнер
+	 * Обработчик закрытия.
+	 * @param event — если есть, значит закрытие пользователем (вызовет onClose)
 	 */
-	private handleOverlayClick = (event: MouseEvent): void => {
-		if (event.target === this.element) {
-			this.close();
+	protected handleClose(event?: MouseEvent): void {
+		// Проверяем, что кликнули именно на overlay или кнопку закрытия
+		if (
+			event &&
+			![this.ensure(this.settings.closeSelector), this.element].includes(
+				event.target as HTMLElement
+			)
+		) {
+			return;
 		}
-	};
 
-	/**
-	 * Обработчик кнопки закрытия
-	 */
-	private handleClose = (): void => {
-		this.close();
-	};
+		this.element.classList.remove(this.settings.activeClass);
 
-	/**
-	 * Обработчик ESC
-	 */
-	private handleKeyDown = (event: KeyboardEvent): void => {
-		if (event.key === 'Escape' && ModalView._openedModal === this) {
-			this.close();
+		if (ModalView._openedModal === this) {
+			ModalView._openedModal = null;
 		}
-	};
+
+		// Вызываем onClose только при user-initiated закрытии
+		if (event) {
+			this.settings.onClose();
+		}
+	}
 
 	/**
 	 * Сеттер для контента
@@ -90,7 +81,7 @@ export class ModalView
 	 * Открыть модалку
 	 */
 	open(): void {
-		// Закрыть предыдущую, если есть
+		// Закрыть предыдущую без вызова onClose
 		if (ModalView._openedModal && ModalView._openedModal !== this) {
 			ModalView._openedModal.close();
 		}
@@ -99,21 +90,27 @@ export class ModalView
 	}
 
 	/**
-	 * Закрыть модалку
+	 * Закрыть модалку программно (без вызова onClose)
 	 */
 	close(): void {
-		this.element.classList.remove(this.settings.activeClass);
-		if (ModalView._openedModal === this) {
-			ModalView._openedModal = null;
-		}
-		this.settings.onClose();
+		this.handleClose(); // без event — onClose не вызовется
 	}
 
 	/**
-	 * Установить контент (альтернатива сеттеру)
+	 * Установить контент
 	 */
 	setContent(content: HTMLElement): void {
 		this.content = content;
 	}
-}
 
+	/**
+	 * isActive — открытие/закрытие через сеттер
+	 */
+	set isActive(value: boolean) {
+		if (value) {
+			this.open();
+		} else {
+			this.close();
+		}
+	}
+}

@@ -108,8 +108,8 @@ export const settings = {
 
 	/** Селекторы формы заказа */
 	orderForm: {
-		paymentCard: 'button[name=card]',
-		paymentCash: 'button[name=cash]',
+		online: 'button[name=card]',
+		cash: 'button[name=cash]',
 		paymentActiveClass: 'button_alt-active',
 		addressInput: 'input[name=address]',
 	},
@@ -133,5 +133,9 @@ export const settings = {
 		priceless: 'Бесценно',
 		addToBasket: 'В корзину',
 		removeFromBasket: 'Убрать',
+		next: 'Далее',
+		pay: 'Оплатить',
+		newPurchases: 'За новыми покупками',
+		checkout: 'Оформить',
 	},
 } as const;

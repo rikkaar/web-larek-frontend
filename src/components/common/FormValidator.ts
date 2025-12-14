@@ -29,13 +29,13 @@ import {
 export class FormValidator<T extends Record<string, unknown>>
 	implements IFormValidator<T>
 {
-	private values: T;
+	private values: Partial<T>;
 	private state: FormState<T>;
-	private readonly initialValues: T;
+	private readonly initialValues: Partial<T>;
 
 	constructor(
 		private readonly schema: StandardSchemaV1<T>,
-		initialValues: T
+		initialValues: Partial<T>
 	) {
 		this.initialValues = { ...initialValues };
 		this.values = { ...initialValues };
@@ -116,8 +116,8 @@ export class FormValidator<T extends Record<string, unknown>>
 	/**
 	 * Получить текущие значения
 	 */
-	getValues(): T {
-		return { ...this.state.values };
+	getValues(): Partial<T> {
+		return { ...this.values };
 	}
 
 	/**
