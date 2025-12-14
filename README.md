@@ -2,23 +2,23 @@
 
 ## Архитектура
 
-Проект применяет паттерн **MVC**, следует принципам **SOLID**.
-Коммуникация между модулями обеспечена через **EventEmitter**.
+Проект применяет паттерн **MVP (Model-View-Presenter)**, следует принципам **SOLID**.
 
 **Стек:** HTML, SCSS, TypeScript, Webpack, Zod
 
 ### Основные части архитектуры
 
-Архитектура построена на паттерне **Model-View-Controller (MVC)**:
+**Model (AppState)** — хранит состояние приложения (каталог, корзина, выбранный товар, открытая модалка). При изменении вызывает callback `onChange`, который эмитит события через `AppStateEmitter`.
 
-**Model (Модель)** — хранит состояние приложения (каталог, корзина, данные заказа), инкапсулирует бизнес-логику (валидация, расчёты), работает с внешним API. При изменении данных уведомляет подписчиков через события.
+**View (Screen/View)** — отображает данные пользователю. `View` — базовые компоненты, `Screen` — верхнеуровневые экраны, которые сами создают вложенные View и получают Controller как settings.
 
-**View (Представление)** — отображает данные пользователю, обрабатывает пользовательский ввод (клики, ввод текста), генерирует UI-события для Controller. Не содержит бизнес-логики.
+**Presenter (Controller)** — реализует интерфейс settings для Screen. Содержит callbacks для UI-событий (клики, ввод), вызывает методы Model.
 
-**Controller (Контроллер)** — связующее звено между Model и View. Подписывается на события от обоих слоёв, обновляет Model в ответ на действия пользователя, обновляет View при изменении данных.
+**AppStateEmitter** — обёртка над AppState, наследует EventEmitter. При изменениях Model эмитит события `AppStateChanges` и `AppStateModals`.
 
-**EventEmitter** — брокер событий, обеспечивающий слабую связанность между Model и View. Компоненты не знают друг о друге напрямую, а общаются через события. Controller подписывается на события и координирует взаимодействие.
+**index.ts** — Composition Root. Создаёт все зависимости, подписывается на события, обновляет Screen'ы.
 
+---
 
 ## Инструкция по сборке и запуску
 
@@ -27,1086 +27,890 @@ npm install
 npm run start
 ```
 
-или
-
-```bash
-yarn
-yarn start
-```
-
 ## Сборка
 
 ```bash
 npm run build
 ```
 
-или
-
-```bash
-yarn build
-```
-
-## Описание базовых классов, их предназначение и функции
-
-Базовые классы находятся в `src/components/base/` и предоставляют фундаментальную функциональность для всех компонентов приложения.
-
 ---
+
+## Базовые классы
 
 ### EventEmitter
 
-**Назначение:** Брокер событий, реализующий паттерн «Наблюдатель» (Observer). Обеспечивает слабую связанность между компонентами приложения — компоненты не знают друг о друге, а общаются через события.
+**Назначение:** Брокер событий (паттерн Observer).
 
-**Имплементирует интерфейс:** `IEvents`
+**Класс:** `EventEmitter`
 
-```typescript
-interface IEvents {
-    // Подписаться на событие
-    on<T extends object>(event: EventName, callback: (data: T) => void): void;
-    // Инициировать событие с данными
-    emit<T extends object>(event: string, data?: T): void;
-    // Создать callback-триггер, генерирующий событие при вызове
-    trigger<T extends object>(event: string, context?: Partial<T>): (data: T) => void;
-}
-```
-
-**Используемые типы:**
-
-```typescript
-// Имя события — строка или регулярное выражение (для паттернов)
-type EventName = string | RegExp;
-
-// Функция-обработчик события
-type Subscriber = Function;
-
-// Событие для подписки на все события (onAll)
-type EmitterEvent = {
-    eventName: string;  // Имя произошедшего события
-    data: unknown;      // Данные события
-};
-```
+**Поля:**
+- `protected events: EventsMap` — карта событий и их обработчиков
 
 **Конструктор:**
 ```typescript
 constructor()
 ```
-Инициализирует пустую `Map` для хранения подписчиков.
-
-**Свойства:**
-
-| Свойство | Тип | Описание |
-|----------|-----|----------|
-| `_events` | `Map<EventName, Set<Subscriber>>` | Хранилище подписчиков: ключ — имя события, значение — множество обработчиков |
 
 **Методы:**
-
-| Метод | Сигнатура | Описание |
-|-------|-----------|----------|
-| `on` | `on<T>(event: EventName, callback: (data: T) => void): void` | Подписаться на событие. Поддерживает строки и RegExp для паттернов |
-| `off` | `off(event: EventName, callback: Subscriber): void` | Отписаться от события |
-| `emit` | `emit<T>(event: string, data?: T): void` | Инициировать событие. Вызывает всех подписчиков, включая паттерны и `*` |
-| `onAll` | `onAll(callback: (event: EmitterEvent) => void): void` | Подписаться на все события (для отладки) |
-| `offAll` | `offAll(): void` | Сбросить все подписки |
-| `trigger` | `trigger<T>(event: string, context?: Partial<T>): (data: T) => void` | Создать функцию, которая при вызове генерирует событие |
+- `on(eventName: string, handler: EventHandler): void` — подписаться на событие
+- `off(eventName: string, handler: EventHandler): void` — отписаться от события
+- `emit(eventName: string, data: object): void` — отправить событие
+- `reset(): void` — сбросить все обработчики
+- `bindEmitter(events: EventsMap): void` — привязать внешнюю карту событий
 
 ---
 
 ### Api
 
-**Назначение:** Базовый HTTP-клиент для работы с REST API. Инкапсулирует логику запросов, обработку ответов и ошибок.
+**Назначение:** Базовый HTTP-клиент для REST API.
+
+**Класс:** `Api`
+
+**Поля:**
+- `readonly baseUrl: string` — базовый URL для всех запросов
+- `protected options: RequestInit` — опции запроса (headers, credentials и др.)
 
 **Конструктор:**
 ```typescript
 constructor(baseUrl: string, options: RequestInit = {})
 ```
 
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `baseUrl` | `string` | Базовый URL API (например, `https://api.example.com`) |
-| `options` | `RequestInit` | Дополнительные опции fetch (headers, credentials и др.) |
-
-**Свойства:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `baseUrl` | `readonly` | `string` | Базовый URL для всех запросов |
-| `options` | `protected` | `RequestInit` | Опции запроса (заголовки `Content-Type: application/json` добавляются автоматически) |
-
 **Методы:**
-
-| Метод | Сигнатура | Описание |
-|-------|-----------|----------|
-| `get` | `get<T>(uri: string): Promise<T>` | GET-запрос. Возвращает типизированный результат |
-| `post` | `post<T>(uri: string, data: object, method?: ApiPostMethods): Promise<T>` | POST/PUT/DELETE-запрос с телом |
-| `handleResponse` | `protected handleResponse<T>(response: Response): Promise<T>` | Обработка ответа: парсинг JSON, обработка ошибок |
-
-**Используемые типы:**
-
-```typescript
-// Методы для запросов с телом
-type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
-
-// Типичный ответ API со списком
-type ApiListResponse<T> = {
-    total: number;  // Общее количество элементов
-    items: T[];     // Массив элементов
-};
-```
+- `protected handleResponse<T>(response: Response): Promise<T>` — обработка ответа: парсинг JSON, обработка ошибок
+- `get<T>(uri: string): Promise<T>` — GET-запрос
+- `post<T>(uri: string, data: object, method?: ApiPostMethods): Promise<T>` — POST/PUT/DELETE-запрос с телом
 
 ---
 
-### LarekApi
+### LarekApi extends Api
 
-**Назначение:** Сервис для работы с API магазина. Наследует базовый `Api`, добавляет специфичные методы и обработку CDN для изображений.
+**Назначение:** Сервис для работы с API магазина.
 
-**Наследует:** `Api`
+**Класс:** `LarekApi extends Api implements ILarekApi`
 
-**Имплементирует:** `ILarekApi`
-
-```typescript
-interface ILarekApi {
-    getProducts(): Promise<Product[]>;           // Получить каталог товаров
-    getProduct(id: string): Promise<Product>;    // Получить товар по ID
-    createOrder(order: OrderRequest): Promise<OrderResult>;  // Создать заказ
-}
-```
+**Поля:**
+- `readonly cdn: string` — URL CDN для изображений
 
 **Конструктор:**
 ```typescript
 constructor(cdn: string, baseUrl: string, options?: RequestInit)
 ```
 
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `cdn` | `string` | URL CDN для изображений |
-| `baseUrl` | `string` | Базовый URL API |
-| `options` | `RequestInit` | Опции fetch (опционально) |
+**Методы:**
+- `private getCdnUrl(url: string): string` — получить полный URL изображения
+- `getProducts(): Promise<Product[]>` — получить список всех товаров
+- `getProduct(id: string): Promise<Product>` — получить товар по ID
+- `createOrder(order: OrderRequest): Promise<OrderResult>` — создать заказ
 
-**Свойства:**
+---
 
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `cdn` | `readonly` | `string` | URL CDN для изображений |
+### View<T, S, E>
+
+**Назначение:** Базовый абстрактный класс для всех View-компонентов.
+
+**Класс:** `View<T, S extends object = object, E extends HTMLElement = HTMLElement> implements IView<T, S, E>`
+
+**Generic параметры:**
+- `T` — тип данных для рендеринга
+- `S` — тип настроек компонента (callbacks, вложенные View)
+- `E` — тип корневого DOM-элемента (по умолчанию HTMLElement)
+
+**Поля:**
+- `['constructor']!: new (element: E, settings: S) => this` — трюк для копирующего конструктора
+- `protected cache: Record<string, HTMLElement>` — кеш DOM-элементов
+- `public element: E` — корневой DOM-элемент компонента
+- `protected readonly settings: S` — настройки компонента
+
+**Конструктор:**
+```typescript
+constructor(element: E, settings: S)
+```
 
 **Методы:**
-
-| Метод | Сигнатура | Описание |
-|-------|-----------|----------|
-| `getProducts` | `getProducts(): Promise<Product[]>` | Получить список всех товаров |
-| `getProduct` | `getProduct(id: string): Promise<Product>` | Получить товар по ID |
-| `createOrder` | `createOrder(order: OrderRequest): Promise<OrderResult>` | Создать заказ |
-
----
-
-### IView (Интерфейс)
-
-**Назначение:** Базовый контракт для всех View-компонентов. Определяет единый интерфейс работы с представлениями.
-
-```typescript
-interface IView<T, S = object> {
-    element: HTMLElement;              // Корневой DOM-элемент компонента
-    copy(settings?: S): IView<T>;      // Копирующий конструктор (клонирование шаблона)
-    render(data?: Partial<T>): HTMLElement;  // Отрисовка с данными
-}
-```
-
-| Generic | Описание |
-|---------|----------|
-| `T` | Тип данных для рендеринга (например, `ProductPreviewData`) |
-| `S` | Тип настроек компонента (callbacks, вложенные View) |
-
-**Дополнительные интерфейсы для View:**
-
-```typescript
-// Для кликабельных элементов (карточки, кнопки)
-interface IClickable<T> {
-    onClick: (args: { event: MouseEvent; item?: T }) => void;
-}
-
-// Для элементов с изменяемым значением (инпуты)
-interface IChangeable<T> {
-    onChange: (args: { event: Event; value?: T }) => void;
-}
-
-// Для выбираемых элементов (списки, радиокнопки)
-interface ISelectable<T> {
-    onSelect: (args: { event: Event; value?: T }) => void;
-}
-```
+- `protected init(): void` — метод жизненного цикла: инициализация (переопределяется в дочерних классах)
+- `copy(settings?: Partial<S>): this` — копирующий конструктор (клонирует element и объединяет settings)
+- `render(data?: Partial<T>): E` — рендер компонента с данными
+- `protected ensure<T extends HTMLElement>(query: SelectorElement<T>, root?: HTMLElement): T` — найти элемент по селектору с кешированием
+- `protected setImage(query: SelectorElement<HTMLImageElement>, src: string, alt?: string): void` — установить изображение
+- `protected setDisabled(query: SelectorElement<DisableableElement>, disabled: boolean): void` — установить disabled-состояние
+- `protected toggleClass(query: SelectorElement<HTMLElement>, className: string, force?: boolean): void` — переключить CSS-класс
+- `protected setValue<T extends HTMLElement>(query: SelectorElement<T>, value: ElementValue<T>): void` — универсальная установка значения элемента
 
 ---
 
-### View (Абстрактный класс)
+### Screen<T, S> extends View
 
-**Назначение:** Базовый абстрактный класс для всех View-компонентов. Предоставляет общую функциональность работы с DOM-элементами и реализует паттерн «Шаблон» (Template Method).
+**Назначение:** Базовый класс для экранов верхнего уровня.
 
-**Имплементирует:** `IView<T, S>`
+Screen получает Controller как settings и сам создаёт вложенные View в `init()`.
+
+**Класс:** `Screen<T, S extends object> extends View<T, S>`
+
+**Generic параметры:**
+- `T` — тип данных для рендеринга
+- `S` — тип настроек (обычно Controller)
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings?: S)
+constructor(settings: S)
 ```
 
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `element` | `HTMLElement` | Корневой DOM-элемент компонента (обычно клонируется из `<template>`) |
-| `settings` | `S` | Настройки компонента: callbacks, вложенные View (опционально) |
+---
 
-**Свойства:**
+### FormValidator<T>
 
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `element` | `readonly` | `HTMLElement` | Корневой DOM-элемент компонента |
-| `settings` | `protected` | `S` | Настройки, переданные в конструктор |
+**Назначение:** Валидатор форм через Standard Schema (Zod).
+
+**Класс:** `FormValidator<T extends Record<string, unknown>> implements IFormValidator<T>`
+
+**Generic параметры:**
+- `T` — тип данных формы
+
+**Поля:**
+- `private values: Partial<T>` — текущие значения полей
+- `private state: FormState<T>` — состояние формы (values, errors, valid)
+- `private readonly initialValues: Partial<T>` — начальные значения
+- `private readonly schema: StandardSchemaV1<T>` — схема валидации
+
+**Конструктор:**
+```typescript
+constructor(schema: StandardSchemaV1<T>, initialValues: Partial<T>)
+```
 
 **Методы:**
-
-| Метод | Сигнатура | Описание |
-|-------|-----------|----------|
-| `render` | `render(data?: Partial<T>): HTMLElement` | Отрисовка компонента с данными. Возвращает корневой элемент |
-| `copy` | `copy(settings?: S): IView<T>` | Создаёт копию View (клонирует element, применяет settings) |
-
----
-
-## Описание компонентов, их функций и связей с другими компонентами
-
-### Типы данных приложения
-
-#### Доменные типы (API)
-
-Типы данных, получаемых из API и используемых в бизнес-логике:
-
-```typescript
-// Брендированные типы для идентификаторов (предотвращают смешивание ID разных сущностей)
-type ProductId = Brand<string, 'ProductId'>;
-type OrderId = Brand<string, 'OrderId'>;
-
-// Категории товаров
-type ProductCategory = 'софт-скил' | 'хард-скил' | 'другое' | 'дополнительное' | 'кнопка';
-
-// Способ оплаты
-type PaymentMethod = 'online' | 'cash';
-```
-
-```typescript
-// Товар
-interface Product {
-    id: ProductId;           // Уникальный идентификатор
-    title: string;           // Название
-    description: string;     // Описание
-    image: string;           // URL изображения
-    category: ProductCategory; // Категория
-    price: number | null;    // Цена (null = бесценно)
-}
-
-// Запрос на создание заказа
-interface OrderRequest {
-    payment: PaymentMethod;  // Способ оплаты
-    email: string;           // Email покупателя
-    phone: string;           // Телефон
-    address: string;         // Адрес доставки
-    total: number;           // Сумма заказа
-    items: ProductId[];      // ID товаров
-}
-
-// Результат создания заказа
-interface OrderResult {
-    id: OrderId;             // ID созданного заказа
-    total: number;           // Списанная сумма
-}
-```
-
-#### Типы состояния приложения
-
-```typescript
-// Данные формы заказа (шаг 1)
-interface OrderData {
-    payment: PaymentMethod | null;  // Выбранный способ оплаты
-    address: string;                // Адрес доставки
-}
-
-// Данные формы контактов (шаг 2)
-interface ContactsData {
-    email: string;   // Email
-    phone: string;   // Телефон
-}
-
-// Ошибки валидации форм
-interface FormErrors {
-    payment?: string;
-    address?: string;
-    email?: string;
-    phone?: string;
-}
-```
+- `setValue<K extends keyof T>(field: K, value: T[K]): void` — установить значение поля
+- `getState(): FormState<T>` — получить текущее состояние
+- `getValues(): Partial<T>` — получить текущие значения
+- `getErrorsArray(): string[]` — получить ошибки как массив строк
+- `get valid(): boolean` — валидна ли форма
+- `reset(): void` — сбросить форму к начальным значениям
 
 ---
 
-### Компоненты Model-слоя
+## Модель состояния
 
-#### AppState
+### AppState
 
-**Расположение:** `components/model/appState.ts`
+**Назначение:** Централизованное хранилище состояния приложения.
 
-**Назначение:** Централизованное хранилище состояния приложения. Управляет каталогом, корзиной, заказом. Генерирует события при изменениях.
+**Класс:** `AppState implements IAppState`
 
-**Имплементирует:** `IAppState`
-
-```typescript
-interface IAppState {
-    // === Каталог ===
-    products: Product[];                          // Список товаров
-    setProducts(products: Product[]): void;       // Установить каталог
-    getProduct(id: ProductId): Product | undefined; // Получить товар
-
-    // === Корзина ===
-    basket: ProductId[];                          // ID товаров в корзине
-    addToBasket(id: ProductId): void;             // Добавить в корзину
-    removeFromBasket(id: ProductId): void;        // Удалить из корзины
-    clearBasket(): void;                          // Очистить корзину
-    isInBasket(id: ProductId): boolean;           // Проверить наличие
-    getBasketTotal(): number;                     // Сумма корзины
-    getBasketCount(): number;                     // Количество товаров
-
-    // === Заказ ===
-    order: OrderData;                             // Данные заказа
-    setOrderField(field: keyof OrderData, value: string | PaymentMethod): void;
-    validateOrder(): FormErrors;                  // Валидация заказа
-
-    // === Контакты ===
-    contacts: ContactsData;                       // Данные контактов
-    setContactsField(field: keyof ContactsData, value: string): void;
-    validateContacts(): FormErrors;               // Валидация контактов
-
-    // === Общее ===
-    formErrors: FormErrors;                       // Текущие ошибки
-    clearOrder(): void;                           // Сбросить заказ
-}
-```
-
-**Генерируемые события:**
-- `products:changed` — при обновлении каталога
-- `basket:changed` — при изменении корзины
-- `order:changed` — при изменении данных заказа
-- `contacts:changed` — при изменении контактов
-- `formErrors:changed` — при изменении ошибок валидации
-
----
-
-### Компоненты View-слоя
-
-Все View-компоненты наследуют базовый класс `View` и реализуют интерфейс `IView<T, S>`. Это означает, что каждый компонент имеет:
-- **`element`** — корневой DOM-элемент компонента
-- **`render(data)`** — метод отрисовки, возвращающий `element`
-- **`copy(settings)`** — метод клонирования View
-
-Ниже описаны только **специфичные** свойства и методы каждого компонента.
-
-Все View-компоненты следуют паттерну **Dependency Injection**: вложенные компоненты и callbacks передаются через `settings`, а не создаются внутри.
-
-#### PageView
-
-**Назначение:** Управление главной страницей — галереей товаров, счётчиком корзины, блокировкой при открытой модалке.
-
-**Данные (`PageData`):**
-```typescript
-interface PageData {
-    basketCounter: number;    // Число товаров в корзине
-    gallery: HTMLElement[];   // Карточки товаров для галереи
-    locked: boolean;          // Заблокирована ли страница (модалка открыта)
-}
-```
-
-**Настройки (`PageSettings`):**
-```typescript
-interface PageSettings {
-    onBasketClick: () => void;  // Callback клика по кнопке корзины
-}
-```
-
-**Класс `PageView<PageData, PageSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `gallery` | `protected` | `HTMLElement` | Контейнер галереи (`.gallery`) |
-| `basketButton` | `protected` | `HTMLButtonElement` | Кнопка корзины в хедере |
-| `basketCounter` | `protected` | `HTMLElement` | Счётчик товаров в корзине |
+**Поля:**
+- `private _products: Map<ProductId, NormalizedProduct>` — каталог продуктов
+- `private _basket: Set<ProductId>` — корзина
+- `private _openedModal: AppStateModals` — текущее модальное окно
+- `private _selectedProduct: ProductId | null` — ID выбранного продукта
+- `private readonly settings: AppStateSettings` — настройки (onChange, валидаторы)
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings: PageSettings)
+constructor(_api: ILarekApi, settings: AppStateSettings)
 ```
+
+**Методы:**
+- `protected notify(changed: AppStateChanges): void` — уведомить об изменении состояния
+- `get products(): NormalizedProduct[]` — получить список всех продуктов
+- `setProducts(products: Product[]): void` — загрузить продукты в каталог (нормализует price: null → 0)
+- `getProduct(id: ProductId): NormalizedProduct | undefined` — получить продукт по ID
+- `get basket(): ProductId[]` — получить ID товаров в корзине
+- `addToBasket(id: ProductId): void` — добавить товар в корзину
+- `removeFromBasket(id: ProductId): void` — удалить товар из корзины
+- `clearBasket(): void` — очистить корзину
+- `isInBasket(id: ProductId): boolean` — проверить, есть ли товар в корзине
+- `getBasketTotal(): number` — получить общую сумму корзины
+- `getBasketCount(): number` — получить количество товаров в корзине
+- `getBasketProducts(): NormalizedProduct[]` — получить список продуктов в корзине
+- `get openedModal(): AppStateModals` — получить текущее открытое модальное окно
+- `openModal(modal: AppStateModals): void` — открыть модальное окно
+- `get selectedProduct(): ProductId | null` — получить ID выбранного продукта
+- `selectProduct(id: ProductId): void` — выбрать продукт для просмотра
+- `get orderValidator(): IFormValidator<OrderFormValues>` — получить валидатор формы заказа
+- `get contactsValidator(): IFormValidator<ContactsFormValues>` — получить валидатор формы контактов
+- `resetValidators(): void` — сбросить валидаторы
+- `notifyOrderChange(): void` — уведомить об изменении формы заказа
+- `notifyContactsChange(): void` — уведомить об изменении формы контактов
 
 ---
 
-#### ModalView
+### AppStateEmitter extends EventEmitter
 
-**Назначение:** Контейнер модального окна. Управляет открытием/закрытием, подстановкой контента.
+**Назначение:** Обёртка над AppState с поддержкой событий.
 
-**Данные (`ModalData`):**
-```typescript
-interface ModalData {
-    content: HTMLElement | null;  // Контент модалки
-}
-```
+**Класс:** `AppStateEmitter extends EventEmitter`
 
-**Настройки (`ModalSettings`):**
-```typescript
-interface ModalSettings {
-    onClose: () => void;  // Callback закрытия модалки
-}
-```
-
-**Интерфейс (`IModal`):**
-```typescript
-interface IModal {
-    open(): void;                        // Открыть модалку
-    close(): void;                       // Закрыть модалку
-    setContent(content: HTMLElement): void;  // Установить контент
-}
-```
-
-**Класс `ModalView<ModalData, ModalSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `contentContainer` | `protected` | `HTMLElement` | Элемент `.modal__content` для контента |
-| `closeButton` | `protected` | `HTMLButtonElement` | Кнопка закрытия |
+**Поля:**
+- `public model: IAppState` — доступ к модели
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings: ModalSettings)
+constructor(api: ILarekApi, Model: AppStateConstructor, settings: AppStateEmitterSettings)
+```
+
+**Методы:**
+- `onModelChange = (changed: AppStateChanges): void` — обработка изменений модели (эмитит события)
+
+При `AppStateChanges.modal` эмитит:
+1. `AppStateChanges.modal` — для закрытия предыдущих модалок
+2. `AppStateModals.X` — для открытия текущей модалки
+
+---
+
+## События приложения
+
+### AppStateChanges (изменения модели)
+
+```typescript
+enum AppStateChanges {
+    products = 'state:products',   // Загружены продукты
+    basket = 'state:basket',       // Изменена корзина
+    modal = 'state:modal',         // Изменена модалка
+    order = 'state:order',         // Изменена форма заказа
+    contacts = 'state:contacts',   // Изменена форма контактов
+}
+```
+
+### AppStateModals (модальные окна)
+
+```typescript
+enum AppStateModals {
+    none = 'modal:none',
+    product = 'modal:product',
+    basket = 'modal:basket',
+    order = 'modal:order',
+    contacts = 'modal:contacts',
+    success = 'modal:success',
+}
 ```
 
 ---
 
-#### Контент модалки (ModalContent)
+## View-компоненты
 
-Все модальные окна используют общий контейнер `ModalView`, в который подставляется контент. Контент модалок может включать опциональные View для заголовка и футера.
+### ButtonView<T>
 
-**Базовые данные контента (`ModalContentData`):**
-```typescript
-interface ModalContentData {
-    title?: string;  // Заголовок модалки (опционально)
-}
-```
+**Назначение:** Отображение типовой кнопки.
 
-**Базовые настройки контента (`ModalContentSettings`):**
-```typescript
-interface ModalContentSettings {
-    titleView?: IView<ModalTitleData>;     // Инжектируемый View заголовка
-    actionsView?: IView<ModalActionsData>; // Инжектируемый View футера
-}
-```
+**Класс:** `ButtonView<T = void> extends View<ButtonData, ButtonSettings<T>, HTMLButtonElement>`
 
----
-
-#### ModalTitleView (Заголовок модалки)
-
-**Назначение:** Отображение заголовка модального окна.
-
-**Данные (`ModalTitleData`):**
-```typescript
-interface ModalTitleData {
-    title: string;  // Текст заголовка
-}
-```
-
-**Класс `ModalTitleView<ModalTitleData>`:**
+**Generic параметры:**
+- `T` — тип данных, передаваемых в onClick (по умолчанию void)
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement)
+constructor(element: HTMLButtonElement, settings: ButtonSettings<T>)
 ```
+
+**Методы:**
+- `protected init(): void` — навешивает обработчик клика
+- `set label(value: string)` — установить текст кнопки
+- `set disabled(value: boolean)` — установить disabled-состояние
+- `set active(value: boolean)` — установить активное состояние (если activeClass указан в settings)
+- `static create(label: string, creator: ElementCreator<HTMLButtonElement>, onClick: (event: MouseEvent) => void): HTMLButtonElement` — фабричный метод для быстрого создания кнопки
 
 ---
 
-#### ModalActionsView (Футер модалки)
+### ChipView
 
-**Назначение:** Футер модалки с кнопкой действия и отображением ошибок.
+**Назначение:** Простой View для отображения категории (chip/tag).
 
-**Данные (`ModalActionsData`):**
-```typescript
-interface ModalActionsData {
-    button: ButtonData;  // { label: string, disabled?: boolean }
-    error?: string;      // Текст ошибки валидации
-}
-```
-
-**Настройки (`ModalActionsSettings`):**
-```typescript
-interface ModalActionsSettings {
-    onSubmit: () => void;  // Callback отправки
-}
-```
-
-**Класс `ModalActionsView<ModalActionsData, ModalActionsSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `button` | `protected` | `HTMLButtonElement` | Кнопка действия |
-| `errorElement` | `protected` | `HTMLElement` | Элемент для ошибок |
+**Класс:** `ChipView extends View<ChipData, ChipSettings>`
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings: ModalActionsSettings)
+constructor(element: HTMLElement, settings: ChipSettings)
 ```
+
+**Методы:**
+- `set category(value: ProductCategory)` — установить категорию (устанавливает label и CSS-класс)
+- `static create(category: ProductCategory, creator: ElementCreator, settings: ChipSettings): HTMLElement` — фабричный метод для быстрого создания чипа
 
 ---
 
-#### ProductPreviewView
+### ProductPreviewView
 
-**Назначение:** Карточка товара в галерее (каталоге).
+**Назначение:** View для карточки продукта в галерее.
 
-**Данные (`ProductPreviewData`):**
-```typescript
-interface ProductPreviewData {
-    id: ProductId;
-    title: string;
-    image: string;
-    price: number | null;
-    category: ProductCategory;
-}
-```
+**Класс:** `ProductPreviewView extends View<ProductPreviewData, ProductPreviewSettings, HTMLButtonElement>`
 
-**Настройки (`ProductPreviewSettings`):**
-```typescript
-interface ProductPreviewSettings {
-    onClick: (id: ProductId) => void;  // Клик по карточке
-}
-```
-
-**Класс `ProductPreviewView<ProductPreviewData, ProductPreviewSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `titleElement` | `protected` | `HTMLElement` | Название товара |
-| `imageElement` | `protected` | `HTMLImageElement` | Изображение |
-| `priceElement` | `protected` | `HTMLElement` | Цена |
-| `categoryElement` | `protected` | `HTMLElement` | Категория |
-| `productId` | `protected` | `ProductId` | ID текущего товара |
+**Поля:**
+- `private currentId!: ProductId` — ID текущего продукта для callback
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings: ProductPreviewSettings)
+constructor(element: HTMLButtonElement, settings: ProductPreviewSettings)
 ```
+
+**Методы:**
+- `protected init(): void` — навешивает обработчик клика
+- `set id(value: ProductId)` — установить ID продукта
+- `set category(value: ProductCategory)` — установить категорию (делегирует в ChipView)
+- `set title(value: string)` — установить название
+- `set image(value: string)` — установить изображение
+- `set price(value: number | null)` — установить цену
 
 ---
 
-#### ProductModalView
+### ProductModalView
 
-**Назначение:** Детальная карточка товара в модалке с кнопкой добавления в корзину.
+**Назначение:** View для карточки продукта в модальном окне.
 
-**Данные (`ProductModalData`):**
-```typescript
-interface ProductModalData extends ModalContentData {
-    id: ProductId;
-    image: string;
-    price: number | null;
-    category: ProductCategory;
-    description: string;
-    button: ButtonData;  // { label, disabled }
-}
-```
+**Класс:** `ProductModalView extends View<ProductModalData, ProductModalSettings>`
 
-**Настройки (`ProductModalSettings`):**
-```typescript
-interface ProductModalSettings extends ModalContentSettings {
-    actionsView: IView<ModalActionsData>;           // Инжектируемый View футера
-    onToggleBasket: (id: ProductId) => void;        // Добавить/убрать из корзины
-}
-```
-
-**Класс `ProductModalView<ProductModalData, ProductModalSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `titleElement` | `protected` | `HTMLElement` | Название товара |
-| `imageElement` | `protected` | `HTMLImageElement` | Изображение |
-| `priceElement` | `protected` | `HTMLElement` | Цена |
-| `categoryElement` | `protected` | `HTMLElement` | Категория |
-| `descriptionElement` | `protected` | `HTMLElement` | Описание |
-| `buttonElement` | `protected` | `HTMLButtonElement` | Кнопка «В корзину» |
-| `productId` | `protected` | `ProductId` | ID текущего товара |
+**Поля:**
+- `private buttonView: ButtonView` — кнопка "В корзину"
+- `private chipView: ChipView` — чип категории
 
 **Конструктор:**
 ```typescript
 constructor(element: HTMLElement, settings: ProductModalSettings)
 ```
 
----
-
-#### BasketModalView
-
-**Назначение:** Модалка корзины со списком товаров и кнопкой оформления.
-
-**Данные (`BasketModalData`):**
-```typescript
-interface BasketModalData extends ModalContentData {
-    items: BasketProductData[];  // Товары в корзине
-    total: number;               // Сумма
-    button: ButtonData;          // Кнопка "Оформить"
-}
-```
-
-**Настройки (`BasketModalSettings`):**
-```typescript
-interface BasketModalSettings extends ModalContentSettings {
-    itemView: IView<BasketProductData>;      // View элемента корзины (DI)
-    actionsView: IView<BasketActionsData>;   // View футера (DI)
-    onDelete: (id: ProductId) => void;       // Удаление товара
-    onSubmit: () => void;                    // Оформление заказа
-}
-```
-
-**Класс `BasketModalView<BasketModalData, BasketModalSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `listElement` | `protected` | `HTMLUListElement` | Список товаров (`.basket__list`) |
-| `totalElement` | `protected` | `HTMLElement` | Общая сумма |
-| `button` | `protected` | `HTMLButtonElement` | Кнопка «Оформить» |
-
-**Конструктор:**
-```typescript
-constructor(element: HTMLElement, settings: BasketModalSettings)
-```
+**Методы:**
+- `protected init(): void` — создаёт вложенные View (ChipView, ButtonView)
+- `set image(value: string)` — установить изображение
+- `set title(value: string)` — установить название
+- `set category(value: ProductCategory)` — установить категорию
+- `set description(value: string)` — установить описание
+- `set price(value: number | null)` — установить цену
+- `set button(value: ButtonData)` — установить данные кнопки
 
 ---
 
-#### BasketProductView (Элемент корзины)
+### BasketProductView
 
-**Назначение:** Отображение одного товара в списке корзины.
+**Назначение:** View для элемента корзины.
 
-**Данные (`BasketProductData`):**
-```typescript
-interface BasketProductData {
-    id: ProductId;     // ID товара
-    title: string;     // Название
-    price: number;     // Цена
-}
-```
+**Класс:** `BasketProductView extends View<BasketProductData, BasketProductSettings>`
 
-**Настройки (`BasketProductSettings`):**
-```typescript
-interface BasketProductSettings {
-    onDelete: (id: ProductId) => void;  // Удаление товара
-}
-```
-
-**Класс `BasketProductView<BasketProductData, BasketProductSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `indexElement` | `protected` | `HTMLElement` | Номер позиции |
-| `titleElement` | `protected` | `HTMLElement` | Название |
-| `priceElement` | `protected` | `HTMLElement` | Цена |
-| `deleteButton` | `protected` | `HTMLButtonElement` | Кнопка удаления |
-| `productId` | `protected` | `ProductId` | ID товара |
+**Поля:**
+- `private currentId?: ProductId` — ID текущего элемента для callback
 
 **Конструктор:**
 ```typescript
 constructor(element: HTMLElement, settings: BasketProductSettings)
 ```
 
+**Методы:**
+- `protected init(): void` — навешивает обработчик на кнопку удаления
+- `set id(value: ProductId)` — установить ID товара
+- `set index(value: number)` — установить индекс
+- `set title(value: string)` — установить название
+- `set price(value: number)` — установить цену
+
 ---
 
-#### OrderFormView
+### BasketModalView
 
-**Назначение:** Форма заказа (шаг 1) — выбор оплаты и ввод адреса.
+**Назначение:** View для модалки корзины.
 
-**Данные (`OrderFormData`):**
-```typescript
-interface OrderFormData extends ModalContentData {
-    payment: PaymentMethod | null;  // Выбранный способ оплаты
-    address: string;                // Адрес
-    button: ButtonData;             // Кнопка "Далее"
-    error?: string;                 // Текст ошибки
-}
-```
-
-**Настройки (`OrderFormSettings`):**
-```typescript
-interface OrderFormSettings extends ModalContentSettings {
-    actionsView: IView<ModalActionsData>;
-    onPaymentChange: (method: PaymentMethod) => void;  // Смена оплаты
-    onAddressChange: (value: string) => void;          // Ввод адреса
-    onSubmit: () => void;                              // Отправка формы
-}
-```
-
-**Класс `OrderFormView<OrderFormData, OrderFormSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `cardButton` | `protected` | `HTMLButtonElement` | Кнопка «Онлайн» |
-| `cashButton` | `protected` | `HTMLButtonElement` | Кнопка «При получении» |
-| `addressInput` | `protected` | `HTMLInputElement` | Поле адреса |
-| `button` | `protected` | `HTMLButtonElement` | Кнопка «Далее» |
-| `errorElement` | `protected` | `HTMLElement` | Элемент ошибок |
+**Класс:** `BasketModalView extends View<BasketModalData, BasketModalSettings>`
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings: OrderFormSettings)
+constructor(element: HTMLElement, settings: BasketModalSettings)
 ```
+
+**Методы:**
+- `set items(value: BasketProductData[])` — установить список товаров (копирует itemView для каждого элемента)
+- `set total(value: number)` — установить общую сумму
+- `set button(value: ButtonData)` — установить данные кнопки
 
 ---
 
-#### ContactsFormView
+### FormView<K, D, S>
 
-**Назначение:** Форма контактов (шаг 2) — email и телефон.
+**Назначение:** Базовый класс для форм.
 
-**Данные (`ContactsFormData`):**
-```typescript
-interface ContactsFormData extends ModalContentData {
-    email: string;
-    phone: string;
-    button: ButtonData;
-    error?: string;
-}
-```
+**Класс:** `FormView<K extends string, D extends FormViewData, S extends FormViewSettings<K>> extends View<D, S, HTMLFormElement>`
 
-**Настройки (`ContactsFormSettings`):**
-```typescript
-interface ContactsFormSettings extends ModalContentSettings {
-    actionsView: IView<ModalActionsData>;
-    onEmailChange: (value: string) => void;
-    onPhoneChange: (value: string) => void;
-    onSubmit: () => void;
-}
-```
+**Generic параметры:**
+- `K` — тип имени поля (string literal)
+- `D` — тип данных формы
+- `S` — тип настроек формы
 
-**Класс `ContactsFormView<ContactsFormData, ContactsFormSettings>`:**
-
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `emailInput` | `protected` | `HTMLInputElement` | Поле email |
-| `phoneInput` | `protected` | `HTMLInputElement` | Поле телефона |
-| `button` | `protected` | `HTMLButtonElement` | Кнопка «Оплатить» |
-| `errorElement` | `protected` | `HTMLElement` | Элемент ошибок |
+**Поля:**
+- `protected fieldInputs: Map<K, HTMLInputElement>` — карта полей формы
+- `protected submitButton: ButtonView` — кнопка submit
 
 **Конструктор:**
 ```typescript
-constructor(element: HTMLElement, settings: ContactsFormSettings)
+constructor(element: HTMLFormElement, settings: S)
 ```
+
+**Методы:**
+- `protected init(): void` — создаёт слушатели на input-поля и кнопку submit
+- `setFieldValue(name: K, value: string | undefined): void` — установить значение поля
+- `set error(value: string | undefined)` — установить ошибку
+- `set button(value: ButtonData)` — установить данные кнопки submit
 
 ---
 
-#### OrderSuccessView
+### OrderFormView
 
-**Назначение:** Экран успешного оформления заказа.
+**Назначение:** View для формы заказа (шаг 1).
 
-**Данные (`OrderSuccessData`):**
+**Класс:** `OrderFormView extends FormView<OrderFormField, OrderFormData, OrderFormSettings>`
+
+**Поля:**
+- `private paymentGroup: OptionGroupView<PaymentMethod>` — группа выбора способа оплаты
+
+**Конструктор:**
 ```typescript
-interface OrderSuccessData extends ModalContentData {
-    total: number;       // Списанная сумма
-    button: ButtonData;  // Кнопка "За новыми покупками"
-}
+constructor(element: HTMLFormElement, settings: OrderFormSettings)
 ```
 
-**Настройки (`OrderSuccessSettings`):**
+**Методы:**
+- `protected init(): void` — вызывает super.init() и создаёт OptionGroupView для оплаты
+- `set payment(value: PaymentMethod | null)` — установить выбранный способ оплаты
+
+---
+
+### OptionGroupView<T>
+
+**Назначение:** View для группы опций — выбор одной из нескольких.
+
+**Класс:** `OptionGroupView<T> extends View<OptionGroupData<T>, OptionGroupSettings<T>>`
+
+**Generic параметры:**
+- `T` — тип значения опции (например, PaymentMethod)
+
+**Конструктор:**
 ```typescript
-interface OrderSuccessSettings extends ModalContentSettings {
-    onClick: () => void;  // Клик по кнопке
-}
+constructor(element: HTMLElement, settings: OptionGroupSettings<T>)
 ```
 
-**Класс `OrderSuccessView<OrderSuccessData, OrderSuccessSettings>`:**
+**Методы:**
+- `set selected(value: T | null)` — установить выбранное значение (обновляет active у всех кнопок)
 
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `titleElement` | `protected` | `HTMLElement` | Заголовок |
-| `descriptionElement` | `protected` | `HTMLElement` | Описание (сумма списания) |
-| `button` | `protected` | `HTMLButtonElement` | Кнопка «За новыми покупками» |
+---
+
+### PageView
+
+**Назначение:** View для главной страницы.
+
+**Класс:** `PageView extends View<PageData, PageSettings>`
+
+**Конструктор:**
+```typescript
+constructor(element: HTMLElement, settings: PageSettings)
+```
+
+**Методы:**
+- `set basket(data: HeaderBasketData)` — обновить данные корзины в хедере
+- `set gallery(items: HTMLElement[])` — установить галерею продуктов
+- `set locked(value: boolean)` — заблокировать/разблокировать страницу
+
+---
+
+### HeaderBasketView
+
+**Назначение:** View для кнопки корзины в хедере.
+
+**Класс:** `HeaderBasketView extends View<HeaderBasketData, HeaderBasketSettings, HTMLButtonElement>`
+
+**Конструктор:**
+```typescript
+constructor(element: HTMLButtonElement, settings: HeaderBasketSettings)
+```
+
+**Методы:**
+- `protected init(): void` — навешивает обработчик клика
+- `set counter(value: number)` — установить счётчик товаров
+
+---
+
+### OrderSuccessView
+
+**Назначение:** View для экрана успешного заказа.
+
+**Класс:** `OrderSuccessView extends View<OrderSuccessData, OrderSuccessSettings>`
 
 **Конструктор:**
 ```typescript
 constructor(element: HTMLElement, settings: OrderSuccessSettings)
 ```
 
----
-
-### События приложения
-
-Все события типизированы через `AppEventMap`:
-
-**UI Events (View → Controller):**
-| Событие | Данные | Описание |
-|---------|--------|----------|
-| `basket:open` | — | Открыть корзину |
-| `product:select` | `{ id: ProductId }` | Выбрать товар |
-| `product:add` | `{ id: ProductId }` | Добавить в корзину |
-| `product:remove` | `{ id: ProductId }` | Убрать из корзины |
-| `basket:remove` | `{ id: ProductId }` | Удалить из корзины |
-| `basket:submit` | — | Оформить заказ |
-| `order:input` | `{ field, value }` | Ввод в форме заказа |
-| `order:submit` | — | Отправить форму заказа |
-| `contacts:input` | `{ field, value }` | Ввод в форме контактов |
-| `contacts:submit` | — | Отправить форму контактов |
-| `modal:close` | — | Закрыть модалку |
-| `success:close` | — | Закрыть окно успеха |
-
-**Model Events (Model → View):**
-| Событие | Данные | Описание |
-|---------|--------|----------|
-| `products:changed` | `{ items: Product[] }` | Каталог обновлён |
-| `basket:changed` | `{ items, total, count }` | Корзина изменена |
-| `order:changed` | — | Данные заказа изменены |
-| `contacts:changed` | — | Контакты изменены |
-| `formErrors:changed` | `{ errors: FormErrors }` | Ошибки валидации |
+**Методы:**
+- `set total(value: number)` — установить сумму списания
+- `set button(value: ButtonData)` — установить данные кнопки
 
 ---
 
-### Компоненты Controller-слоя
+### ModalView
 
-Контроллеры связывают Model и View, подписываясь на события и координируя взаимодействие.
+**Назначение:** View для модального окна. Контейнер — один на всё приложение. Контент вставляется динамически.
 
-**Иерархия компонентов:**
-- **Простые View** — компоненты без контроллера, управляются родительским View (`ProductPreviewView`, `BasketProductView`, `ModalTitleView`, `ModalActionsView`)
-- **View с контроллером** — самостоятельные экраны приложения (`PageView`, `ModalView`, `ProductModalView`, `BasketModalView`, `OrderFormView`, `ContactsFormView`, `OrderSuccessView`)
+**Класс:** `ModalView extends View<ModalData, ModalViewSettings> implements IModal`
+
+**Поля:**
+- `protected static _openedModal: ModalView | null` — текущая открытая модалка (всегда одна)
+- `private static _listenersAttached: boolean` — флаг: слушатели уже навешены
+
+**Конструктор:**
+```typescript
+constructor(element: HTMLElement, settings: ModalViewSettings)
+```
+
+**Методы:**
+- `protected init(): void` — навешивает слушатели (только один раз для всего приложения)
+- `protected handleClose(event?: MouseEvent): void` — обработчик закрытия
+- `set content(value: HTMLElement | null)` — установить контент
+- `open(): void` — открыть модалку
+- `close(): void` — закрыть модалку программно (без вызова onClose)
+- `setContent(content: HTMLElement): void` — установить контент (альтернатива сеттеру)
+- `set isActive(value: boolean)` — открытие/закрытие через сеттер
 
 ---
 
-#### Controller (Базовый класс)
+## Screen-компоненты
 
-**Назначение:** Абстрактный базовый класс для всех контроллеров. Хранит ссылку на модель.
+### ModalScreen<T, S> extends Screen
+
+**Назначение:** Базовый класс для модальных экранов.
+
+Все модальные экраны используют один DOM-элемент `#modal-container` (не клонируют). Контент устанавливается при открытии, не при инициализации.
+
+**Класс:** `ModalScreen<T, S extends ModalScreenSettings> extends Screen<T, S>`
+
+**Generic параметры:**
+- `T` — тип данных для рендеринга
+- `S` — тип настроек (Controller)
+
+**Поля:**
+- `protected modal: ModalView` — контейнер модалки
+- `protected content: HTMLElement` — контент модалки
+
+**Конструктор:**
+```typescript
+constructor(settings: S)
+```
+
+**Методы:**
+- `protected abstract initContent(): HTMLElement` — абстрактный метод: дочерние классы создают контент
+- `protected init(): void` — создаёт ModalView и контент
+- `set isActive(value: boolean)` — устанавливает контент и открывает/закрывает модалку
+
+---
+
+### PageScreen
+
+**Назначение:** Экран главной страницы.
+
+**Класс:** `PageScreen extends Screen<PageScreenData, PageScreenSettings>`
+
+**Поля:**
+- `private pageView: PageView` — View главной страницы
+- `private productTemplate: ProductPreviewView` — шаблон карточки продукта
+
+**Конструктор:**
+```typescript
+constructor(settings: PageScreenSettings)
+```
+
+**Методы:**
+- `protected init(): void` — создаёт PageView, HeaderBasketView, ProductPreviewView
+- `set products(items: NormalizedProduct[])` — рендер галереи продуктов
+- `set basketCount(value: number)` — обновить счётчик корзины
+- `set locked(value: boolean)` — блокировка страницы при открытой модалке
+
+---
+
+### ProductScreen extends ModalScreen
+
+**Назначение:** Экран продукта в модалке.
+
+**Класс:** `ProductScreen extends ModalScreen<ProductScreenData, ProductScreenSettings>`
+
+**Поля:**
+- `private productView: ProductModalView` — View продукта
+
+**Конструктор:**
+```typescript
+constructor(settings: ProductScreenSettings)
+```
+
+**Методы:**
+- `protected initContent(): HTMLElement` — создаёт ProductModalView
+- `set title(value: string)` — установить название
+- `set image(value: string)` — установить изображение
+- `set category(value: ProductCategory)` — установить категорию
+- `set description(value: string)` — установить описание
+- `set price(value: number)` — установить цену
+- `set isInBasket(value: boolean)` — установить состояние кнопки (Screen сам определяет label)
+
+---
+
+### BasketScreen extends ModalScreen
+
+**Назначение:** Экран корзины в модалке.
+
+**Класс:** `BasketScreen extends ModalScreen<BasketScreenData, BasketScreenSettings>`
+
+**Поля:**
+- `private basketView: BasketModalView` — View корзины
+
+**Конструктор:**
+```typescript
+constructor(settings: BasketScreenSettings)
+```
+
+**Методы:**
+- `protected initContent(): HTMLElement` — создаёт BasketModalView, BasketProductView, ButtonView
+- `set items(value: BasketProductData[])` — установить список товаров
+- `set total(value: number)` — установить общую сумму
+- `set isDisabled(value: boolean)` — установить состояние кнопки (Screen определяет disabled)
+
+---
+
+### OrderScreen extends ModalScreen
+
+**Назначение:** Экран формы заказа (шаг 1).
+
+**Класс:** `OrderScreen extends ModalScreen<OrderScreenData, OrderScreenSettings>`
+
+**Поля:**
+- `private orderView: OrderFormView` — View формы заказа
+
+**Конструктор:**
+```typescript
+constructor(settings: OrderScreenSettings)
+```
+
+**Методы:**
+- `protected initContent(): HTMLElement` — создаёт OrderFormView
+- `set payment(value: PaymentMethod | null)` — установить способ оплаты
+- `set error(value: string | undefined)` — установить ошибку
+- `set valid(value: boolean)` — установить состояние кнопки submit
+- `setFieldValue(field: OrderFormField, value: string | undefined): void` — установить значение поля
+
+---
+
+### ContactsScreen extends ModalScreen
+
+**Назначение:** Экран формы контактов (шаг 2).
+
+**Класс:** `ContactsScreen extends ModalScreen<ContactsScreenData, ContactsScreenSettings>`
+
+**Поля:**
+- `private formView: ContactsFormView` — View формы контактов
+
+**Конструктор:**
+```typescript
+constructor(settings: ContactsScreenSettings)
+```
+
+**Методы:**
+- `protected initContent(): HTMLElement` — создаёт ContactsFormView
+- `set error(value: string | undefined)` — установить ошибку
+- `set valid(value: boolean)` — установить состояние кнопки submit
+- `setFieldValue(field: ContactsFormField, value: string | undefined): void` — установить значение поля
+
+---
+
+### SuccessScreen extends ModalScreen
+
+**Назначение:** Экран успешного заказа.
+
+**Класс:** `SuccessScreen extends ModalScreen<SuccessScreenData, SuccessScreenSettings>`
+
+**Поля:**
+- `private successView: OrderSuccessView` — View успешного заказа
+
+**Конструктор:**
+```typescript
+constructor(settings: SuccessScreenSettings)
+```
+
+**Методы:**
+- `protected initContent(): HTMLElement` — создаёт OrderSuccessView, ButtonView
+- `set total(value: number)` — установить сумму списания
+
+---
+
+## Контроллеры
+
+### Controller<T>
+
+**Назначение:** Абстрактный базовый класс для всех контроллеров.
+
+**Класс:** `Controller<T>`
+
+**Generic параметры:**
+- `T` — тип модели состояния
+
+**Поля:**
+- `protected model: T` — модель состояния (инжектируется через конструктор)
+
+**Конструктор:**
+```typescript
+constructor(model: T)
+```
+
+---
+
+### PageController extends Controller
+
+**Назначение:** Контроллер главной страницы.
+
+**Класс:** `PageController extends Controller<IAppState> implements PageScreenSettings`
+
+**Конструктор:**
+```typescript
+constructor(model: IAppState)
+```
+
+**Методы:**
+- `onProductClick = (id: ProductId) => void` — клик по карточке продукта (выбирает продукт и открывает модалку)
+- `onBasketClick = () => void` — клик по кнопке корзины (открывает модалку корзины)
+
+---
+
+### ProductController extends Controller
+
+**Назначение:** Контроллер модалки продукта.
+
+**Класс:** `ProductController extends Controller<IAppState> implements ProductScreenSettings`
+
+**Конструктор:**
+```typescript
+constructor(model: IAppState)
+```
+
+**Методы:**
+- `onToggleBasket = () => void` — добавить/убрать товар из корзины
+- `onClose = () => void` — закрыть модалку
+
+---
+
+### BasketController extends Controller
+
+**Назначение:** Контроллер корзины.
+
+**Класс:** `BasketController extends Controller<IAppState> implements BasketScreenSettings`
+
+**Конструктор:**
+```typescript
+constructor(model: IAppState)
+```
+
+**Методы:**
+- `onRemove = (id: ProductId) => void` — удалить товар из корзины
+- `onCheckout = () => void` — перейти к оформлению (открывает форму заказа)
+- `onClose = () => void` — закрыть модалку
+
+---
+
+### OrderController extends Controller
+
+**Назначение:** Контроллер формы заказа (шаг 1).
+
+**Класс:** `OrderController extends Controller<IAppState> implements OrderScreenSettings`
+
+**Конструктор:**
+```typescript
+constructor(model: IAppState)
+```
+
+**Методы:**
+- `onPaymentChange = (method: PaymentMethod) => void` — изменение способа оплаты
+- `onFieldChange = (field: OrderFormField, value: string) => void` — изменение поля формы
+- `onSubmit = () => void` — submit формы (переход к контактам, если форма валидна)
+- `onClose = () => void` — закрыть модалку
+
+---
+
+### ContactsController extends Controller
+
+**Назначение:** Контроллер формы контактов (шаг 2).
+
+**Класс:** `ContactsController extends Controller<IAppState> implements ContactsScreenSettings`
+
+**Поля:**
+- `private readonly api: ILarekApi` — API для отправки заказа
+
+**Конструктор:**
+```typescript
+constructor(app: IAppState, api: ILarekApi)
+```
+
+**Методы:**
+- `onFieldChange = (field: ContactsFormField, value: string) => void` — изменение поля формы
+- `onSubmit = async () => Promise<void>` — submit формы (отправка заказа на сервер)
+- `onClose = () => void` — закрыть модалку
+
+---
+
+### SuccessController extends Controller
+
+**Назначение:** Контроллер успешного заказа.
+
+**Класс:** `SuccessController extends Controller<IAppState> implements SuccessScreenSettings`
+
+**Конструктор:**
+```typescript
+constructor(model: IAppState)
+```
+
+**Методы:**
+- `onClose = () => void` — закрыть модалку, очистить корзину и сбросить валидаторы
+
+---
+
+## Типы данных
+
+### Доменные типы (API)
 
 ```typescript
-class Controller<T> {
-    constructor(protected model: T) {}
+type ProductId = Brand<string, 'ProductId'>;
+type OrderId = Brand<string, 'OrderId'>;
+type ProductCategory = 'софт-скил' | 'хард-скил' | 'другое' | 'дополнительное' | 'кнопка';
+type PaymentMethod = 'online' | 'cash';
+
+interface Product {
+    id: ProductId;
+    title: string;
+    description: string;
+    image: string;
+    category: ProductCategory;
+    price: number | null;
+}
+
+interface NormalizedProduct extends Omit<Product, 'price'> {
+    price: number;  // null → 0
+}
+
+interface OrderRequest {
+    payment: PaymentMethod;
+    email: string;
+    phone: string;
+    address: string;
+    total: number;
+    items: ProductId[];
+}
+
+interface OrderResult {
+    id: OrderId;
+    total: number;
 }
 ```
 
-| Свойство | Модификатор | Тип | Описание |
-|----------|-------------|-----|----------|
-| `model` | `protected` | `T` | Модель состояния (инжектируется через конструктор) |
+### Схемы форм (Zod)
 
----
-
-#### MainController<AppState>
-
-**Обслуживает:** `PageView`
-
-**Назначение:** Управление главной страницей — галерея, хедер, блокировка при модалке.
-
-**Конструктор:**
 ```typescript
-constructor(model: AppState)
+// Форма заказа (шаг 1)
+const orderFormSchema = z.object({
+    payment: z.enum(['online', 'cash']),
+    address: z.string().min(5),
+});
+type OrderFormValues = z.infer<typeof orderFormSchema>;
+
+// Форма контактов (шаг 2)
+const contactsFormSchema = z.object({
+    email: z.string().email(),
+    phone: z.string().regex(/^\+?[0-9\s\-()]{10,}$/),
+});
+type ContactsFormValues = z.infer<typeof contactsFormSchema>;
 ```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `products:changed` | Рендерит галерею карточек |
-| `basket:changed` | Обновляет счётчик в хедере |
-| `modal:open` | Блокирует прокрутку страницы |
-| `modal:close` | Разблокирует прокрутку страницы |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация View, подписка на события |
-| `renderGallery(products: Product[])` | Рендерит карточки товаров в галерею |
-| `updateBasketCounter(count: number)` | Обновляет счётчик корзины |
-| `handleProductClick(id: ProductId)` | Emit `product:select` |
-| `handleBasketClick()` | Emit `basket:open` |
-| `lockPage()` | Блокирует прокрутку |
-| `unlockPage()` | Разблокирует прокрутку |
-
----
-
-#### ModalController<AppState>
-
-**Обслуживает:** `ModalView`
-
-**Назначение:** Управление контейнером модалки — открытие, закрытие, подстановка контента.
-
-**Конструктор:**
-```typescript
-constructor(model: AppState)
-```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `modal:close` | Закрывает модалку |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация, подписка на события |
-| `open(content: HTMLElement)` | Открывает модалку с контентом, emit `modal:open` |
-| `close()` | Закрывает модалку |
-| `handleClose()` | Обработчик закрытия — emit `modal:close` |
-
----
-
-#### ProductController<AppState>
-
-**Обслуживает:** `ProductModalView`
-
-**Назначение:** Управление детальной карточкой товара в модалке.
-
-**Конструктор:**
-```typescript
-constructor(model: AppState)
-```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `product:select` | Рендерит карточку и открывает модалку |
-| `product:add` | Добавляет товар в корзину |
-| `product:remove` | Убирает товар из корзины |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация View, подписка на события |
-| `showProduct(id: ProductId)` | Получает данные, рендерит карточку, открывает модалку |
-| `handleToggleBasket(id: ProductId)` | Emit `product:add` или `product:remove` |
-| `getButtonState(id: ProductId)` | Возвращает текст и состояние кнопки |
-
----
-
-#### BasketController<AppState>
-
-**Обслуживает:** `BasketModalView`
-
-**Назначение:** Управление модалкой корзины.
-
-**Конструктор:**
-```typescript
-constructor(model: AppState)
-```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `basket:open` | Рендерит корзину и открывает модалку |
-| `basket:changed` | Перерисовывает содержимое корзины |
-| `basket:remove` | Удаляет товар из корзины |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация View, подписка на события |
-| `showBasket()` | Рендерит корзину, открывает модалку |
-| `renderBasket()` | Перерисовывает список товаров |
-| `handleDelete(id: ProductId)` | Удаляет товар из модели |
-| `handleSubmit()` | Emit `basket:submit` |
-
----
-
-#### OrderController<AppState>
-
-**Обслуживает:** `OrderFormView`
-
-**Назначение:** Управление формой заказа (шаг 1).
-
-**Конструктор:**
-```typescript
-constructor(model: AppState)
-```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `basket:submit` | Открывает форму заказа |
-| `order:input` | Обновляет поле, валидирует |
-| `formErrors:changed` | Обновляет отображение ошибок |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация View, подписка на события |
-| `showOrderForm()` | Рендерит форму, открывает модалку |
-| `handlePaymentChange(method: PaymentMethod)` | Обновляет способ оплаты в модели |
-| `handleAddressChange(value: string)` | Обновляет адрес в модели |
-| `handleSubmit()` | Валидирует, emit `order:submit` |
-| `updateErrors(errors: FormErrors)` | Обновляет отображение ошибок |
-
----
-
-#### ContactsController<AppState>
-
-**Обслуживает:** `ContactsFormView`
-
-**Назначение:** Управление формой контактов (шаг 2).
-
-**Конструктор:**
-```typescript
-constructor(model: AppState)
-```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `order:submit` | Открывает форму контактов |
-| `contacts:input` | Обновляет поле, валидирует |
-| `formErrors:changed` | Обновляет отображение ошибок |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация View, подписка на события |
-| `showContactsForm()` | Рендерит форму, открывает модалку |
-| `handleEmailChange(value: string)` | Обновляет email в модели |
-| `handlePhoneChange(value: string)` | Обновляет телефон в модели |
-| `handleSubmit()` | Валидирует, отправляет заказ на сервер |
-| `updateErrors(errors: FormErrors)` | Обновляет отображение ошибок |
-
----
-
-#### SuccessController<AppState>
-
-**Обслуживает:** `OrderSuccessView`
-
-**Назначение:** Управление экраном успешного заказа.
-
-**Конструктор:**
-```typescript
-constructor(model: AppState)
-```
-
-| Параметр | Тип | Описание |
-|----------|-----|----------|
-| `model` | `AppState` | Модель состояния приложения |
-
-**Слушает события:**
-| Событие | Действие |
-|---------|----------|
-| `order:success` | Показывает экран успеха |
-
-**Методы:**
-| Метод | Описание |
-|-------|----------|
-| `init()` | Инициализация View, подписка на события |
-| `showSuccess(total: number)` | Рендерит View с суммой списания |
-| `handleClose()` | Очищает данные, emit `success:close` |
 
 ---
 
@@ -1115,20 +919,18 @@ constructor(model: AppState)
 ```
 src/
 ├── components/
-│   ├── base/          # Базовые классы (Api, EventEmitter, View)
-│   ├── view/          # View-компоненты
-│   ├── model/         # Model-компоненты
-│   └── controller/    # Controller-компоненты
+│   ├── base/          # EventEmitter, Api, View, Screen
+│   ├── common/        # FormValidator
+│   ├── view/          # View и Screen компоненты
+│   ├── model/         # AppState, AppStateEmitter, LarekApi
+│   └── controller/    # Контроллеры
 ├── types/
 │   └── components/    # Типы (структура повторяет components/)
-│       ├── base/
-│       ├── view/
-│       ├── model/
-│       └── common/    # Общие типы (FormValidator, схемы)
 ├── utils/
-│   ├── constants.ts   # Конфигурация, селекторы
-│   └── utils.ts       # Утилиты
+│   ├── constants.ts   # Селекторы, настройки
+│   └── utils.ts       # Утилиты (formatPrice, cloneTemplate и др.)
+├── scss/              # Стили
 ├── pages/
 │   └── index.html     # HTML-шаблоны
-└── index.ts           # Точка входа (Controller)
+└── index.ts           # Composition Root
 ```
