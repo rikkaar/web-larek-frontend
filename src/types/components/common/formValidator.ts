@@ -1,13 +1,15 @@
 /**
  * Типы для FormValidator
- * 
- * FormValidator — инструмент Controller'а для управления состоянием формы.
- * 
- * НЕ emit'ит события, НЕ обновляет View.
- * Controller сам решает что делать с результатами.
+ *
+ * FormValidator — абстрактный инструмент для валидации форм.
+ * Работает с любой библиотекой валидации через Standard Schema.
+ * https://standardschema.dev/
  */
 
-import { z } from 'zod';
+import type { StandardSchemaV1 } from '@standard-schema/spec';
+
+// Реэкспорт для удобства
+export type { StandardSchemaV1 };
 
 /**
  * Состояние формы
@@ -22,84 +24,24 @@ export interface FormState<T> {
 }
 
 /**
- * Результат валидации одного поля
- */
-export interface FieldValidationResult {
-	/** Валидно ли поле */
-	valid: boolean;
-	/** Сообщение об ошибке (null если валидно) */
-	error: string | null;
-}
-
-/**
- * Результат валидации всей формы
- */
-export interface FormValidationResult<T> {
-	/** Валидна ли форма */
-	valid: boolean;
-	/** Ошибки по полям */
-	errors: Partial<Record<keyof T, string>>;
-	/** Данные формы (null если невалидна) */
-	data: T | null;
-}
-
-/**
  * Интерфейс FormValidator
- * T — тип данных формы (выводится из zod схемы)
  */
 export interface IFormValidator<T> {
-	/**
-	 * Установить значение поля и провалидировать
-	 */
-	setValue<K extends keyof T>(field: K, value: T[K]): FieldValidationResult;
+	/** Установить значение поля */
+	setValue<K extends keyof T>(field: K, value: T[K]): void;
 
-	/**
-	 * Установить несколько значений
-	 */
-	setValues(values: Partial<T>): FormValidationResult<T>;
-
-	/**
-	 * Валидировать всю форму
-	 */
-	validate(): FormValidationResult<T>;
-
-	/**
-	 * Получить текущее состояние
-	 */
+	/** Получить текущее состояние */
 	getState(): FormState<T>;
 
-	/**
-	 * Получить значения
-	 */
+	/** Получить текущие значения */
 	getValues(): T;
 
-	/**
-	 * Получить ошибки
-	 */
-	getErrors(): Partial<Record<keyof T, string>>;
+	/** Получить ошибки как массив строк */
+	getErrorsArray(): string[];
 
-	/**
-	 * Проверить валидность
-	 */
-	isValid(): boolean;
+	/** Валидна ли форма */
+	readonly valid: boolean;
 
-	/**
-	 * Сбросить форму к начальным значениям
-	 */
+	/** Сбросить форму к начальным значениям */
 	reset(): void;
-
-	/**
-	 * Очистить ошибки (без сброса значений)
-	 */
-	clearErrors(): void;
-}
-
-/**
- * Конструктор FormValidator
- */
-export interface IFormValidatorConstructor {
-	new <S extends z.ZodObject<z.ZodRawShape>>(
-		schema: S,
-		initialValues: z.infer<S>
-	): IFormValidator<z.infer<S>>;
 }

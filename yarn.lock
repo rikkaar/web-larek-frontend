@@ -1113,6 +1113,11 @@
     "@sigstore/protobuf-specs" "^0.2.0"
     tuf-js "^1.1.7"
 
+"@standard-schema/spec@^1.0.0":
+  version "1.0.0"
+  resolved "https://npm.yandex-team.ru/@standard-schema%2fspec/-/spec-1.0.0.tgz?rbtorrent="
+  integrity sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==
+
 "@tootallnate/once@1":
   version "1.1.2"
 
