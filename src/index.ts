@@ -1,16 +1,18 @@
 import './scss/styles.scss';
 
+import './scss/styles.scss';
+
 import { API_URL, CDN_URL } from '@/utils/constants';
 
-// API
 import { LarekApi } from '@/components/api/larekApi';
 
-// Model
 import { AppState } from '@/components/model/appState';
 import { AppStateEmitter } from '@/components/model/appStateEmitter';
-import { AppStateChanges, AppStateModals } from '@/types/components/model/appState';
+import {
+	AppStateChanges,
+	AppStateModals,
+} from '@/types/components/model/appState';
 
-// Validators
 import { FormValidator } from '@/components/common/FormValidator';
 import {
 	orderFormSchema,
@@ -21,7 +23,6 @@ import {
 	ContactsFormValues,
 } from '@/types/components/common/formSchemas';
 
-// Controllers
 import { PageController } from '@/components/controller/PageController';
 import { ProductController } from '@/components/controller/ProductController';
 import { BasketController } from '@/components/controller/BasketController';
@@ -29,17 +30,12 @@ import { OrderController } from '@/components/controller/OrderController';
 import { ContactsController } from '@/components/controller/ContactsController';
 import { SuccessController } from '@/components/controller/SuccessController';
 
-// Screens
 import { PageScreen } from '@/components/view/PageScreen';
 import { ProductScreen } from '@/components/view/ProductScreen';
 import { BasketScreen } from '@/components/view/BasketScreen';
 import { OrderScreen } from '@/components/view/OrderScreen';
 import { ContactsScreen } from '@/components/view/ContactsScreen';
 import { SuccessScreen } from '@/components/view/SuccessScreen';
-
-// ============================================================================
-// Инициализация
-// ============================================================================
 
 const api = new LarekApi(CDN_URL, API_URL);
 
@@ -58,38 +54,27 @@ const app = new AppStateEmitter(api, AppState, {
 	contactsValidator,
 });
 
-// ============================================================================
-// Screens
-// ============================================================================
-
-// Page Screen (главная страница)
 const pageScreen = new PageScreen(new PageController(app.model));
 
 const modal = {
 	[AppStateModals.product]: new ProductScreen(new ProductController(app.model)),
 	[AppStateModals.basket]: new BasketScreen(new BasketController(app.model)),
 	[AppStateModals.order]: new OrderScreen(new OrderController(app.model)),
-	[AppStateModals.contacts]: new ContactsScreen(new ContactsController(app.model, api)),
+	[AppStateModals.contacts]: new ContactsScreen(
+		new ContactsController(app.model, api)
+	),
 	[AppStateModals.success]: new SuccessScreen(new SuccessController(app.model)),
 };
 
-// ============================================================================
-// Подписки
-// ============================================================================
-
-// Обновление галереи при загрузке продуктов
 app.on(AppStateChanges.products, () => {
 	pageScreen.render({ products: app.model.products });
 });
 
-// Закрытие всех модалок кроме текущей + блокировка страницы
 app.on(AppStateChanges.modal, () => {
 	const current = app.model.openedModal;
 
-	// Блокировка страницы
 	pageScreen.render({ locked: current !== AppStateModals.none });
 
-	// Закрытие других модалок
 	Object.entries(modal).forEach(([key, screen]) => {
 		if (key !== current) {
 			screen.render({ isActive: false });
@@ -97,7 +82,6 @@ app.on(AppStateChanges.modal, () => {
 	});
 });
 
-// Открытие модалки продукта
 app.on(AppStateModals.product, () => {
 	const productId = app.model.selectedProduct;
 	if (!productId) return;
@@ -112,12 +96,9 @@ app.on(AppStateModals.product, () => {
 	});
 });
 
-// Обновление при изменении корзины
 app.on(AppStateChanges.basket, () => {
-	// Обновляем счётчик на странице
 	pageScreen.render({ basketCount: app.model.getBasketCount() });
 
-	// Обновляем модалку продукта
 	if (app.model.openedModal === AppStateModals.product) {
 		const productId = app.model.selectedProduct;
 		if (productId) {
@@ -127,7 +108,6 @@ app.on(AppStateChanges.basket, () => {
 		}
 	}
 
-	// Обновляем модалку корзины
 	if (app.model.openedModal === AppStateModals.basket) {
 		const products = app.model.getBasketProducts();
 		modal[AppStateModals.basket].render({
@@ -143,7 +123,6 @@ app.on(AppStateChanges.basket, () => {
 	}
 });
 
-// Открытие модалки корзины
 app.on(AppStateModals.basket, () => {
 	const products = app.model.getBasketProducts();
 	modal[AppStateModals.basket].render({
@@ -159,7 +138,6 @@ app.on(AppStateModals.basket, () => {
 	});
 });
 
-// Открытие формы заказа
 app.on(AppStateModals.order, () => {
 	const validator = app.model.orderValidator;
 	const values = validator.getValues();
@@ -173,7 +151,6 @@ app.on(AppStateModals.order, () => {
 	modal[AppStateModals.order].setFieldValue('address', values.address);
 });
 
-// Обновление формы заказа (при изменении полей)
 app.on(AppStateChanges.order, () => {
 	const validator = app.model.orderValidator;
 	const values = validator.getValues();
@@ -185,7 +162,6 @@ app.on(AppStateChanges.order, () => {
 	});
 });
 
-// Открытие формы контактов
 app.on(AppStateModals.contacts, () => {
 	const validator = app.model.contactsValidator;
 	const values = validator.getValues();
@@ -199,7 +175,6 @@ app.on(AppStateModals.contacts, () => {
 	modal[AppStateModals.contacts].setFieldValue('phone', values.phone);
 });
 
-// Обновление формы контактов (при изменении полей)
 app.on(AppStateChanges.contacts, () => {
 	const validator = app.model.contactsValidator;
 
@@ -209,22 +184,16 @@ app.on(AppStateChanges.contacts, () => {
 	});
 });
 
-// Открытие успешного заказа
 app.on(AppStateModals.success, () => {
 	modal[AppStateModals.success].render({
-		total: app.model.getBasketTotal(), // корзина ещё не очищена
+		total: app.model.getBasketTotal(),
 		isActive: true,
 	});
 });
 
-// ============================================================================
-// Запуск
-// ============================================================================
-
-// Инициализация PageScreen
 pageScreen.render({});
 
-// Загрузка продуктов
-api.getProducts()
+api
+	.getProducts()
 	.then((products) => app.model.setProducts(products))
 	.catch(console.error);

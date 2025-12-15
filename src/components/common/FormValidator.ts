@@ -4,28 +4,6 @@ import {
 	FormState,
 } from '@/types/components/common/formValidator';
 
-/**
- * FormValidator — абстрактный валидатор форм.
- *
- * Работает с любой библиотекой валидации через Standard Schema:
- * - Zod 3.24+
- * - Valibot 1.0+
- * - ArkType 2.0+
- * - и др. (https://standardschema.dev/)
- *
- * @template T — тип данных формы
- *
- * @example
- * // С Zod
- * const validator = new FormValidator(zodSchema, { email: '', phone: '' });
- *
- * // При изменении поля
- * validator.setValue('email', 'test@example.com');
- *
- * // Получить состояние
- * const { valid, errors } = validator.getState();
- * view.render({ error: validator.getErrorsArray()[0] ?? '' });
- */
 export class FormValidator<T extends Record<string, unknown>>
 	implements IFormValidator<T>
 {
@@ -43,9 +21,6 @@ export class FormValidator<T extends Record<string, unknown>>
 		this.validate();
 	}
 
-	/**
-	 * Создать начальное состояние
-	 */
 	private createInitialState(): FormState<T> {
 		return {
 			values: { ...this.values },
@@ -54,34 +29,25 @@ export class FormValidator<T extends Record<string, unknown>>
 		};
 	}
 
-	/**
-	 * Установить значение поля
-	 */
 	setValue<K extends keyof T>(field: K, value: T[K]): void {
 		this.values[field] = value;
 		this.validate();
 	}
 
-	/**
-	 * Валидировать форму и обновить состояние
-	 */
 	private validate(): void {
 		const result = this.schema['~standard'].validate(this.values);
 
-		// Standard Schema может возвращать Promise, но мы работаем синхронно
 		if (result instanceof Promise) {
 			throw new Error('FormValidator: async validation is not supported');
 		}
 
 		if (result.issues) {
-			// Валидация провалена
 			this.state = {
 				values: { ...this.values },
 				errors: this.extractErrors(result.issues),
 				valid: false,
 			};
 		} else {
-			// Валидация успешна
 			this.state = {
 				values: { ...this.values },
 				errors: {},
@@ -90,9 +56,6 @@ export class FormValidator<T extends Record<string, unknown>>
 		}
 	}
 
-	/**
-	 * Извлечь ошибки из issues
-	 */
 	private extractErrors(
 		issues: ReadonlyArray<StandardSchemaV1.Issue>
 	): Partial<Record<keyof T, string>> {
@@ -106,39 +69,24 @@ export class FormValidator<T extends Record<string, unknown>>
 		return errors;
 	}
 
-	/**
-	 * Получить текущее состояние
-	 */
 	getState(): FormState<T> {
 		return { ...this.state };
 	}
 
-	/**
-	 * Получить текущие значения
-	 */
 	getValues(): Partial<T> {
 		return { ...this.values };
 	}
 
-	/**
-	 * Получить ошибки как массив строк
-	 */
 	getErrorsArray(): string[] {
 		return Object.values(this.state.errors).filter(
 			(error): error is string => typeof error === 'string'
 		);
 	}
 
-	/**
-	 * Валидна ли форма
-	 */
 	get valid(): boolean {
 		return this.state.valid;
 	}
 
-	/**
-	 * Сбросить форму к начальным значениям
-	 */
 	reset(): void {
 		this.values = { ...this.initialValues };
 		this.validate();

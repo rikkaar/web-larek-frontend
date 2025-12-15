@@ -7,9 +7,6 @@ import {
 	OrderResult,
 } from '@/types/components/model/larekApi';
 
-/**
- * Класс для работы с API Larek
- */
 export class LarekApi extends Api implements ILarekApi {
 	readonly cdn: string;
 
@@ -18,25 +15,18 @@ export class LarekApi extends Api implements ILarekApi {
 		this.cdn = cdn;
 	}
 
-    private getCdnUrl(url: string): string {
-        return this.cdn + url;
-    }
+	private getCdnUrl(url: string): string {
+		return this.cdn + url;
+	}
 
-	/**
-	 * Получить список продуктов
-	 */
 	async getProducts(): Promise<Product[]> {
-		const data = (await this.get<ApiListResponse<Product>>('/product/'));
+		const data = await this.get<ApiListResponse<Product>>('/product/');
 		return data.items.map((item) => ({
 			...item,
 			image: this.getCdnUrl(item.image),
 		}));
 	}
 
-	/**
-	 * Получить продукт по id
-	 * @param id - идентификатор продукта
-	 */
 	async getProduct(id: string): Promise<Product> {
 		const item = await this.get<Product>(`/product/${id}`);
 		return {
@@ -45,12 +35,7 @@ export class LarekApi extends Api implements ILarekApi {
 		};
 	}
 
-	/**
-	 * Создать заказ
-	 * @param order - данные заказа
-	 */
 	async createOrder(order: OrderRequest): Promise<OrderResult> {
 		return await this.post<OrderResult>('/order', order);
 	}
 }
-

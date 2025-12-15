@@ -12,18 +12,12 @@ import { cloneTemplate } from '@/utils/utils';
 
 export { ContactsScreenSettings, ContactsScreenData };
 
-/**
- * Конкретная реализация FormView для контактов
- */
 class ContactsFormView extends FormView<
 	ContactsFormField,
 	FormViewData,
 	FormViewSettings<ContactsFormField>
 > {}
 
-/**
- * Экран формы контактов (шаг 2).
- */
 export class ContactsScreen extends ModalScreen<
 	ContactsScreenData,
 	ContactsScreenSettings
@@ -31,7 +25,9 @@ export class ContactsScreen extends ModalScreen<
 	private formView: ContactsFormView;
 
 	protected initContent(): HTMLElement {
-		const formTemplate = cloneTemplate<HTMLFormElement>(settings.templates.contactsForm);
+		const formTemplate = cloneTemplate<HTMLFormElement>(
+			settings.templates.contactsForm
+		);
 
 		this.formView = new ContactsFormView(formTemplate, {
 			fields: [
@@ -40,7 +36,8 @@ export class ContactsScreen extends ModalScreen<
 			],
 			submitButtonSelector: settings.form.submitButton,
 			errorSelector: settings.form.errors,
-			onFieldChange: (field, value) => this.settings.onFieldChange(field, value),
+			onFieldChange: (field, value) =>
+				this.settings.onFieldChange(field, value),
 			onSubmit: () => this.settings.onSubmit(),
 		});
 

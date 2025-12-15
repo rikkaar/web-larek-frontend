@@ -1,14 +1,8 @@
-// Типы, поставляемые из API
-// Источник: https://larek-api.nomoreparties.co/weblarek.postman.json
-
-export type Brand<T, B extends string> = T & { readonly _brand: B }
+export type Brand<T, B extends string> = T & { readonly _brand: B };
 
 export type ProductId = Brand<string, 'ProductId'>;
 export type OrderId = Brand<string, 'OrderId'>;
 
-/**
- * Категория продукта
- */
 export type ProductCategory =
 	| 'софт-скил'
 	| 'хард-скил'
@@ -16,14 +10,8 @@ export type ProductCategory =
 	| 'дополнительное'
 	| 'кнопка';
 
-/**
- * Способ оплаты
- */
 export type PaymentMethod = 'online' | 'cash';
 
-/**
- * Продукт (как приходит с API)
- */
 export interface Product {
 	id: ProductId;
 	description: string;
@@ -33,18 +21,10 @@ export interface Product {
 	price: number | null;
 }
 
-/**
- * Нормализованный продукт (price: number, null → 0)
- * Используется внутри приложения для консистентности.
- * Товары с price === 0 считаются бесценными.
- */
 export interface NormalizedProduct extends Omit<Product, 'price'> {
 	price: number;
 }
 
-/**
- * Запрос на создание заказа
- */
 export interface OrderRequest {
 	payment: PaymentMethod;
 	email: string;
@@ -54,32 +34,15 @@ export interface OrderRequest {
 	items: ProductId[];
 }
 
-/**
- * Ответ после создания заказа
- */
 export interface OrderResult {
 	id: OrderId;
 	total: number;
 }
 
-/**
- * Интерфейс API для работы с Larek
- */
 export interface ILarekApi {
-	/**
-	 * Получить список продуктов
-	 */
 	getProducts(): Promise<Product[]>;
 
-	/**
-	 * Получить продукт по id
-	 * @param id - идентификатор продукта
-	 */
 	getProduct(id: string): Promise<Product>;
 
-	/**
-	 * Создать заказ
-	 * @param order - данные заказа
-	 */
 	createOrder(order: OrderRequest): Promise<OrderResult>;
 }

@@ -10,9 +10,6 @@ import { cloneTemplate, ensureElement, formatPrice } from '@/utils/utils';
 
 export { SuccessScreenSettings, SuccessScreenData };
 
-/**
- * Экран успешного заказа.
- */
 export class SuccessScreen extends ModalScreen<
 	SuccessScreenData,
 	SuccessScreenSettings
@@ -22,9 +19,11 @@ export class SuccessScreen extends ModalScreen<
 	protected initContent(): HTMLElement {
 		const template = cloneTemplate(settings.templates.orderSuccess);
 
-		// Кнопка "За новыми покупками"
 		const buttonView = new ButtonView(
-			ensureElement<HTMLButtonElement>(settings.orderSuccess.closeButton, template),
+			ensureElement<HTMLButtonElement>(
+				settings.orderSuccess.closeButton,
+				template
+			),
 			{ onClick: () => this.settings.onClose() }
 		);
 
@@ -32,7 +31,11 @@ export class SuccessScreen extends ModalScreen<
 			descriptionSelector: settings.orderSuccess.description,
 			buttonView,
 			formatTotal: (value) =>
-				`Списано ${formatPrice(value, settings.text.currency, settings.text.priceless)}`,
+				`Списано ${formatPrice(
+					value,
+					settings.text.currency,
+					settings.text.priceless
+				)}`,
 		});
 
 		return this.successView.element;

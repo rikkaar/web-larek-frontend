@@ -1,7 +1,3 @@
-/**
- * Экспорт типов View-компонентов
- */
-
 export * from './button';
 export * from './chip';
 export * from './page';

@@ -4,13 +4,18 @@ import {
 	AppStateChanges,
 	AppStateModals,
 } from '@/types/components/model/appState';
-import { Product, ProductId, NormalizedProduct, ILarekApi } from '@/types/components/model/larekApi';
+import {
+	Product,
+	ProductId,
+	NormalizedProduct,
+	ILarekApi,
+} from '@/types/components/model/larekApi';
 import { IFormValidator } from '@/types/components/common/formValidator';
-import { OrderFormValues, ContactsFormValues } from '@/types/components/common/formSchemas';
+import {
+	OrderFormValues,
+	ContactsFormValues,
+} from '@/types/components/common/formSchemas';
 
-/**
- * Нормализует продукт: price null → 0
- */
 function normalizeProduct(product: Product): NormalizedProduct {
 	return {
 		...product,
@@ -18,59 +23,20 @@ function normalizeProduct(product: Product): NormalizedProduct {
 	};
 }
 
-/**
- * Модель состояния приложения.
- *
- * Хранит данные и предоставляет методы для их изменения.
- * При изменении данных вызывает notifyChanged().
- *
- * @example
- * const app = new AppStateEmitter(api, AppState, { orderValidator, contactsValidator });
- *
- * app.on(AppStateChanges.basket, () => {
- *   console.log('Basket:', app.model.getBasketCount());
- * });
- *
- * app.model.addToBasket(productId);
- */
 export class AppState implements IAppState {
-	// =========================================================================
-	// Приватные поля
-	// =========================================================================
-
-	/** Каталог продуктов (Map для быстрого доступа по ID) */
 	private _products: Map<ProductId, NormalizedProduct> = new Map();
-
-	/** Корзина (Set для уникальности) */
 	private _basket: Set<ProductId> = new Set();
-
-	/** Текущее модальное окно */
 	private _openedModal: AppStateModals = AppStateModals.none;
-
-	/** ID выбранного продукта */
 	private _selectedProduct: ProductId | null = null;
-
-	/** Настройки (onChange, валидаторы) */
 	private readonly settings: AppStateSettings;
-
-	// =========================================================================
-	// Конструктор
-	// =========================================================================
 
 	constructor(_api: ILarekApi, settings: AppStateSettings) {
 		this.settings = settings;
 	}
 
-	/**
-	 * Уведомить об изменении состояния
-	 */
 	protected notify(changed: AppStateChanges): void {
 		this.settings.onChange(changed);
 	}
-
-	// =========================================================================
-	// Каталог продуктов
-	// =========================================================================
 
 	get products(): NormalizedProduct[] {
 		return Array.from(this._products.values());
@@ -88,10 +54,6 @@ export class AppState implements IAppState {
 	getProduct(id: ProductId): NormalizedProduct | undefined {
 		return this._products.get(id);
 	}
-
-	// =========================================================================
-	// Корзина
-	// =========================================================================
 
 	get basket(): ProductId[] {
 		return Array.from(this._basket);
@@ -123,7 +85,10 @@ export class AppState implements IAppState {
 	}
 
 	getBasketTotal(): number {
-		return this.getBasketProducts().reduce((sum, product) => sum + product.price, 0);
+		return this.getBasketProducts().reduce(
+			(sum, product) => sum + product.price,
+			0
+		);
 	}
 
 	getBasketCount(): number {
@@ -133,10 +98,6 @@ export class AppState implements IAppState {
 	getBasketProducts(): NormalizedProduct[] {
 		return Array.from(this._basket, (id) => this._products.get(id));
 	}
-
-	// =========================================================================
-	// Модальные окна
-	// =========================================================================
 
 	get openedModal(): AppStateModals {
 		return this._openedModal;
@@ -149,10 +110,6 @@ export class AppState implements IAppState {
 		this.notify(AppStateChanges.modal);
 	}
 
-	// =========================================================================
-	// Выбранный продукт
-	// =========================================================================
-
 	get selectedProduct(): ProductId | null {
 		return this._selectedProduct;
 	}
@@ -160,10 +117,6 @@ export class AppState implements IAppState {
 	selectProduct(id: ProductId): void {
 		this._selectedProduct = id;
 	}
-
-	// =========================================================================
-	// Валидаторы форм
-	// =========================================================================
 
 	get orderValidator(): IFormValidator<OrderFormValues> {
 		return this.settings.orderValidator;

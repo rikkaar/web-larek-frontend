@@ -10,27 +10,12 @@ import { cloneTemplate, formatPrice } from '@/utils/utils';
 
 export { ProductScreenSettings, ProductScreenData };
 
-/**
- * Экран продукта в модалке.
- *
- * - Получает Controller как settings (Controller = Settings)
- * - Сам создаёт ProductModalView
- * - Сам определяет label кнопки по isInBasket
- *
- * @example
- * const productScreen = new ProductScreen(new ProductController(app.model));
- *
- * productScreen.render({ ...product, isInBasket: true, isActive: true });
- */
 export class ProductScreen extends ModalScreen<
 	ProductScreenData,
 	ProductScreenSettings
 > {
 	private productView: ProductModalView;
 
-	/**
-	 * Создаёт контент модалки
-	 */
 	protected initContent(): HTMLElement {
 		const priceFormatter = (value: number | null) =>
 			formatPrice(value ?? 0, settings.text.currency, settings.text.priceless);
@@ -38,7 +23,6 @@ export class ProductScreen extends ModalScreen<
 		this.productView = new ProductModalView(
 			cloneTemplate(settings.templates.productModal),
 			{
-				// Используем this.settings — это Controller
 				onToggleBasket: () => this.settings.onToggleBasket(),
 				formatPrice: priceFormatter,
 			}
@@ -47,9 +31,6 @@ export class ProductScreen extends ModalScreen<
 		return this.productView.element;
 	}
 
-	/**
-	 * Сеттеры
-	 */
 	set title(value: string) {
 		this.productView.title = value;
 	}
@@ -70,15 +51,10 @@ export class ProductScreen extends ModalScreen<
 		this.productView.price = value;
 	}
 
-	/**
-	 * Screen сам определяет label кнопки
-	 */
 	set isInBasket(value: boolean) {
 		const label = value
 			? settings.text.removeFromBasket
 			: settings.text.addToBasket;
 		this.productView.button = { label };
 	}
-
-	// isActive наследуется от ModalScreen
 }

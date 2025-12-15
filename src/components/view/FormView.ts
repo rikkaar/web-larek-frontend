@@ -6,14 +6,6 @@ import { ensureElement } from '@/utils/utils';
 
 export { FormViewSettings, FormViewData };
 
-/**
- * Базовый класс для форм.
- *
- * Управляет:
- * - Input-полями (слушатели input)
- * - Кнопкой submit (ButtonView с onClick)
- * - Ошибкой
- */
 export abstract class FormView<
 	K extends string,
 	D extends FormViewData,
@@ -24,7 +16,6 @@ export abstract class FormView<
 
 	protected init(): void {
 		this.fieldInputs = new Map();
-		// Слушатели на input-поля
 		for (const field of this.settings.fields) {
 			const input = this.ensure<HTMLInputElement>(field.selector);
 			this.fieldInputs.set(field.name, input);
@@ -33,7 +24,6 @@ export abstract class FormView<
 			});
 		}
 
-		// Кнопка submit с явным onClick
 		this.submitButton = new ButtonView(
 			ensureElement<HTMLButtonElement>(
 				this.settings.submitButtonSelector,

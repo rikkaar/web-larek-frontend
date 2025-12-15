@@ -4,10 +4,6 @@ import { ILarekApi } from '@/types/components/model/larekApi';
 import { ContactsFormField } from '@/types/components/view/form';
 import { ContactsScreenSettings } from '@/components/view/ContactsScreen';
 
-/**
- * Контроллер формы контактов (шаг 2).
- * Реализует ContactsScreenSettings — Controller = Settings.
- */
 export class ContactsController
 	extends Controller<IAppState>
 	implements ContactsScreenSettings
@@ -19,17 +15,11 @@ export class ContactsController
 		this.api = api;
 	}
 
-	/**
-	 * Изменение поля формы
-	 */
 	onFieldChange = (field: ContactsFormField, value: string) => {
 		this.model.contactsValidator.setValue(field, value);
 		this.model.notifyContactsChange();
 	};
 
-	/**
-	 * Submit формы — отправка заказа
-	 */
 	onSubmit = async () => {
 		const orderValidator = this.model.orderValidator;
 		const contactsValidator = this.model.contactsValidator;
@@ -49,17 +39,12 @@ export class ContactsController
 				total: this.model.getBasketTotal(),
 			});
 
-			// Открываем success — корзина ещё не очищена, total доступен
 			this.model.openModal(AppStateModals.success);
 		} catch (error) {
-			// TODO: показать ошибку
 			console.error('Order error:', error);
 		}
 	};
 
-	/**
-	 * Закрыть модалку
-	 */
 	onClose = () => {
 		this.model.openModal(AppStateModals.none);
 	};

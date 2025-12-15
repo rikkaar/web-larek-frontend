@@ -13,32 +13,16 @@ import { cloneTemplate, formatPrice } from '@/utils/utils';
 
 export { BasketScreenSettings, BasketScreenData };
 
-/**
- * Экран корзины в модалке.
- *
- * @example
- * const basketScreen = new BasketScreen(new BasketController(app.model));
- *
- * basketScreen.render({
- *   items: [...],
- *   total: 1000,
- *   isActive: true,
- * });
- */
 export class BasketScreen extends ModalScreen<
 	BasketScreenData,
 	BasketScreenSettings
 > {
 	private basketView: BasketModalView;
 
-	/**
-	 * Создаёт контент модалки
-	 */
 	protected initContent(): HTMLElement {
 		const priceFormatter = (value: number) =>
 			formatPrice(value, settings.text.currency, settings.text.priceless);
 
-		// Шаблон для элемента корзины
 		const itemView = new BasketProductView(
 			cloneTemplate(settings.templates.basketProduct),
 			{
@@ -51,10 +35,12 @@ export class BasketScreen extends ModalScreen<
 			}
 		);
 
-		// Кнопка "Оформить"
 		const basketTemplate = cloneTemplate(settings.templates.basketModal);
 		const buttonView = new ButtonView(
-			this.ensure<HTMLButtonElement>(settings.basket.submitButton, basketTemplate),
+			this.ensure<HTMLButtonElement>(
+				settings.basket.submitButton,
+				basketTemplate
+			),
 			{ onClick: () => this.settings.onCheckout() }
 		);
 
@@ -69,9 +55,6 @@ export class BasketScreen extends ModalScreen<
 		return this.basketView.element;
 	}
 
-	/**
-	 * Сеттеры
-	 */
 	set items(value: BasketProductData[]) {
 		this.basketView.items = value;
 	}
@@ -80,15 +63,10 @@ export class BasketScreen extends ModalScreen<
 		this.basketView.total = value;
 	}
 
-	/**
-	 * Screen определяет состояние кнопки
-	 */
 	set isDisabled(value: boolean) {
 		this.basketView.button = {
 			label: 'Оформить',
 			disabled: value,
 		} as ButtonData;
 	}
-
-	// isActive наследуется от ModalScreen
 }

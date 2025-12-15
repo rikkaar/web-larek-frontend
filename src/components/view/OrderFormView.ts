@@ -11,12 +11,6 @@ import { ensureElement } from '@/utils/utils';
 
 export { OrderFormData, OrderFormSettings };
 
-/**
- * View для формы заказа (шаг 1).
- *
- * Добавляет к FormView:
- * - OptionGroupView для выбора способа оплаты
- */
 export class OrderFormView extends FormView<
 	OrderFormField,
 	OrderFormData,
@@ -31,23 +25,29 @@ export class OrderFormView extends FormView<
 			options: [
 				{
 					value: 'online',
-					view: new ButtonView(ensureElement<HTMLButtonElement>(
-						this.settings.onlineButtonSelector,
-						this.element
-					), {
-						onClick: () => this.settings.onPaymentChange('online'),
-						activeClass: this.settings.paymentActiveClass,
-					}),
+					view: new ButtonView(
+						ensureElement<HTMLButtonElement>(
+							this.settings.onlineButtonSelector,
+							this.element
+						),
+						{
+							onClick: () => this.settings.onPaymentChange('online'),
+							activeClass: this.settings.paymentActiveClass,
+						}
+					),
 				},
 				{
 					value: 'cash',
-					view: new ButtonView(ensureElement<HTMLButtonElement>(
-						this.settings.cashButtonSelector,
-						this.element
-					), {
-						onClick: () => this.settings.onPaymentChange('cash'),
-						activeClass: this.settings.paymentActiveClass,
-					}),
+					view: new ButtonView(
+						ensureElement<HTMLButtonElement>(
+							this.settings.cashButtonSelector,
+							this.element
+						),
+						{
+							onClick: () => this.settings.onPaymentChange('cash'),
+							activeClass: this.settings.paymentActiveClass,
+						}
+					),
 				},
 			],
 			onSelect: (method) => this.settings.onPaymentChange(method),

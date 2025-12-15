@@ -11,9 +11,6 @@ import { cloneTemplate } from '@/utils/utils';
 
 export { OrderScreenSettings, OrderScreenData };
 
-/**
- * Экран формы заказа (шаг 1).
- */
 export class OrderScreen extends ModalScreen<
 	OrderScreenData,
 	OrderScreenSettings
@@ -21,7 +18,9 @@ export class OrderScreen extends ModalScreen<
 	private orderView: OrderFormView;
 
 	protected initContent(): HTMLElement {
-		const formTemplate = cloneTemplate<HTMLFormElement>(settings.templates.orderForm);
+		const formTemplate = cloneTemplate<HTMLFormElement>(
+			settings.templates.orderForm
+		);
 
 		this.orderView = new OrderFormView(formTemplate, {
 			fields: [{ name: 'address', selector: settings.orderForm.addressInput }],
@@ -31,7 +30,8 @@ export class OrderScreen extends ModalScreen<
 			cashButtonSelector: settings.orderForm.cash,
 			paymentActiveClass: settings.orderForm.paymentActiveClass,
 			onPaymentChange: (method) => this.settings.onPaymentChange(method),
-			onFieldChange: (field, value) => this.settings.onFieldChange(field, value),
+			onFieldChange: (field, value) =>
+				this.settings.onFieldChange(field, value),
 			onSubmit: () => this.settings.onSubmit(),
 		});
 
