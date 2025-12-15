@@ -15,7 +15,6 @@ import {
 	ContactsFormValues,
 } from '@/types/components/common/formSchemas';
 
-
 export class AppState implements IAppState {
 	private _products: Map<ProductId, Product> = new Map();
 	private _basket: Set<ProductId> = new Set();
