@@ -7,7 +7,6 @@ import {
 import {
 	Product,
 	ProductId,
-	NormalizedProduct,
 	ILarekApi,
 } from '@/types/components/model/larekApi';
 import { IFormValidator } from '@/types/components/common/formValidator';
@@ -16,15 +15,9 @@ import {
 	ContactsFormValues,
 } from '@/types/components/common/formSchemas';
 
-function normalizeProduct(product: Product): NormalizedProduct {
-	return {
-		...product,
-		price: product.price ?? 0,
-	};
-}
 
 export class AppState implements IAppState {
-	private _products: Map<ProductId, NormalizedProduct> = new Map();
+	private _products: Map<ProductId, Product> = new Map();
 	private _basket: Set<ProductId> = new Set();
 	private _openedModal: AppStateModals = AppStateModals.none;
 	private _selectedProduct: ProductId | null = null;
@@ -38,20 +31,19 @@ export class AppState implements IAppState {
 		this.settings.onChange(changed);
 	}
 
-	get products(): NormalizedProduct[] {
+	get products(): Product[] {
 		return Array.from(this._products.values());
 	}
 
 	setProducts(products: Product[]): void {
 		this._products.clear();
 		for (const product of products) {
-			const normalized = normalizeProduct(product);
-			this._products.set(normalized.id, normalized);
+			this._products.set(product.id, product);
 		}
 		this.notify(AppStateChanges.products);
 	}
 
-	getProduct(id: ProductId): NormalizedProduct | undefined {
+	getProduct(id: ProductId): Product | undefined {
 		return this._products.get(id);
 	}
 
@@ -84,6 +76,10 @@ export class AppState implements IAppState {
 		return this._basket.has(id);
 	}
 
+	isPriceless(id: ProductId): boolean {
+		return this._products.get(id)?.price === null;
+	}
+
 	getBasketTotal(): number {
 		return this.getBasketProducts().reduce(
 			(sum, product) => sum + product.price,
@@ -95,7 +91,7 @@ export class AppState implements IAppState {
 		return this._basket.size;
 	}
 
-	getBasketProducts(): NormalizedProduct[] {
+	getBasketProducts(): Product[] {
 		return Array.from(this._basket, (id) => this._products.get(id));
 	}
 

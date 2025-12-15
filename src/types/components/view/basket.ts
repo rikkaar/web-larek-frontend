@@ -15,10 +15,8 @@ export interface BasketProductSettings {
 	titleSelector: string;
 	priceSelector: string;
 	deleteSelector: string;
-
 	onDelete: (id: ProductId) => void;
-
-	formatPrice: (value: number) => string;
+	formatPrice: (value: number | null) => string;
 }
 
 export interface BasketModalData {
@@ -30,16 +28,13 @@ export interface BasketModalData {
 export interface BasketModalSettings {
 	listSelector: string;
 	priceSelector: string;
-
 	itemView: IView<BasketProductData>;
 	buttonView: IView<ButtonData>;
-
-	formatPrice: (value: number) => string;
+	formatPrice: (value: number | null) => string;
 }
 
 export interface BasketScreenSettings extends ModalScreenSettings {
 	onRemove: (id: ProductId) => void;
-
 	onCheckout: () => void;
 }
 

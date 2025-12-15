@@ -12,7 +12,6 @@ export interface ModalActionsData {
 
 export interface ModalActionsSettings {
 	buttonView: IView<ButtonData>;
-
 	secondarySelector: string;
 }
 
@@ -26,9 +25,7 @@ export interface ModalSettings {
 
 export interface ModalViewSettings extends ModalSettings {
 	closeSelector: string;
-
 	contentSelector: string;
-
 	activeClass: string;
 }
 
@@ -44,7 +41,6 @@ export interface ModalContentData {
 
 export interface ModalContentSettings {
 	titleView?: IView<ModalTitleData>;
-
 	actionsView?: IView<ModalActionsData>;
 }
 

@@ -1,7 +1,7 @@
 import {
 	ProductId,
 	ProductCategory,
-	NormalizedProduct,
+	Product,
 } from '@/types/components/model/larekApi';
 import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
@@ -20,11 +20,8 @@ export interface ProductPreviewSettings {
 	titleSelector: string;
 	imageSelector: string;
 	priceSelector: string;
-
 	categoryView: IView<ChipData>;
-
 	onClick: (id: ProductId) => void;
-
 	formatPrice: (value: number | null) => string;
 }
 
@@ -39,7 +36,6 @@ export interface ProductModalData {
 
 export interface ProductModalSettings {
 	onToggleBasket: () => void;
-
 	formatPrice: (value: number | null) => string;
 }
 
@@ -47,8 +43,7 @@ export interface ProductScreenSettings extends ModalScreenSettings {
 	onToggleBasket: () => void;
 }
 
-export interface ProductScreenData extends NormalizedProduct {
-	isInBasket: boolean;
-
+export interface ProductScreenData extends Product {
+	button: ButtonData;
 	isActive?: boolean;
 }

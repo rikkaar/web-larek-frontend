@@ -10,6 +10,8 @@ export class ProductController
 		const productId = this.model.selectedProduct;
 		if (!productId) return;
 
+		if (this.model.isPriceless(productId)) return;
+
 		const isInBasket = this.model.isInBasket(productId);
 
 		if (isInBasket) {

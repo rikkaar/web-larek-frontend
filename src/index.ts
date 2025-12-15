@@ -1,11 +1,8 @@
 import './scss/styles.scss';
-
 import './scss/styles.scss';
 
-import { API_URL, CDN_URL } from '@/utils/constants';
-
+import { API_URL, CDN_URL,settings } from '@/utils/constants';
 import { LarekApi } from '@/components/api/larekApi';
-
 import { AppState } from '@/components/model/appState';
 import { AppStateEmitter } from '@/components/model/appStateEmitter';
 import {
@@ -91,7 +88,12 @@ app.on(AppStateModals.product, () => {
 
 	modal[AppStateModals.product].render({
 		...product,
-		isInBasket: app.model.isInBasket(productId),
+		button: {
+			label: app.model.isInBasket(productId)
+				? settings.text.removeFromBasket
+				: settings.text.addToBasket,
+			disabled: app.model.isPriceless(productId),
+		},
 		isActive: true,
 	});
 });
@@ -103,7 +105,12 @@ app.on(AppStateChanges.basket, () => {
 		const productId = app.model.selectedProduct;
 		if (productId) {
 			modal[AppStateModals.product].render({
-				isInBasket: app.model.isInBasket(productId),
+				button: {
+					label: app.model.isInBasket(productId)
+						? settings.text.removeFromBasket
+						: settings.text.addToBasket,
+					disabled: app.model.isPriceless(productId),
+				},
 			});
 		}
 	}

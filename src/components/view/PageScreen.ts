@@ -3,7 +3,7 @@ import { PageView } from './PageView';
 import { HeaderBasketView } from './HeaderBasketView';
 import { ProductPreviewView } from './ProductPreviewView';
 import { ChipView } from './ChipView';
-import { NormalizedProduct } from '@/types/components/model/larekApi';
+import { Product } from '@/types/components/model/larekApi';
 import {
 	PageScreenSettings,
 	PageScreenData,
@@ -49,13 +49,13 @@ export class PageScreen extends Screen<PageScreenData, PageScreenSettings> {
 			categoryView: chipView,
 			onClick: (id) => this.settings.onProductClick(id),
 			formatPrice: (v) =>
-				formatPrice(v ?? 0, settings.text.currency, settings.text.priceless),
+				formatPrice(v, settings.text.currency, settings.text.priceless),
 		});
 
 		this.element = this.pageView.element;
 	}
 
-	set products(items: NormalizedProduct[]) {
+	set products(items: Product[]) {
 		const gallery = items.map((product) => {
 			const view = this.productTemplate.copy({
 				onClick: (id) => this.settings.onProductClick(id),

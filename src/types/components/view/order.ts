@@ -4,15 +4,12 @@ import { ModalScreenSettings } from './screen';
 
 export interface OrderSuccessData {
 	total: number;
-
 	button: ButtonData;
 }
 
 export interface OrderSuccessSettings {
 	descriptionSelector: string;
-
 	buttonView: IView<ButtonData>;
-
 	formatTotal: (value: number) => string;
 }
 

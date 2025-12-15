@@ -21,10 +21,6 @@ export interface Product {
 	price: number | null;
 }
 
-export interface NormalizedProduct extends Omit<Product, 'price'> {
-	price: number;
-}
-
 export interface OrderRequest {
 	payment: PaymentMethod;
 	email: string;

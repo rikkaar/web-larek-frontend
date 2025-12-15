@@ -196,7 +196,7 @@ constructor(schema: StandardSchemaV1<T>, initialValues: Partial<T>)
 **Класс:** `AppState implements IAppState`
 
 **Поля:**
-- `private _products: Map<ProductId, NormalizedProduct>` — каталог продуктов
+- `private _products: Map<ProductId, Product>` — каталог продуктов
 - `private _basket: Set<ProductId>` — корзина
 - `private _openedModal: AppStateModals` — текущее модальное окно
 - `private _selectedProduct: ProductId | null` — ID выбранного продукта
@@ -209,9 +209,9 @@ constructor(_api: ILarekApi, settings: AppStateSettings)
 
 **Методы:**
 - `protected notify(changed: AppStateChanges): void` — уведомить об изменении состояния
-- `get products(): NormalizedProduct[]` — получить список всех продуктов
+- `get products(): Product[]` — получить список всех продуктов
 - `setProducts(products: Product[]): void` — загрузить продукты в каталог (нормализует price: null → 0)
-- `getProduct(id: ProductId): NormalizedProduct | undefined` — получить продукт по ID
+- `getProduct(id: ProductId): Product | undefined` — получить продукт по ID
 - `get basket(): ProductId[]` — получить ID товаров в корзине
 - `addToBasket(id: ProductId): void` — добавить товар в корзину
 - `removeFromBasket(id: ProductId): void` — удалить товар из корзины
@@ -219,7 +219,7 @@ constructor(_api: ILarekApi, settings: AppStateSettings)
 - `isInBasket(id: ProductId): boolean` — проверить, есть ли товар в корзине
 - `getBasketTotal(): number` — получить общую сумму корзины
 - `getBasketCount(): number` — получить количество товаров в корзине
-- `getBasketProducts(): NormalizedProduct[]` — получить список продуктов в корзине
+- `getBasketProducts(): Product[]` — получить список продуктов в корзине
 - `get openedModal(): AppStateModals` — получить текущее открытое модальное окно
 - `openModal(modal: AppStateModals): void` — открыть модальное окно
 - `get selectedProduct(): ProductId | null` — получить ID выбранного продукта
@@ -609,7 +609,7 @@ constructor(settings: PageScreenSettings)
 
 **Методы:**
 - `protected init(): void` — создаёт PageView, HeaderBasketView, ProductPreviewView
-- `set products(items: NormalizedProduct[])` — рендер галереи продуктов
+- `set products(items: Product[])` — рендер галереи продуктов
 - `set basketCount(value: number)` — обновить счётчик корзины
 - `set locked(value: boolean)` — блокировка страницы при открытой модалке
 
@@ -875,9 +875,6 @@ interface Product {
     price: number | null;
 }
 
-interface NormalizedProduct extends Omit<Product, 'price'> {
-    price: number;  // null → 0
-}
 
 interface OrderRequest {
     payment: PaymentMethod;

@@ -1,9 +1,6 @@
 import { IView } from '@/types/components/base/view';
 import { HeaderBasketData } from './headerBasket';
-import {
-	ProductId,
-	NormalizedProduct,
-} from '@/types/components/model/larekApi';
+import { ProductId, Product } from '@/types/components/model/larekApi';
 
 export interface PageData {
 	basket: HeaderBasketData;
@@ -28,7 +25,7 @@ export interface PageScreenSettings {
 }
 
 export interface PageScreenData {
-	products?: NormalizedProduct[];
+	products?: Product[];
 	basketCount?: number;
 	locked?: boolean;
 }

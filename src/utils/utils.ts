@@ -148,9 +148,9 @@ export function createElement<T extends HTMLElement>(
 }
 
 export function formatPrice(
-	value: number,
+	value: number | null,
 	currency: string,
 	priceless: string
 ): string {
-	return value === 0 ? priceless : `${value} ${currency}`;
+	return value === null ? priceless : `${value} ${currency}`;
 }

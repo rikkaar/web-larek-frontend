@@ -9,13 +9,9 @@ export type ContactsFormField = 'email' | 'phone';
 
 export interface FormViewSettings<K extends string> {
 	fields: FormFieldConfig<K>[];
-
 	submitButtonSelector: string;
-
 	errorSelector: string;
-
 	onFieldChange: (field: K, value: string) => void;
-
 	onSubmit: () => void;
 }
 
@@ -30,11 +26,8 @@ export interface OrderFormData extends FormViewData {
 
 export interface OrderFormSettings extends FormViewSettings<OrderFormField> {
 	onlineButtonSelector: string;
-
 	cashButtonSelector: string;
-
 	paymentActiveClass: string;
-
 	onPaymentChange: (method: PaymentMethod) => void;
 }
 

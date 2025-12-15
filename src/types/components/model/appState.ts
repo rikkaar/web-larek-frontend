@@ -1,4 +1,4 @@
-import { Product, ProductId, NormalizedProduct, ILarekApi } from './larekApi';
+import { Product, ProductId, ILarekApi } from './larekApi';
 import { IFormValidator } from '../common/formValidator';
 import { OrderFormValues, ContactsFormValues } from '../common/formSchemas';
 
@@ -32,11 +32,11 @@ export interface AppStateSettings {
 }
 
 export interface IAppState {
-	products: NormalizedProduct[];
+	products: Product[];
 
 	setProducts(products: Product[]): void;
 
-	getProduct(id: ProductId): NormalizedProduct | undefined;
+	getProduct(id: ProductId): Product | undefined;
 
 	basket: ProductId[];
 
@@ -48,11 +48,13 @@ export interface IAppState {
 
 	isInBasket(id: ProductId): boolean;
 
+	isPriceless(id: ProductId): boolean;
+
 	getBasketTotal(): number;
 
 	getBasketCount(): number;
 
-	getBasketProducts(): NormalizedProduct[];
+	getBasketProducts(): Product[];
 
 	openedModal: AppStateModals;
 

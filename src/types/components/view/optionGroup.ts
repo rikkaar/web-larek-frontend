@@ -3,7 +3,6 @@ import { ButtonData } from './button';
 
 interface Option<T> {
 	value: T;
-
 	view: IView<ButtonData>;
 }
 
@@ -13,6 +12,5 @@ export interface OptionGroupData<T> {
 
 export interface OptionGroupSettings<T> {
 	options: Option<T>[];
-
 	onSelect: (value: T) => void;
 }

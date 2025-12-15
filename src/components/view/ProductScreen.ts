@@ -7,6 +7,7 @@ import {
 } from '@/types/components/view/product';
 import { settings } from '@/utils/constants';
 import { cloneTemplate, formatPrice } from '@/utils/utils';
+import { ButtonData } from '@/types/components/view';
 
 export { ProductScreenSettings, ProductScreenData };
 
@@ -18,7 +19,7 @@ export class ProductScreen extends ModalScreen<
 
 	protected initContent(): HTMLElement {
 		const priceFormatter = (value: number | null) =>
-			formatPrice(value ?? 0, settings.text.currency, settings.text.priceless);
+			formatPrice(value, settings.text.currency, settings.text.priceless);
 
 		this.productView = new ProductModalView(
 			cloneTemplate(settings.templates.productModal),
@@ -51,10 +52,7 @@ export class ProductScreen extends ModalScreen<
 		this.productView.price = value;
 	}
 
-	set isInBasket(value: boolean) {
-		const label = value
-			? settings.text.removeFromBasket
-			: settings.text.addToBasket;
-		this.productView.button = { label };
+	set button(value: ButtonData) {
+		this.productView.button = value;
 	}
 }
