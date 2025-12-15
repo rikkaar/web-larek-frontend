@@ -53,3 +53,4 @@ export class LarekApi extends Api implements ILarekApi {
 		return await this.post<OrderResult>('/order', order);
 	}
 }
+

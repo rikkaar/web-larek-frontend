@@ -3,7 +3,7 @@ import './scss/styles.scss';
 import { API_URL, CDN_URL } from '@/utils/constants';
 
 // API
-import { LarekApi } from '@/components/model/larekApi';
+import { LarekApi } from '@/components/api/larekApi';
 
 // Model
 import { AppState } from '@/components/model/appState';
