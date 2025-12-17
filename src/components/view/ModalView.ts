@@ -36,11 +36,12 @@ export class ModalView
 			return;
 		}
 
-		this.element.classList.remove(this.settings.activeClass);
-
-		if (ModalView._openedModal === this) {
-			ModalView._openedModal = null;
+		if (ModalView._openedModal !== this) {
+			return;
 		}
+
+		this.element.classList.remove(this.settings.activeClass);
+		ModalView._openedModal = null;
 
 		if (event) {
 			this.settings.onClose();
