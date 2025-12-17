@@ -13,22 +13,17 @@ export class ModalView
 {
 	protected static _openedModal: ModalView | null = null;
 
-	private static _listenersAttached = false;
+	private _handleEscape = (event: KeyboardEvent): void => {
+		if (event.key === 'Escape') {
+			this.handleClose();
+		}
+	};
 
 	protected init(): void {
-		if (ModalView._listenersAttached) return;
-		ModalView._listenersAttached = true;
-
 		this.ensure(this.settings.closeSelector).addEventListener('click', (e) =>
 			this.handleClose(e)
 		);
 		this.element.addEventListener('click', (e) => this.handleClose(e));
-
-		document.addEventListener('keydown', (event: KeyboardEvent) => {
-			if (event.key === 'Escape' && ModalView._openedModal) {
-				ModalView._openedModal.handleClose();
-			}
-		});
 	}
 
 	protected handleClose(event?: MouseEvent): void {
@@ -67,9 +62,11 @@ export class ModalView
 		}
 		ModalView._openedModal = this;
 		this.element.classList.add(this.settings.activeClass);
+		document.addEventListener('keydown', this._handleEscape);
 	}
 
 	close(): void {
+		document.removeEventListener('keydown', this._handleEscape);
 		this.handleClose();
 	}
 

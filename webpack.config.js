@@ -53,6 +53,7 @@ const config = {
           loader: "sass-loader",
           options: {
             sourceMap: true,
+            api: "modern",
             sassOptions: {
               includePaths: ["src/scss"]
             }
