@@ -4,6 +4,10 @@ import {
 	ProductPreviewSettings,
 } from '@/types/components/view/product';
 import { ProductId, ProductCategory } from '@/types/components/model/larekApi';
+import { ChipView } from './ChipView';
+import { ensureElement } from '@/utils/utils';
+import { settings } from '@/utils/constants';
+
 
 export class ProductPreviewView extends View<
 	ProductPreviewData,
@@ -11,8 +15,15 @@ export class ProductPreviewView extends View<
 	HTMLButtonElement
 > {
 	private currentId!: ProductId;
+	private chipView: ChipView;
+
 
 	protected init(): void {
+		this.chipView = new ChipView(
+			ensureElement(settings.productCard.category, this.element),
+			settings.chip
+		);
+
 		this.element.addEventListener('click', () => {
 			this.settings.onClick(this.currentId);
 		});
@@ -23,7 +34,7 @@ export class ProductPreviewView extends View<
 	}
 
 	set category(value: ProductCategory) {
-		this.settings.categoryView.render({ category: value });
+		this.chipView.render({ category: value });
 	}
 
 	set title(value: string) {

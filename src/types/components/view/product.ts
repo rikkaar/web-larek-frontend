@@ -3,9 +3,7 @@ import {
 	ProductCategory,
 	Product,
 } from '@/types/components/model/larekApi';
-import { IView } from '@/types/components/base/view';
 import { ButtonData } from './button';
-import { ChipData } from './chip';
 import { ModalScreenSettings } from './screen';
 
 export interface ProductPreviewData {
@@ -20,7 +18,6 @@ export interface ProductPreviewSettings {
 	titleSelector: string;
 	imageSelector: string;
 	priceSelector: string;
-	categoryView: IView<ChipData>;
 	onClick: (id: ProductId) => void;
 	formatPrice: (value: number | null) => string;
 }

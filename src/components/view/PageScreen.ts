@@ -37,16 +37,10 @@ export class PageScreen extends Screen<PageScreenData, PageScreenSettings> {
 			settings.templates.productPreview
 		);
 
-		const chipView = new ChipView(
-			ensureElement(settings.productCard.category, cardTemplate),
-			settings.chip
-		);
-
 		this.productTemplate = new ProductPreviewView(cardTemplate, {
 			titleSelector: settings.productCard.title,
 			imageSelector: settings.productCard.image,
 			priceSelector: settings.productCard.price,
-			categoryView: chipView,
 			onClick: (id) => this.settings.onProductClick(id),
 			formatPrice: (v) =>
 				formatPrice(v, settings.text.currency, settings.text.priceless),

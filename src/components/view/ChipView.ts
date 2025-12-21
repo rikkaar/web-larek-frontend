@@ -5,9 +5,16 @@ import { ElementCreator } from '@/types/html';
 import { createElement } from '@/utils/utils';
 
 export class ChipView extends View<ChipData, ChipSettings> {
+	private currentClass?: string;
+
 	set category(value: ProductCategory) {
+		if (this.currentClass) {
+			this.toggleClass(this.element, this.currentClass, false);
+		}
+
 		this.setValue(this.element, this.settings.labels[value]);
-		this.toggleClass(this.element, this.settings.classes[value], true);
+		this.currentClass = this.settings.classes[value];
+		this.toggleClass(this.element, this.currentClass, true);
 	}
 
 	static create(
