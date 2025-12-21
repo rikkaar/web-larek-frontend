@@ -15,7 +15,7 @@ export class ModalView
 
 	private _handleEscape = (event: KeyboardEvent): void => {
 		if (event.key === 'Escape') {
-			this.handleClose();
+			this.handleClose(event);
 		}
 	};
 
@@ -26,14 +26,15 @@ export class ModalView
 		this.element.addEventListener('click', (e) => this.handleClose(e));
 	}
 
-	protected handleClose(event?: MouseEvent): void {
-		if (
-			event &&
-			![this.ensure(this.settings.closeSelector), this.element].includes(
-				event.target as HTMLElement
-			)
-		) {
-			return;
+	protected handleClose(event?: MouseEvent | KeyboardEvent): void {
+		if (event instanceof MouseEvent) {
+			if (
+				![this.ensure(this.settings.closeSelector), this.element].includes(
+					event.target as HTMLElement
+				)
+			) {
+				return;
+			}
 		}
 
 		if (ModalView._openedModal !== this) {
@@ -68,7 +69,8 @@ export class ModalView
 
 	close(): void {
 		document.removeEventListener('keydown', this._handleEscape);
-		this.handleClose();
+		this.element.classList.remove(this.settings.activeClass);
+		ModalView._openedModal = null;
 	}
 
 	setContent(content: HTMLElement): void {
